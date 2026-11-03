@@ -1,0 +1,19 @@
+# Seçkin Optik ödeme sunucusu — Cloudflare Worker ayarları
+# Komut satırıyla yayınlamak isterseniz: npx wrangler deploy  (sunucu/ klasöründe)
+# Gizli değerler: npx wrangler secret put MERCHANT_ID  (MERCHANT_KEY, MERCHANT_SALT, SHEET_SECRET için de)
+
+name = "seckin-optik-odeme"
+main = "worker.js"
+compatibility_date = "2026-06-01"
+
+[vars]
+SITE = "https://seckin-optik.blogspot.com"
+IZINLI_KOKENLER = "https://seckin-optik.blogspot.com"
+TEST_MODE = "1"
+SHEET_WEBHOOK = ""
+
+# Siparişleri Cloudflare'de de saklamak için (isteğe bağlı):
+# npx wrangler kv namespace create SIPARISLER  → çıkan id'yi aşağıya yazın
+# [[kv_namespaces]]
+# binding = "SIPARISLER"
+# id = "BURAYA_KV_ID"

@@ -288,6 +288,11 @@ body{margin:0;background:#fff}
 <div class='mobil-al gizli' id='mobil-al'></div>
 <div class='modal gizli' id='modal' role='dialog' aria-modal='true' aria-labelledby='modal-baslik'></div>
 
+<script>//<![CDATA[
+/* Satış ayarları: PayTR sunucusu hazır olunca satisAktif:true ve sunucu adresini girin (sunucu/KURULUM.md) */
+window.SO_AYAR = { satisAktif: false, sunucu: "" };
+//]]></script>
 <script defer='defer' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@ee555e19ed261e1d3260c8079a483e16f2c54fee/tema/seckin.js'></script>
+<script defer='defer' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@ee555e19ed261e1d3260c8079a483e16f2c54fee/tema/sepet.js'></script>
 </body>
 </html>

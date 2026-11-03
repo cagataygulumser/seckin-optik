@@ -45,6 +45,10 @@ Her ürün bir Blogger yazısıdır. Yazının HTML görünümüne şunu koy:
 
 Lacivert `#02122C` · Mavi `#004EA9` · Beyaz zemin · Yazı tipi: Plus Jakarta Sans
 
-## Satışı açma
+## Satış ve ödeme
 
-`tema/seckin.js` dosyasının başındaki `satisAktif: false` ayarı açıkken "Satın al" butonları görünür ama tıklanınca "Online satış çok yakında aktif" uyarısı çıkar. PayTR linkleri ürünlere eklendikten sonra bu değeri `true` yapın; butonlar sözleşme onayı + PayTR ödeme sayfasına yönlenir.
+- Sepet, ödeme sayfası (`/p/odeme.html`), sonuç sayfaları (`/p/odeme-basarili.html`, `/p/odeme-basarisiz.html`) hazır: `tema/sepet.js`.
+- PayTR bağlantısı için küçük bir sunucu kullanılır: `sunucu/worker.js` (Cloudflare Worker). Siparişler Google E-Tablo'ya yazılır: `sunucu/siparis-tablosu.gs`.
+- Kurulum adımları: **[sunucu/KURULUM.md](sunucu/KURULUM.md)**
+- Online ödeme kapalıyken (`satisAktif: false`) ödeme adımı siparişi eksiksiz şekilde WhatsApp'a gönderir.
+- Açmak için Blogger temasında: `window.SO_AYAR = { satisAktif: true, sunucu: "https://...workers.dev" };`

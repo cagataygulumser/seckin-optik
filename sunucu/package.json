@@ -1,0 +1,6 @@
+{
+  "name": "seckin-optik-odeme",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node test.mjs", "deploy": "wrangler deploy" }
+}
