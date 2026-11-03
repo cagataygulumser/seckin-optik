@@ -48,7 +48,7 @@ h1,h2,h3{font-family:var(--font);font-weight:800;color:var(--lacivert);margin:0;
 .btn svg{width:18px;height:18px;flex:none}
 
 /* Duyuru */
-.duyuru{background:var(--lacivert);color:#fff;font:600 13px/1.4 var(--font);text-align:center;padding:10px 16px}
+.duyuru{background:var(--lacivert);color:#fff;font:700 12px/1.4 var(--font);text-align:center;padding:11px 16px;text-transform:uppercase;letter-spacing:.09em}
 .duyuru b{color:#8EC1FF;font-weight:700}
 
 /* Üst bilgi */
@@ -92,23 +92,23 @@ h1,h2,h3{font-family:var(--font);font-weight:800;color:var(--lacivert);margin:0;
 .hero-etiket span{color:var(--mavi);font-size:16px;font-weight:800}
 
 /* Güven */
-.guven ul{list-style:none;margin:0;padding:32px 24px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.guven ul{list-style:none;margin:0 auto;padding:32px 24px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .guven li{display:flex;align-items:center;gap:14px;font:700 15px/1.35 var(--font);color:var(--lacivert);padding:18px;border:1px solid var(--cizgi);border-radius:var(--r-md)}
 .guven li small{display:block;font-weight:500;color:var(--ikincil);font-size:13px}
 .guven .ik{width:44px;height:44px;border-radius:12px;background:var(--mavi-acik);color:var(--mavi);display:flex;align-items:center;justify-content:center;flex:none}
 .guven svg{width:22px;height:22px}
 
 /* Kategoriler */
-.kategoriler{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-.kat-kart{position:relative;border-radius:var(--r-md);background:var(--zemin-2);padding:24px 22px;min-height:168px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;transition:transform .2s,box-shadow .2s,background .2s}
-.kat-kart:hover{transform:translateY(-3px);box-shadow:var(--golge);background:#fff}
-.kat-kart h3{font-size:22px}
+.kategoriler{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.kat-kart{position:relative;isolation:isolate;border-radius:var(--r-lg);background:var(--zemin-2);padding:26px 24px;min-height:240px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;transition:transform .2s,box-shadow .2s,background .2s}
+.kat-kart:hover{transform:translateY(-4px);box-shadow:var(--golge);background:var(--zemin-3)}
+.kat-gorsel{position:absolute;right:-8%;bottom:-6%;width:82%;max-width:none;z-index:-1;opacity:.38;mix-blend-mode:multiply;transform:rotate(-10deg);transition:opacity .35s,transform .45s;pointer-events:none}
+.kat-kart:hover .kat-gorsel{opacity:.85;transform:rotate(-6deg) scale(1.06)}
+.kat-kart .metin{position:relative}
+.kat-kart h3{font-size:26px}
 .kat-kart p{margin:6px 0 0;color:var(--ikincil);font-size:14px;font-weight:600}
 .kat-kart .ok{width:38px;height:38px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;color:var(--lacivert);box-shadow:0 1px 2px rgba(2,18,44,.08)}
 .kat-kart .ok svg{width:16px;height:16px}
-.kat-kart.koyu{background:var(--lacivert)} .kat-kart.koyu h3{color:#fff} .kat-kart.koyu p{color:#AFC0D8}
-.kat-kart.mavi{background:var(--mavi)} .kat-kart.mavi h3{color:#fff} .kat-kart.mavi p{color:#D3E3F8}
-.kat-kart.koyu:hover,.kat-kart.mavi:hover{background:var(--lacivert-2)}
 .kat-halka{display:none}
 
 /* Koleksiyon */
@@ -125,10 +125,11 @@ h1,h2,h3{font-family:var(--font);font-weight:800;color:var(--lacivert);margin:0;
 .urunler{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
 .kart{display:flex;flex-direction:column;position:relative}
 .kart-gorsel{position:relative;aspect-ratio:1/1;background:var(--zemin-2);border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;padding:20px;overflow:hidden}
-.kart-gorsel img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;transition:opacity .3s,transform .4s}
+.kart-gorsel img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply;transition:opacity .35s ease,transform .45s ease}
 .kart-gorsel img.ikinci{position:absolute;inset:20px;width:calc(100% - 40px);height:calc(100% - 40px);opacity:0}
 .kart:hover .kart-gorsel img:first-child{transform:scale(1.04)}
-.kart:hover .kart-gorsel img.ikinci{opacity:1}
+.kart:hover .kart-gorsel.cift img:first-child{opacity:0}
+.kart:hover .kart-gorsel.cift img.ikinci{opacity:1}
 .rozet{position:absolute;top:12px;left:12px;z-index:2;font:700 12px/1 var(--font);padding:7px 10px;border-radius:var(--r-pill);background:var(--indirim);color:#fff}
 .rozet.yeni{background:var(--mavi)}
 .rozet.tukendi{background:var(--ikincil)}
@@ -279,7 +280,7 @@ body:not(.v-tekil) .sadece-tekil{display:none}
 /* Duyarlı */
 @media (max-width:1080px){
   .urunler{grid-template-columns:repeat(3,1fr)}
-  .kategoriler{grid-template-columns:repeat(3,1fr)}
+  .kategoriler{grid-template-columns:repeat(2,1fr)}
   .alt-izgara{grid-template-columns:1fr 1fr}
   .guven ul{grid-template-columns:1fr 1fr}
 }
@@ -315,8 +316,8 @@ body:not(.v-tekil) .sadece-tekil{display:none}
   .hero-rakam div span{font-size:12px}
   .guven ul{grid-template-columns:1fr;padding-top:20px}
   .kategoriler{grid-template-columns:1fr 1fr;gap:10px}
-  .kat-kart{min-height:130px;padding:18px}
-  .kat-kart h3{font-size:19px}
+  .kat-kart{min-height:170px;padding:18px}
+  .kat-kart h3{font-size:21px}
   .kart-govde h3{font-size:14px}
   .fiyat strong{font-size:17px}
   .kart-aksiyon{grid-template-columns:1fr}
@@ -325,5 +326,35 @@ body:not(.v-tekil) .sadece-tekil{display:none}
   .filtre-ara{flex:1;min-width:0}
   .vaatler{grid-template-columns:1fr}
   .alt-izgara{grid-template-columns:1fr}
-  .duyuru{font-size:12px}
+  .duyuru{font-size:10.5px;letter-spacing:.06em}
 }
+
+/* Kurumsal ve yasal sayfalar */
+body.v-sayfa .yazi{max-width:900px}
+.sayfa-ust{background:var(--zemin-2);border-radius:var(--r-lg);padding:36px 40px;margin-bottom:36px}
+.sayfa-ust p{margin:10px 0 0;color:var(--ikincil);font-size:17px;max-width:640px}
+.yazi-govde .so-izgara{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:24px 0}
+.yazi-govde .so-kart{background:var(--zemin-2);border-radius:var(--r-md);padding:22px}
+.yazi-govde .so-kart h3{margin:0 0 6px;font-size:17px}
+.yazi-govde .so-kart p{margin:0;color:var(--ikincil);font-size:15px}
+.yazi-govde .so-kart a{color:var(--mavi)}
+.yazi-govde .so-rakam{font:800 30px/1 var(--font);color:var(--mavi);display:block;margin-bottom:6px}
+.yazi-govde details{border:1px solid var(--cizgi);border-radius:var(--r-md);padding:0 20px;margin:0 0 12px;background:#fff;transition:background .2s}
+.yazi-govde details[open]{background:var(--zemin-2)}
+.yazi-govde summary{cursor:pointer;list-style:none;font:700 16px/1.4 var(--font);color:var(--lacivert);padding:18px 32px 18px 0;position:relative}
+.yazi-govde summary::-webkit-details-marker{display:none}
+.yazi-govde summary::after{content:"+";position:absolute;right:0;top:50%;transform:translateY(-50%);font:600 22px/1 var(--font);color:var(--mavi)}
+.yazi-govde details[open] summary::after{content:"\2212"}
+.yazi-govde details p{margin:0 0 18px;color:#3A4354}
+.yazi-govde .so-not{background:var(--mavi-acik);border-radius:var(--r-md);padding:16px 20px;font-size:15px;color:var(--lacivert)}
+.yazi-govde .so-tablo{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--cizgi);border-radius:var(--r-md);overflow:hidden;margin:16px 0}
+.yazi-govde .so-tablo th,.yazi-govde .so-tablo td{border:0;border-bottom:1px solid var(--cizgi);padding:12px 16px;text-align:left;vertical-align:top}
+.yazi-govde .so-tablo tr:last-child th,.yazi-govde .so-tablo tr:last-child td{border-bottom:0}
+.yazi-govde .so-tablo th{width:36%;background:var(--zemin-2);color:var(--ikincil);font-weight:600}
+.yazi-govde .so-btn{display:inline-flex;align-items:center;gap:8px;background:var(--mavi);color:#fff!important;text-decoration:none!important;border-radius:var(--r-pill);padding:12px 22px;font-weight:700;margin:6px 8px 6px 0}
+.yazi-govde .so-btn.ikincil{background:#fff;color:var(--lacivert)!important;box-shadow:inset 0 0 0 1.5px var(--cizgi)}
+.yazi-govde ol,.yazi-govde ul{padding-left:22px}
+.yazi-govde li{margin:6px 0}
+.yazi-govde .so-guncel{color:var(--ikincil);font-size:14px}
+.yazi-govde iframe{width:100%;min-height:340px;border:0;border-radius:var(--r-md)}
+@media (max-width:560px){.sayfa-ust{padding:24px 20px}}

@@ -130,7 +130,7 @@ function kart(u,i){
   var rozet=u.stok==="yok"?"<span class='rozet tukendi'>Tükendi</span>":(y?"<span class='rozet'>%"+y+" indirim</span>":(u.yeni?"<span class='rozet yeni'>Yeni</span>":""));
   var ozet=[u.cinsiyet,u.tur==="optik"?"Optik çerçeve":"Güneş gözlüğü",u.cerceve].filter(Boolean).join(" · ");
   return "<article class='kart'>"+rozet+
-    "<a aria-label='"+esc(u.baslik)+"' class='kart-gorsel' href='"+esc(u.url)+"'>"+(r1?"<img alt='"+esc(u.baslik)+"' loading='lazy' src='"+esc(r1)+"'/>":"")+(r2?"<img alt='' class='ikinci' loading='lazy' src='"+esc(r2)+"'/>":"")+"</a>"+
+    "<a aria-label='"+esc(u.baslik)+"' class='kart-gorsel"+(r2?" cift":"")+"' href='"+esc(u.url)+"'>"+(r1?"<img alt='"+esc(u.baslik)+"' loading='lazy' src='"+esc(r1)+"'/>":"")+(r2?"<img alt='' class='ikinci' loading='lazy' src='"+esc(r2)+"'/>":"")+"</a>"+
     "<div class='kart-govde'><p class='eyebrow'>"+esc(u.marka)+"</p><h3><a href='"+esc(u.url)+"'>"+esc(u.model||u.baslik)+"</a></h3><p class='ozet'>"+esc(ozet)+"</p>"+
     "<div class='fiyat'><strong>"+tl(u.fiyat)+"</strong>"+(isFinite(u.eski)?"<del>"+tl(u.eski)+"</del>":"")+"</div>"+
     "<div class='kart-aksiyon'><button class='btn btn-ana' data-al='"+i+"' type='button'>Satın al</button><a class='btn btn-cizgi' href='"+esc(u.url)+"'>İncele</a></div></div></article>";
