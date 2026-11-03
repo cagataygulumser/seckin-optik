@@ -44,3 +44,7 @@ Her ürün bir Blogger yazısıdır. Yazının HTML görünümüne şunu koy:
 ## Renkler
 
 Lacivert `#02122C` · Mavi `#004EA9` · Beyaz zemin · Yazı tipi: Plus Jakarta Sans
+
+## Satışı açma
+
+`tema/seckin.js` dosyasının başındaki `satisAktif: false` ayarı açıkken "Satın al" butonları görünür ama tıklanınca "Online satış çok yakında aktif" uyarısı çıkar. PayTR linkleri ürünlere eklendikten sonra bu değeri `true` yapın; butonlar sözleşme onayı + PayTR ödeme sayfasına yönlenir.

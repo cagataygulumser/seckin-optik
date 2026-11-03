@@ -3,6 +3,7 @@
 "use strict";
 /* ---------- AYARLAR (buradan düzenleyin) ---------- */
 var AYAR = {
+  satisAktif: false, /* PayTR hazır olunca true yapın */
   whatsapp: "905054596402",
   telefon: "+902862176636",
   sayfaBasi: 12,
@@ -86,6 +87,17 @@ var MODAL=$("#modal");
 function satinAl(u){
   var var_=u.stok!=="yok";
   var ilkResim=kucult(u.resimler[0],300)||"";
+  if(!AYAR.satisAktif){
+    var adK=(u.marka+" "+u.model).trim();
+    MODAL.innerHTML="<div class='modal-kutu'><div class='modal-ust'>"+(ilkResim?"<img alt='' src='"+esc(ilkResim)+"'/>":"")+
+      "<div><p class='eyebrow'>"+esc(u.marka)+"</p><h3 id='modal-baslik'>"+esc(u.model||u.baslik)+"</h3><strong>"+tl(u.fiyat)+"</strong></div>"+
+      "<button aria-label='Kapat' class='ikon-btn modal-kapat' data-kapat='1' type='button'><svg fill='none' stroke='currentColor' stroke-linecap='round' stroke-width='2' viewBox='0 0 24 24'><path d='M6 6l12 12M18 6L6 18'/></svg></button></div>"+
+      "<div class='modal-ic'><div class='yakinda'><span class='yakinda-ik'><svg fill='none' stroke='currentColor' stroke-linecap='round' stroke-width='2' viewBox='0 0 24 24'><circle cx='12' cy='12' r='9'/><path d='M12 7v5l3 2'/></svg></span><div><b>Online satış çok yakında aktif</b><p>Güvenli ödeme altyapımızın kurulumu tamamlanmak üzere. Bu ürünü şimdilik WhatsApp'tan ya da mağazamızdan sipariş edebilirsiniz.</p></div></div>"+
+      "<a class='btn btn-ana btn-tam' href='"+waLink("Merhaba, "+adK+" ("+tl(u.fiyat)+") sipariş vermek istiyorum. "+(u.url||location.href))+"' rel='noopener' target='_blank'>WhatsApp ile sipariş ver</a>"+
+      "<button class='btn btn-cizgi btn-tam' data-kapat='1' style='margin-top:10px' type='button'>Alışverişe devam et</button></div></div>";
+    MODAL.classList.remove("gizli");document.documentElement.style.overflow="hidden";
+    return;
+  }
   var odemeVar=!!u.paytr&&var_;
   var optikNot=u.tur==="optik"?"<p class='not' style='margin:0 0 14px'>Bu ürün <b>çerçevedir</b>. Numaralı cam için siparişinizden sonra reçetenizi WhatsApp'tan iletin; cam seçenekleri ve fiyatı için sizi arayalım.</p>":"";
   MODAL.innerHTML=
@@ -242,7 +254,7 @@ function urunSayfa(){
         "<div class='stok"+(var_?"":" yok")+"'>"+(var_?"Stokta · Aynı gün kargoda":"Şu an stokta yok")+"</div>"+
         (u.tur==="optik"?"<div class='not'><b>Numaralı cam mı istiyorsunuz?</b> Çerçeveyi satın aldıktan sonra reçetenizi WhatsApp'tan gönderin; cam seçeneklerini ve fiyatını optisyenimiz size iletsin.</div>":"")+
         "<div class='urun-btnler'>"+
-          "<button class='btn btn-ana' id='satin-al' type='button'>"+(var_?(u.paytr?"Satın al":"WhatsApp ile sipariş ver"):"Gelince haber ver")+"</button>"+
+          "<button class='btn btn-ana' id='satin-al' type='button'>"+(var_?((u.paytr||!AYAR.satisAktif)?"Satın al":"WhatsApp ile sipariş ver"):"Gelince haber ver")+"</button>"+
           "<a class='btn btn-cizgi' href='"+waLink("Merhaba, "+(u.marka+" "+u.model).trim()+" hakkında bilgi almak istiyorum. "+u.url)+"' rel='noopener' target='_blank'>Optisyene sor (WhatsApp)</a>"+
         "</div>"+
         "<ul class='vaatler'>"+
