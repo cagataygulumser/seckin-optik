@@ -324,13 +324,57 @@ function sonucKur(){
   }
 }
 
+
+/* ---------- İADE TALEP FORMU ---------- */
+var IADE_NEDEN=["Fikrimi değiştirdim","Beklediğim gibi değil","Yüzüme uymadı","Ürün kusurlu / hasarlı geldi","Yanlış ürün gönderildi","Diğer"];
+function iadeKur(){
+  var el=$("#so-iade-form"); if(!el||el.getAttribute("data-kuruldu"))return;
+  el.setAttribute("data-kuruldu","1");
+  var m=oku(MUSTERI,{}), son=oku(SON,null);
+  el.innerHTML="<form class='od-kutu iade-form' id='iade-form' novalidate><div class='od-alanlar'>"+
+    alan("iadeNo","Sipariş numarası","text",son&&son.no||"",{ph:"SO2611…"})+
+    alan("iadeAd","Ad soyad","text",m.ad,{ac:"name"})+
+    alan("iadeTel","Cep telefonu","tel",m.telefon,{ac:"tel",ph:"05xx xxx xx xx",mod:"tel"})+
+    alan("iadeEposta","E-posta","email",m.eposta,{ac:"email"})+
+    alan("iadeUrun","İade edilecek ürün(ler)","text",son&&son.sepet?son.sepet.map(function(x){return (x.marka+" "+(x.model||"")).trim()}).join(", "):"",{genis:true,ph:"Marka ve model"})+
+    alan("iadeNeden","İade nedeni","select","",{secenek:IADE_NEDEN,genis:true})+
+    alan("iadeAciklama","Açıklama","textarea","",{genis:true,gerekli:false,ph:"Kusurlu ürünlerde sorunu kısaca anlatın; fotoğrafı WhatsApp'tan iletebilirsiniz."})+
+  "</div><label class='onay-kutu' style='margin-top:14px'><input id='iade-onay' type='checkbox'/><span>Ürünün kullanılmamış olduğunu ve kutusu, aksesuarları ve faturasıyla birlikte gönderileceğini onaylıyorum.</span></label>"+
+  "<p class='od-hata-genel gizli' id='iade-hata'></p>"+
+  "<button class='btn btn-ana btn-tam' type='submit'>"+IK.wa+"<span>İade talebini gönder</span></button>"+
+  "<p class='od-kucuk merkez'>Talebiniz WhatsApp'a hazır mesaj olarak aktarılır; size iade kargo kodunu aynı gün iletiriz.</p></form>";
+  var f=$("#iade-form");
+  f.addEventListener("input",function(e){var l=e.target.closest(".od-alan");if(l)l.classList.remove("hatali")});
+  f.addEventListener("submit",function(e){
+    e.preventDefault();
+    var d={}; ["iadeNo","iadeAd","iadeTel","iadeEposta","iadeUrun","iadeNeden","iadeAciklama"].forEach(function(k){d[k]=$("#od-"+k,f).value.trim()});
+    $$(".od-alan",f).forEach(function(l){l.classList.remove("hatali")});
+    var ok=true,ilk=null; function h(a,mm){ok=false;hataGoster(f,a,mm);if(!ilk)ilk=a}
+    if(d.iadeNo.length<4)h("iadeNo","Sipariş numaranızı yazın (onay ekranında ve e-postanızda yer alır)");
+    if(d.iadeAd.split(/\s+/).filter(Boolean).length<2)h("iadeAd","Ad ve soyadınızı yazın");
+    var tel=d.iadeTel.replace(/\D/g,"").replace(/^90/,"").replace(/^0/,"");
+    if(!/^5\d{9}$/.test(tel))h("iadeTel","Geçerli bir cep telefonu yazın"); else d.iadeTel="0"+tel;
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.iadeEposta))h("iadeEposta","Geçerli bir e-posta yazın");
+    if(d.iadeUrun.length<2)h("iadeUrun","İade edilecek ürünü yazın");
+    if(!d.iadeNeden)h("iadeNeden","İade nedenini seçin");
+    var g=$("#iade-hata",f), kusurlu=/kusurlu|Yanlış/.test(d.iadeNeden);
+    var onayYok=!kusurlu&&!$("#iade-onay",f).checked;
+    g.textContent=onayYok?"Devam etmek için ürün durumu onayını işaretleyin.":""; g.classList.toggle("gizli",!onayYok); if(onayYok)ok=false;
+    if(ilk)$("#od-"+ilk,f).focus();
+    if(!ok)return;
+    var metin=["Merhaba, iade talebinde bulunmak istiyorum.","Sipariş no: "+d.iadeNo,"Ürün: "+d.iadeUrun,"Neden: "+d.iadeNeden].concat(d.iadeAciklama?["Açıklama: "+d.iadeAciklama]:[]).concat(["","Ad soyad: "+d.iadeAd,"Telefon: "+d.iadeTel,"E-posta: "+d.iadeEposta]).join("\n");
+    if(A.sunucu){try{fetch(A.sunucu.replace(/\/$/,"")+"/iade-talebi",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d),keepalive:true}).catch(function(){})}catch(x){}}
+    window.open(SO.waLink(metin),"_blank","noopener");
+    el.innerHTML="<div class='od-kutu sonuc-kutu'><span class='sonuc-ik tamam'>"+IK.tik+"</span><h2>İade talebiniz hazırlandı</h2><p>WhatsApp'ta açılan mesajı gönderin; iade kargo kodunuzu aynı gün iletelim. WhatsApp açılmadıysa aşağıdaki butonu kullanın.</p><div class='sonuc-btn'><a class='btn btn-ana' href='"+SO.waLink(metin)+"' rel='noopener' target='_blank'>WhatsApp'ı aç</a></div></div>";
+  });
+}
 /* ---------- Başlat ---------- */
 /* PayTR, sonuç sayfasını ödeme çerçevesi içinde açar: üst pencereye taşı */
 if(window.top!==window.self&&/\/p\/odeme-basar/.test(location.pathname)){try{window.top.location.href=location.href}catch(e){}}
 headerKur(); panelKur(); rozet(); paneliCiz();
 tazele();
 window.SoSepet={ekle:ekle,ac:ac,kapat:kapat,temizle:temizle,liste:function(){return sepet.slice()},toplam:araToplam};
-function sayfalar(){odemeKur();sonucKur()}
+function sayfalar(){odemeKur();sonucKur();iadeKur()}
 sayfalar();
 document.addEventListener("so:sayfa",sayfalar);
 /* başka sekmede değişirse eşitle */

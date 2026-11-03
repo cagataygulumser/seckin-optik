@@ -37,6 +37,10 @@ export default {
         if (!izinliMi(koken, env)) return json({ hata: "Bu kaynaktan istek kabul edilmiyor" }, 403, cors);
         return await odemeBaslat(istek, env, ctx, cors);
       }
+      if (url.pathname === "/iade-talebi" && istek.method === "POST") {
+        if (!izinliMi(koken, env)) return json({ hata: "Bu kaynaktan istek kabul edilmiyor" }, 403, cors);
+        return await iadeTalebi(istek, env, ctx, cors);
+      }
       if (url.pathname === "/paytr-bildirim" && istek.method === "POST") {
         return await paytrBildirim(istek, env, ctx);
       }
@@ -147,6 +151,22 @@ async function paytrBildirim(istek, env, ctx) {
   kayit.bildirimTarihi = new Date().toISOString();
   await kaydet(env, kayit);
   return new Response("OK"); // PayTR yalnızca düz "OK" bekler
+}
+
+/* ------------------------------------------------------------------ */
+async function iadeTalebi(istek, env, ctx, cors) {
+  const d = await istek.json().catch(() => null);
+  if (!d) return json({ hata: "Eksik bilgi" }, 400, cors);
+  const t = (v, n = 200) => String(v || "").replace(/[<>]/g, "").trim().slice(0, n);
+  const kayit = {
+    tur: "iade", tarih: new Date().toISOString(), siparisNo: t(d.iadeNo, 40), ad: t(d.iadeAd, 60), telefon: t(d.iadeTel, 20),
+    eposta: t(d.iadeEposta, 100), urun: t(d.iadeUrun, 300), neden: t(d.iadeNeden, 80), aciklama: t(d.iadeAciklama, 600),
+  };
+  if (!kayit.siparisNo || !kayit.ad) return json({ hata: "Eksik bilgi" }, 400, cors);
+  if (env.SHEET_WEBHOOK) {
+    ctx.waitUntil(fetch(env.SHEET_WEBHOOK, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ gizli: env.SHEET_SECRET || "", ...kayit }), redirect: "follow" }).catch(() => {}));
+  }
+  return json({ ok: true }, 200, cors);
 }
 
 /* ------------------------------------------------------------------ */
