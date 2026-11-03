@@ -5,16 +5,25 @@
 <meta charset='utf-8'/>
 <meta content='width=device-width, initial-scale=1' name='viewport'/>
 <meta content='#02122C' name='theme-color'/>
-<b:include data='blog' name='all-head-content'/>
-<title><b:if cond='data:view.isHomepage'>Seçkin Optik | Çanakkale Orijinal Güneş ve Optik Gözlük<b:else/><data:view.title.escaped/> | Seçkin Optik</b:if></title>
+<link expr:href='data:view.url.canonical' rel='canonical'/>
+<link expr:href='data:blog.homepageUrl + &quot;feeds/posts/default&quot;' rel='alternate' title='Seçkin Optik' type='application/atom+xml'/>
+<meta content='Seçkin Optik' property='og:site_name'/>
+<meta expr:content='data:view.title.escaped' property='og:title'/>
+<meta expr:content='data:view.url.canonical' property='og:url'/>
+<meta content='website' property='og:type'/>
+<b:if cond='data:view.featuredImage'><meta expr:content='data:view.featuredImage' property='og:image'/></b:if>
+<meta content='tr_TR' property='og:locale'/>
+<title><b:if cond='data:view.isHomepage'>Seçkin Optik | Çanakkale Orijinal Güneş Gözlükleri<b:else/><data:view.title.escaped/> | Seçkin Optik</b:if></title>
 <b:if cond='data:view.isHomepage'>
-<meta content='Çanakkale Seçkin Optik: Ray-Ban, Prada, Vogue, Gigi Studios ve daha fazlası. %100 orijinal, faturalı, aynı gün ücretsiz kargo. PayTR ile güvenli ödeme ve taksit.' name='description'/>
+<meta content='Çanakkale Seçkin Optik: Ray-Ban, Prada, Vogue, Gigi Studios ve daha fazlası. Orijinal güneş gözlükleri, %100 orijinal, faturalı, aynı gün ücretsiz kargo. PayTR ile güvenli ödeme ve taksit.' name='description'/>
 </b:if>
 <link href='https://fonts.googleapis.com' rel='preconnect'/>
 <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
 <link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap' rel='stylesheet'/>
-<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d55255ff70f959f8be4ac22eb2b529a52f33d604/tema/seckin.css' rel='stylesheet'/>
-<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d55255ff70f959f8be4ac22eb2b529a52f33d604/img/logo/favicon.png' rel='icon' type='image/png'/>
+<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/tema/seckin.css' rel='stylesheet'/>
+<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/img/logo/favicon-32.png' rel='icon' sizes='32x32' type='image/png'/>
+<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/img/logo/favicon-192.png' rel='icon' sizes='192x192' type='image/png'/>
+<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/img/logo/apple-touch-icon.png' rel='apple-touch-icon'/>
 <b:skin><![CDATA[
 /* Seçkin Optik v2 — stiller GitHub'dan yüklenir: tema/seckin.css */
 body{margin:0;background:#fff}
@@ -32,13 +41,12 @@ body{margin:0;background:#fff}
 
 <header class='ust'>
   <div class='kap ust-ic'>
-    <a aria-label='Seçkin Optik ana sayfa' class='logo' href='/'><img alt='Seçkin Optik' height='40' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d55255ff70f959f8be4ac22eb2b529a52f33d604/img/logo/seckin-optik-logo.svg' width='245'/></a>
+    <a aria-label='Seçkin Optik ana sayfa' class='logo' href='/'><img alt='Seçkin Optik' height='40' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/img/logo/seckin-optik-logo.svg' width='245'/></a>
     <nav class='menu' id='menu'>
       <a data-kat='kadin' href='/search/label/Kad%C4%B1n'>Kadın</a>
       <a data-kat='erkek' href='/search/label/Erkek'>Erkek</a>
       <a data-kat='unisex' href='/search/label/Unisex'>Unisex</a>
       <a data-kat='cocuk' href='/search/label/%C3%87ocuk'>Çocuk</a>
-      <a data-kat='optik' href='/search/label/Optik'>Optik</a>
       <a href='/#magaza'>Mağaza</a>
     </nav>
     <div class='ust-arac'>
@@ -64,7 +72,7 @@ body{margin:0;background:#fff}
 <div>
 <p class='eyebrow'>Çanakkale · Seçkin Optik</p>
 <h1>Gözlükte <em>orijinal</em> ve seçkin olanı.</h1>
-<p class='alt'>Ray-Ban, Prada, Vogue ve Gigi Studios başta olmak üzere orijinal güneş ve optik gözlükler. Optisyen danışmanlığıyla seçin, aynı gün kargoda.</p>
+<p class='alt'>Ray-Ban, Prada, Vogue ve Gigi Studios başta olmak üzere orijinal güneş gözlükleri. Optisyen danışmanlığıyla seçin, aynı gün kargoda.</p>
 <div class='hero-btn'>
 <a class='btn btn-ana' href='#koleksiyon'>Koleksiyonu keşfet</a>
 <a class='btn btn-cizgi' href='#magaza'>Mağazamıza gelin</a>
@@ -76,7 +84,7 @@ body{margin:0;background:#fff}
 </div>
 </div>
 <div class='hero-gorsel'>
-<div class='hero-vitrin' id='hero-sol'><img alt='' class='bos' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d55255ff70f959f8be4ac22eb2b529a52f33d604/img/logo/seckin-optik-isaret.svg'/></div>
+<div class='hero-vitrin' id='hero-sol'><img alt='' class='bos' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/img/logo/seckin-optik-isaret.svg'/></div>
 <a class='hero-etiket gizli' href='#' id='hero-etiket'></a>
 </div>
 </div>
@@ -98,12 +106,11 @@ body{margin:0;background:#fff}
     <div class='kap'>
       <div class='bolum-bas'><div><p class='eyebrow'>Kategoriler</p><h2>Size uygun olanı seçin</h2></div></div>
       <div class='kategoriler'>
-        <a class='kat-kart' href='/search/label/Kad%C4%B1n'><h3>Kadın</h3><p data-say='kadin'>Güneş gözlükleri</p><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
-        <a class='kat-kart koyu' href='/search/label/Erkek'><h3>Erkek</h3><p data-say='erkek'>Güneş gözlükleri</p><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
-        <a class='kat-kart' href='/search/label/Unisex'><h3>Unisex</h3><p data-say='unisex'>Herkese uyan</p><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
-        <a class='kat-kart mavi' href='/search/label/%C3%87ocuk'><h3>Çocuk</h3><p data-say='cocuk'>UV400 koruma</p><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
-        <a class='kat-kart' href='/search/label/Optik'><h3>Optik</h3><p data-say='optik'>Numaralı çerçeveler</p><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
-      </div>
+<a class='kat-kart' href='/search/label/Kad%C4%B1n'><img alt='' class='kat-gorsel' loading='lazy' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@main/img/urunler/gigi-studios-ggs-6705-1-1.png'/><div class='metin'><h3>Kadın</h3><p data-say='kadin'>Güneş gözlükleri</p></div><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
+<a class='kat-kart' href='/search/label/Erkek'><img alt='' class='kat-gorsel' loading='lazy' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@main/img/urunler/ray-ban-rb0316s-6826j5-1.jpg'/><div class='metin'><h3>Erkek</h3><p data-say='erkek'>Güneş gözlükleri</p></div><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
+<a class='kat-kart' href='/search/label/Unisex'><img alt='' class='kat-gorsel' loading='lazy' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@main/img/urunler/prada-pr-a01s-15o10c-1.jpg'/><div class='metin'><h3>Unisex</h3><p data-say='unisex'>Herkese uyan modeller</p></div><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
+<a class='kat-kart' href='/search/label/%C3%87ocuk'><img alt='' class='kat-gorsel' loading='lazy' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@main/img/urunler/vogue-vj2015-w44-71-1.jpg'/><div class='metin'><h3>Çocuk</h3><p data-say='cocuk'>UV400 koruma</p></div><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
+</div>
     </div>
   </section>
 
@@ -118,7 +125,6 @@ body{margin:0;background:#fff}
           <button class='cip' data-kat='erkek' type='button'>Erkek</button>
           <button class='cip' data-kat='unisex' type='button'>Unisex</button>
           <button class='cip' data-kat='cocuk' type='button'>Çocuk</button>
-          <button class='cip' data-kat='optik' type='button'>Optik</button>
           <button class='cip' data-kat='indirim' type='button'>İndirimli</button>
         </div>
         <div class='filtre-sag'>
@@ -236,8 +242,8 @@ body{margin:0;background:#fff}
   <div class='kap'>
     <div class='alt-izgara'>
       <div>
-        <a class='alt-logo' href='/'><img alt='Seçkin Optik' height='40' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d55255ff70f959f8be4ac22eb2b529a52f33d604/img/logo/seckin-optik-logo-beyaz.svg' width='245'/></a>
-        <p>Bakışınıza seçkinlik. Orijinal güneş ve optik gözlükler, optisyen güvencesiyle.</p>
+        <a class='alt-logo' href='/'><img alt='Seçkin Optik' height='40' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/img/logo/seckin-optik-logo-beyaz.svg' width='245'/></a>
+        <p>Bakışınıza seçkinlik. Orijinal güneş gözlükleri, optisyen güvencesiyle.</p>
         <div class='sosyal'>
           <a aria-label='Instagram' href='https://www.instagram.com/seckinoptik17/' rel='noopener' target='_blank'><svg fill='none' stroke='currentColor' stroke-width='1.8' viewBox='0 0 24 24'><rect height='18' rx='5' width='18' x='3' y='3'/><circle cx='12' cy='12' r='4'/><circle cx='17.5' cy='6.5' fill='currentColor' r='1'/></svg></a>
           <a aria-label='Facebook' href='https://www.facebook.com/markaoptik.net' rel='noopener' target='_blank'><svg fill='currentColor' viewBox='0 0 24 24'><path d='M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8z'/></svg></a>
@@ -250,7 +256,6 @@ body{margin:0;background:#fff}
           <li><a href='/search/label/Kad%C4%B1n'>Kadın güneş gözlükleri</a></li>
           <li><a href='/search/label/Erkek'>Erkek güneş gözlükleri</a></li>
           <li><a href='/search/label/%C3%87ocuk'>Çocuk güneş gözlükleri</a></li>
-          <li><a href='/search/label/Optik'>Optik çerçeveler</a></li>
         </ul>
       </div>
       <div>
@@ -283,6 +288,6 @@ body{margin:0;background:#fff}
 <div class='mobil-al gizli' id='mobil-al'></div>
 <div class='modal gizli' id='modal' role='dialog' aria-modal='true' aria-labelledby='modal-baslik'></div>
 
-<script defer='defer' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d55255ff70f959f8be4ac22eb2b529a52f33d604/tema/seckin.js'></script>
+<script defer='defer' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/tema/seckin.js'></script>
 </body>
 </html>
