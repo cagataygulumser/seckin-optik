@@ -18,8 +18,8 @@ Site dosyaları jsDelivr üzerinden yüklenir:
 ## Tasarımı güncelleme
 
 1. `tema/seckin.css` veya `tema/seckin.js` dosyasını değiştir, commit et.
-2. Yeni bir sürüm etiketi ver (ör. `v2.0.1`).
-3. Blogger temasında `@v2.0.0` geçen yerleri yeni sürümle değiştir.
+2. Değişikliği GitHub'a gönder ve commit kimliğini (SHA) kopyala.
+3. Blogger temasında `@ESKI_SHA` geçen yerleri yeni commit kimliğiyle değiştir.
 
 ## Ürün ekleme
 
