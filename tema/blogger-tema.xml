@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' b:responsive='true' b:templateVersion='1.0.0' lang='tr' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
+<head>
+<meta charset='utf-8'/>
+<meta content='width=device-width, initial-scale=1' name='viewport'/>
+<meta content='#02122C' name='theme-color'/>
+<b:include data='blog' name='all-head-content'/>
+<title><b:if cond='data:view.isHomepage'>Seçkin Optik | Çanakkale Orijinal Güneş ve Optik Gözlük<b:else/><data:view.title.escaped/> | Seçkin Optik</b:if></title>
+<b:if cond='data:view.isHomepage'>
+<meta content='Çanakkale Seçkin Optik: Ray-Ban, Prada, Vogue, Gigi Studios ve daha fazlası. %100 orijinal, faturalı, aynı gün ücretsiz kargo. PayTR ile güvenli ödeme ve taksit.' name='description'/>
+</b:if>
+<link href='https://fonts.googleapis.com' rel='preconnect'/>
+<link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
+<link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap' rel='stylesheet'/>
+<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@v2.0.0/tema/seckin.css' rel='stylesheet'/>
+<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@v2.0.0/img/logo/favicon.png' rel='icon' type='image/png'/>
+<b:skin><![CDATA[
+/* Seçkin Optik v2 — stiller GitHub'dan yüklenir: tema/seckin.css */
+body{margin:0;background:#fff}
+.so-urun{display:none}
+]]></b:skin>
+<b:template-skin><![CDATA[ ]]></b:template-skin>
+</head>
+<body>
+<b:class cond='data:view.isHomepage' name='v-ana'/>
+<b:class cond='data:view.isSingleItem' name='v-tekil'/>
+<b:class cond='data:view.isPage' name='v-sayfa'/>
+<b:class cond='data:view.isMultipleItems' name='v-liste'/>
+
+<div class='duyuru'>Tüm ürünler <b>%100 orijinal ve faturalı</b> · Aynı gün <b>ücretsiz kargo</b> · PayTR ile güvenli ödeme</div>
+
+<header class='ust'>
+  <div class='kap ust-ic'>
+    <a aria-label='Seçkin Optik ana sayfa' class='logo' href='/'><img alt='Seçkin Optik' height='48' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@v2.0.0/img/logo/seckin-optik-logo.png' width='132'/></a>
+    <nav class='menu' id='menu'>
+      <a data-kat='kadin' href='/search/label/Kad%C4%B1n'>Kadın</a>
+      <a data-kat='erkek' href='/search/label/Erkek'>Erkek</a>
+      <a data-kat='unisex' href='/search/label/Unisex'>Unisex</a>
+      <a data-kat='cocuk' href='/search/label/%C3%87ocuk'>Çocuk</a>
+      <a data-kat='optik' href='/search/label/Optik'>Optik</a>
+      <a href='/#magaza'>Mağaza</a>
+    </nav>
+    <div class='ust-arac'>
+      <button aria-label='Ara' class='ikon-btn' id='arama-ac' type='button'><svg fill='none' stroke='currentColor' stroke-linecap='round' stroke-width='2' viewBox='0 0 24 24'><circle cx='11' cy='11' r='7'/><path d='M20 20l-3.5-3.5'/></svg></button>
+      <a aria-label='WhatsApp' class='ikon-btn' id='ust-wa' rel='noopener' target='_blank'><svg fill='currentColor' viewBox='0 0 24 24'><path d='M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z'/></svg></a>
+      <button aria-controls='menu' aria-label='Menü' class='ikon-btn hamburger' id='menu-ac' type='button'><svg fill='none' stroke='currentColor' stroke-linecap='round' stroke-width='2' viewBox='0 0 24 24'><path d='M4 7h16M4 12h16M4 17h16'/></svg></button>
+    </div>
+  </div>
+  <div class='arama-cubuk gizli' id='arama-cubuk'>
+    <form action='/search' class='kap' method='get'>
+      <label class='sr' for='q'>Ürün ara</label>
+      <input autocomplete='off' id='q' name='q' placeholder='Marka veya model kodu yazın (ör. Ray-Ban RB0316S)' type='search'/>
+      <button class='btn btn-koyu btn-sm' type='submit'>Ara</button>
+    </form>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class='hero sadece-ana'>
+<div class='kap'>
+<div class='hero-kutu'>
+<div>
+<p class='eyebrow'>Çanakkale · Seçkin Optik</p>
+<h1>Gözlükte <em>orijinal</em> ve seçkin olanı.</h1>
+<p class='alt'>Ray-Ban, Prada, Vogue ve Gigi Studios başta olmak üzere orijinal güneş ve optik gözlükler. Optisyen danışmanlığıyla seçin, aynı gün kargoda.</p>
+<div class='hero-btn'>
+<a class='btn btn-ana' href='#koleksiyon'>Koleksiyonu keşfet</a>
+<a class='btn btn-cizgi' href='#magaza'>Mağazamıza gelin</a>
+</div>
+<div class='hero-rakam'>
+<div><b>%100</b><span>Orijinal ve faturalı</span></div>
+<div><b>Aynı gün</b><span>Ücretsiz kargo</span></div>
+<div><b>2 yıl</b><span>Garanti</span></div>
+</div>
+</div>
+<div class='hero-gorsel'>
+<div class='hero-vitrin' id='hero-sol'><img alt='' class='bos' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@v2.0.0/img/logo/seckin-optik-isaret.png'/></div>
+<a class='hero-etiket gizli' href='#' id='hero-etiket'></a>
+</div>
+</div>
+</div>
+</section>
+
+  <!-- GÜVEN -->
+  <section class='guven sadece-ana'>
+    <ul class='kap'>
+      <li><span class='ik'><svg fill='none' stroke='currentColor' stroke-width='1.8' viewBox='0 0 24 24'><path d='M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6z'/><path d='M8.5 12l2.5 2.5 4.5-5'/></svg></span><span>%100 Orijinal<small>Faturalı, garantili ürün</small></span></li>
+      <li><span class='ik'><svg fill='none' stroke='currentColor' stroke-width='1.8' viewBox='0 0 24 24'><path d='M3 7h11v9H3zM14 10h4l3 3v3h-7z'/><circle cx='7' cy='17.5' r='1.8'/><circle cx='17' cy='17.5' r='1.8'/></svg></span><span>Aynı gün kargo<small>Tüm Türkiye'ye ücretsiz</small></span></li>
+      <li><span class='ik'><svg fill='none' stroke='currentColor' stroke-width='1.8' viewBox='0 0 24 24'><rect height='14' rx='2' width='20' x='2' y='5'/><path d='M2 10h20M6 15h4'/></svg></span><span>Güvenli ödeme<small>PayTR altyapısı, taksit</small></span></li>
+      <li><span class='ik'><svg fill='none' stroke='currentColor' stroke-width='1.8' viewBox='0 0 24 24'><circle cx='7' cy='12' r='4'/><circle cx='17' cy='12' r='4'/><path d='M11 11.5c.6-.6 1.4-.6 2 0'/></svg></span><span>Optisyen desteği<small>Doğru gözlüğü birlikte seçelim</small></span></li>
+    </ul>
+  </section>
+
+  <!-- KATEGORİLER -->
+  <section class='bolum sadece-ana'>
+    <div class='kap'>
+      <div class='bolum-bas'><div><p class='eyebrow'>Kategoriler</p><h2>Size uygun olanı seçin</h2></div></div>
+      <div class='kategoriler'>
+        <a class='kat-kart' href='/search/label/Kad%C4%B1n'><h3>Kadın</h3><p data-say='kadin'>Güneş gözlükleri</p><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
+        <a class='kat-kart koyu' href='/search/label/Erkek'><h3>Erkek</h3><p data-say='erkek'>Güneş gözlükleri</p><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
+        <a class='kat-kart' href='/search/label/Unisex'><h3>Unisex</h3><p data-say='unisex'>Herkese uyan</p><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
+        <a class='kat-kart mavi' href='/search/label/%C3%87ocuk'><h3>Çocuk</h3><p data-say='cocuk'>UV400 koruma</p><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
+        <a class='kat-kart' href='/search/label/Optik'><h3>Optik</h3><p data-say='optik'>Numaralı çerçeveler</p><span class='ok'><svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><path d='M5 12h14M13 6l6 6-6 6'/></svg></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- KOLEKSİYON -->
+  <section class='bolum sadece-liste' id='koleksiyon' style='padding-top:24px'>
+    <div class='kap'>
+      <div class='bolum-bas'><div><p class='eyebrow' id='liste-ust'>Koleksiyon</p><h2 id='liste-baslik'>Yeni sezon gözlükler</h2></div></div>
+      <div class='filtre'>
+        <div class='cipler' id='cipler'>
+          <button class='cip aktif' data-kat='tumu' type='button'>Tümü</button>
+          <button class='cip' data-kat='kadin' type='button'>Kadın</button>
+          <button class='cip' data-kat='erkek' type='button'>Erkek</button>
+          <button class='cip' data-kat='unisex' type='button'>Unisex</button>
+          <button class='cip' data-kat='cocuk' type='button'>Çocuk</button>
+          <button class='cip' data-kat='optik' type='button'>Optik</button>
+          <button class='cip' data-kat='indirim' type='button'>İndirimli</button>
+        </div>
+        <div class='filtre-sag'>
+          <input aria-label='Koleksiyonda ara' class='filtre-ara' id='filtre-ara' placeholder='Model kodu ara' type='search'/>
+          <select aria-label='Marka' class='secim' id='marka-sec'><option value=''>Tüm markalar</option></select>
+          <select aria-label='Sıralama' class='secim' id='sira-sec'>
+            <option value='yeni'>En yeniler</option>
+            <option value='artan'>Fiyat: düşükten yükseğe</option>
+            <option value='azalan'>Fiyat: yüksekten düşüğe</option>
+            <option value='indirim'>En çok indirim</option>
+          </select>
+        </div>
+      </div>
+      <p class='sonuc-bilgi' id='sonuc-bilgi'>Ürünler yükleniyor…</p>
+      <div class='urunler' id='urunler'>
+        <div class='iskelet'></div><div class='iskelet'></div><div class='iskelet'></div><div class='iskelet'></div>
+      </div>
+      <div class='daha gizli' id='daha'><button class='btn btn-cizgi' id='daha-btn' type='button'>Daha fazla göster</button></div>
+    </div>
+  </section>
+
+  <!-- TEKİL: ÜRÜN / SAYFA / YAZI -->
+  <div class='kap sadece-tekil'>
+    <b:section class='main' id='main' name='Ana' showaddelement='no'>
+      <b:widget id='Blog1' locked='true' title='Ürünler' type='Blog' version='2' visible='true'>
+        <b:widget-settings>
+          <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+          <b:widget-setting name='commentLabel'>Yorum</b:widget-setting>
+          <b:widget-setting name='style.textcolor'>#000000</b:widget-setting>
+          <b:widget-setting name='showShareButtons'>false</b:widget-setting>
+          <b:widget-setting name='showCommentLink'>false</b:widget-setting>
+          <b:widget-setting name='style.urlcolor'>#000000</b:widget-setting>
+          <b:widget-setting name='showAuthor'>false</b:widget-setting>
+          <b:widget-setting name='style.linkcolor'>#000000</b:widget-setting>
+          <b:widget-setting name='style.unittype'>TextAndImage</b:widget-setting>
+          <b:widget-setting name='style.bgcolor'>#ffffff</b:widget-setting>
+          <b:widget-setting name='showAuthorProfile'>false</b:widget-setting>
+          <b:widget-setting name='style.layout'>1x1</b:widget-setting>
+          <b:widget-setting name='showLabels'>true</b:widget-setting>
+          <b:widget-setting name='showLocation'>false</b:widget-setting>
+          <b:widget-setting name='showTimestamp'>false</b:widget-setting>
+          <b:widget-setting name='postsPerAd'>1</b:widget-setting>
+          <b:widget-setting name='style.bordercolor'>#000000</b:widget-setting>
+          <b:widget-setting name='showReactions'>false</b:widget-setting>
+        </b:widget-settings>
+        <b:includable id='main' var='top'>
+          <b:if cond='data:view.isSingleItem'>
+            <b:loop values='data:posts' var='post'>
+              <article class='yazi' id='so-yazi'>
+                <nav class='yol' id='so-yol'><a href='/'>Ana sayfa</a><span>/</span><span><data:post.title/></span></nav>
+                <h1 id='so-baslik'><data:post.title/></h1>
+                <div class='yazi-govde' id='so-govde'><data:post.body/></div>
+                <div hidden='hidden' id='so-etiketler'><b:loop values='data:post.labels' var='label'><span><data:label.name/></span></b:loop></div>
+                <span hidden='hidden' id='so-url'><data:post.url/></span>
+              </article>
+            </b:loop>
+          </b:if>
+        </b:includable>
+      </b:widget>
+    </b:section>
+  </div>
+
+  <!-- NEDEN SEÇKİN -->
+  <section class='bolum neden sadece-ana'>
+    <div class='kap'>
+      <div class='bolum-bas'><div><p class='eyebrow'>Neden Seçkin Optik</p><h2>Gözlük sadece aksesuar değil</h2></div></div>
+      <div class='neden-izgara'>
+        <div class='neden-kart'><span class='neden-no'>01</span><h3>Optisyen danışmanlığı</h3><p>Yüz şeklinize, kullanım alanınıza ve cam ihtiyacınıza göre doğru modeli birlikte seçiyoruz. WhatsApp'tan fotoğrafınızı gönderin, önerelim.</p></div>
+        <div class='neden-kart'><span class='neden-no'>02</span><h3>Orijinal ve faturalı</h3><p>Tüm ürünler distribütör güvencesiyle, orijinal kılıf ve temizleme beziyle, faturalı ve garantili olarak gönderilir.</p></div>
+        <div class='neden-kart'><span class='neden-no'>03</span><h3>Satış sonrası yanınızdayız</h3><p>Ayar, vida, burunluk değişimi gibi işlemler için Çanakkale mağazamız her zaman açık. 14 gün içinde koşulsuz iade.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MARKALAR -->
+  <section class='bolum sadece-ana'>
+    <div class='kap'>
+      <div class='bolum-bas'><div><p class='eyebrow'>Markalar</p><h2>Koleksiyondaki markalar</h2></div></div>
+      <div class='markalar' id='markalar'></div>
+    </div>
+  </section>
+
+  <!-- REHBER -->
+  <section class='bolum gizli' id='rehber-bolum' style='padding-top:0'>
+    <div class='kap'>
+      <div class='bolum-bas'><div><p class='eyebrow'>Gözlük Rehberi</p><h2>Optisyeninizden notlar</h2></div></div>
+      <div class='rehber' id='rehber'></div>
+    </div>
+  </section>
+
+  <!-- MAĞAZA -->
+  <section class='bolum' id='magaza' style='padding-top:0'>
+    <div class='kap'>
+      <div class='magaza'>
+        <div class='magaza-bilgi'>
+          <p class='eyebrow'>Mağazamız</p>
+          <h2>Çanakkale'de, Boğaz'a birkaç adım.</h2>
+          <ul>
+            <li><span class='ik'><svg fill='none' stroke='currentColor' stroke-width='1.8' viewBox='0 0 24 24'><path d='M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z'/><circle cx='12' cy='9.5' r='2.5'/></svg></span><span>Demircioğlu Caddesi No: 37/A, Merkez / Çanakkale</span></li>
+            <li><svg fill='none' stroke='currentColor' stroke-width='1.8' viewBox='0 0 24 24'><path d='M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2'/></svg><a href='tel:+902862176636'>0286 217 66 36</a></li>
+            <li><svg fill='none' stroke='currentColor' stroke-width='1.8' viewBox='0 0 24 24'><rect height='14' rx='2' width='18' x='3' y='5'/><path d='M3 7l9 6 9-6'/></svg><a href='mailto:info@seckinoptik.com.tr'>info@seckinoptik.com.tr</a></li>
+          </ul>
+          <div class='hero-btn'>
+            <a class='btn btn-ana' href='https://www.google.com/maps/search/?api=1&amp;query=Se%C3%A7kin+Optik+Demircio%C4%9Flu+Caddesi+37%2FA+%C3%87anakkale' rel='noopener' target='_blank'>Yol tarifi al</a>
+            <a class='btn btn-acik' id='magaza-wa' rel='noopener' target='_blank'>WhatsApp'tan yazın</a>
+          </div>
+        </div>
+        <iframe loading='lazy' referrerpolicy='no-referrer-when-downgrade' src='https://www.google.com/maps?q=Demircio%C4%9Flu+Caddesi+No:37/A+%C3%87anakkale&amp;output=embed' title='Seçkin Optik harita'></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class='altbilgi'>
+  <div class='kap'>
+    <div class='alt-izgara'>
+      <div>
+        <a class='alt-logo' href='/'><img alt='Seçkin Optik' height='56' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@v2.0.0/img/logo/seckin-optik-logo-beyaz.png' width='154'/></a>
+        <p>Bakışınıza seçkinlik. Orijinal güneş ve optik gözlükler, optisyen güvencesiyle.</p>
+        <div class='sosyal'>
+          <a aria-label='Instagram' href='https://www.instagram.com/seckinoptik17/' rel='noopener' target='_blank'><svg fill='none' stroke='currentColor' stroke-width='1.8' viewBox='0 0 24 24'><rect height='18' rx='5' width='18' x='3' y='3'/><circle cx='12' cy='12' r='4'/><circle cx='17.5' cy='6.5' fill='currentColor' r='1'/></svg></a>
+          <a aria-label='Facebook' href='https://www.facebook.com/markaoptik.net' rel='noopener' target='_blank'><svg fill='currentColor' viewBox='0 0 24 24'><path d='M14 8h3V4h-3a4 4 0 0 0-4 4v2H8v4h2v8h4v-8h3l1-4h-4V8z'/></svg></a>
+          <a aria-label='WhatsApp' id='alt-wa' rel='noopener' target='_blank'><svg fill='currentColor' viewBox='0 0 24 24'><path d='M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z'/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4>Alışveriş</h4>
+        <ul>
+          <li><a href='/search/label/Kad%C4%B1n'>Kadın güneş gözlükleri</a></li>
+          <li><a href='/search/label/Erkek'>Erkek güneş gözlükleri</a></li>
+          <li><a href='/search/label/%C3%87ocuk'>Çocuk güneş gözlükleri</a></li>
+          <li><a href='/search/label/Optik'>Optik çerçeveler</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kurumsal</h4>
+        <ul>
+          <li><a href='/p/hakkimizda.html'>Hakkımızda</a></li>
+          <li><a href='/p/iletisim.html'>İletişim</a></li>
+          <li><a href='/p/sss.html'>Sıkça sorulan sorular</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sözleşmeler</h4>
+        <ul>
+          <li><a href='/p/mesafeli-satis-sozlesmesi.html'>Mesafeli satış sözleşmesi</a></li>
+          <li><a href='/p/on-bilgilendirme-formu.html'>Ön bilgilendirme formu</a></li>
+          <li><a href='/p/iade-ve-degisim.html'>İade ve değişim</a></li>
+          <li><a href='/p/kvkk.html'>KVKK ve gizlilik</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class='alt-cizgi'>
+      <span>© <span id='yil'>2026</span> Seçkin Optik · Demircioğlu Cad. No:37/A Çanakkale</span>
+      <span class='odeme'><span>PayTR</span><span>VISA</span><span>MASTERCARD</span><span>TROY</span></span>
+    </div>
+  </div>
+</footer>
+
+<a aria-label='WhatsApp ile yazın' class='wa-yuzen' id='wa-yuzen' rel='noopener' target='_blank'><svg fill='currentColor' viewBox='0 0 24 24'><path d='M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.3 2.2 2.2 0 0 0 .2-1.3c-.1-.1-.3-.2-.5-.3z'/></svg></a>
+
+<div class='mobil-al gizli' id='mobil-al'></div>
+<div class='modal gizli' id='modal' role='dialog' aria-modal='true' aria-labelledby='modal-baslik'></div>
+
+<script defer='defer' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@v2.0.0/tema/seckin.js'></script>
+</body>
+</html>
