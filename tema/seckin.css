@@ -502,3 +502,11 @@ body.v-sayfa .yazi{max-width:900px}
   .od-adimlar li span{width:22px;height:22px}
   .sepet-panel{width:100vw}
 }
+/* sayfa içi düzeltmeler */
+body.v-sayfa .yazi.genis{max-width:1160px}
+body.v-sayfa .yazi.sonuc-sayfa{max-width:720px}
+.yazi-govde .sp-ad{text-decoration:none;color:var(--lacivert)}
+.yazi-govde .sp-ad:hover{color:var(--mavi)}
+.yazi-govde .sp-liste,.yazi-govde .od-adimlar{padding-left:0}
+.yazi-govde .sp-liste li,.yazi-govde .od-adimlar li{margin:0}
+.yazi-govde .sp-gorsel{text-decoration:none}
