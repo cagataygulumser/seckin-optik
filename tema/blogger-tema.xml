@@ -13,8 +13,8 @@
 <link href='https://fonts.googleapis.com' rel='preconnect'/>
 <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
 <link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap' rel='stylesheet'/>
-<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@4a91d0e97ee553616a06b17f31d25de7fe63818a/tema/seckin.css' rel='stylesheet'/>
-<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@4a91d0e97ee553616a06b17f31d25de7fe63818a/img/logo/favicon.png' rel='icon' type='image/png'/>
+<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d55255ff70f959f8be4ac22eb2b529a52f33d604/tema/seckin.css' rel='stylesheet'/>
+<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d55255ff70f959f8be4ac22eb2b529a52f33d604/img/logo/favicon.png' rel='icon' type='image/png'/>
 <b:skin><![CDATA[
 /* Seçkin Optik v2 — stiller GitHub'dan yüklenir: tema/seckin.css */
 body{margin:0;background:#fff}
@@ -32,7 +32,7 @@ body{margin:0;background:#fff}
 
 <header class='ust'>
   <div class='kap ust-ic'>
-    <a aria-label='Seçkin Optik ana sayfa' class='logo' href='/'><img alt='Seçkin Optik' height='48' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@4a91d0e97ee553616a06b17f31d25de7fe63818a/img/logo/seckin-optik-logo.png' width='132'/></a>
+    <a aria-label='Seçkin Optik ana sayfa' class='logo' href='/'><img alt='Seçkin Optik' height='40' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d55255ff70f959f8be4ac22eb2b529a52f33d604/img/logo/seckin-optik-logo.svg' width='245'/></a>
     <nav class='menu' id='menu'>
       <a data-kat='kadin' href='/search/label/Kad%C4%B1n'>Kadın</a>
       <a data-kat='erkek' href='/search/label/Erkek'>Erkek</a>
@@ -76,7 +76,7 @@ body{margin:0;background:#fff}
 </div>
 </div>
 <div class='hero-gorsel'>
-<div class='hero-vitrin' id='hero-sol'><img alt='' class='bos' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@4a91d0e97ee553616a06b17f31d25de7fe63818a/img/logo/seckin-optik-isaret.png'/></div>
+<div class='hero-vitrin' id='hero-sol'><img alt='' class='bos' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d55255ff70f959f8be4ac22eb2b529a52f33d604/img/logo/seckin-optik-isaret.svg'/></div>
 <a class='hero-etiket gizli' href='#' id='hero-etiket'></a>
 </div>
 </div>
@@ -236,7 +236,7 @@ body{margin:0;background:#fff}
   <div class='kap'>
     <div class='alt-izgara'>
       <div>
-        <a class='alt-logo' href='/'><img alt='Seçkin Optik' height='56' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@4a91d0e97ee553616a06b17f31d25de7fe63818a/img/logo/seckin-optik-logo-beyaz.png' width='154'/></a>
+        <a class='alt-logo' href='/'><img alt='Seçkin Optik' height='40' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d55255ff70f959f8be4ac22eb2b529a52f33d604/img/logo/seckin-optik-logo-beyaz.svg' width='245'/></a>
         <p>Bakışınıza seçkinlik. Orijinal güneş ve optik gözlükler, optisyen güvencesiyle.</p>
         <div class='sosyal'>
           <a aria-label='Instagram' href='https://www.instagram.com/seckinoptik17/' rel='noopener' target='_blank'><svg fill='none' stroke='currentColor' stroke-width='1.8' viewBox='0 0 24 24'><rect height='18' rx='5' width='18' x='3' y='3'/><circle cx='12' cy='12' r='4'/><circle cx='17.5' cy='6.5' fill='currentColor' r='1'/></svg></a>
@@ -283,6 +283,6 @@ body{margin:0;background:#fff}
 <div class='mobil-al gizli' id='mobil-al'></div>
 <div class='modal gizli' id='modal' role='dialog' aria-modal='true' aria-labelledby='modal-baslik'></div>
 
-<script defer='defer' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@4a91d0e97ee553616a06b17f31d25de7fe63818a/tema/seckin.js'></script>
+<script defer='defer' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d55255ff70f959f8be4ac22eb2b529a52f33d604/tema/seckin.js'></script>
 </body>
 </html>
