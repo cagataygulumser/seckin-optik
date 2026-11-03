@@ -20,10 +20,10 @@
 <link href='https://fonts.googleapis.com' rel='preconnect'/>
 <link crossorigin='anonymous' href='https://fonts.gstatic.com' rel='preconnect'/>
 <link href='https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap' rel='stylesheet'/>
-<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/tema/seckin.css' rel='stylesheet'/>
-<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/img/logo/favicon-32.png' rel='icon' sizes='32x32' type='image/png'/>
-<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/img/logo/favicon-192.png' rel='icon' sizes='192x192' type='image/png'/>
-<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/img/logo/apple-touch-icon.png' rel='apple-touch-icon'/>
+<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d79361a2bb04983437601e5b75193eb95944f88c/tema/seckin.css' rel='stylesheet'/>
+<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d79361a2bb04983437601e5b75193eb95944f88c/img/logo/favicon-32.png' rel='icon' sizes='32x32' type='image/png'/>
+<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d79361a2bb04983437601e5b75193eb95944f88c/img/logo/favicon-192.png' rel='icon' sizes='192x192' type='image/png'/>
+<link href='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d79361a2bb04983437601e5b75193eb95944f88c/img/logo/apple-touch-icon.png' rel='apple-touch-icon'/>
 <b:skin><![CDATA[
 /* Seçkin Optik v2 — stiller GitHub'dan yüklenir: tema/seckin.css */
 body{margin:0;background:#fff}
@@ -41,7 +41,7 @@ body{margin:0;background:#fff}
 
 <header class='ust'>
   <div class='kap ust-ic'>
-    <a aria-label='Seçkin Optik ana sayfa' class='logo' href='/'><img alt='Seçkin Optik' height='40' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/img/logo/seckin-optik-logo.svg' width='245'/></a>
+    <a aria-label='Seçkin Optik ana sayfa' class='logo' href='/'><img alt='Seçkin Optik' height='40' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d79361a2bb04983437601e5b75193eb95944f88c/img/logo/seckin-optik-logo.svg' width='245'/></a>
     <nav class='menu' id='menu'>
       <a data-kat='kadin' href='/search/label/Kad%C4%B1n'>Kadın</a>
       <a data-kat='erkek' href='/search/label/Erkek'>Erkek</a>
@@ -84,7 +84,7 @@ body{margin:0;background:#fff}
 </div>
 </div>
 <div class='hero-gorsel'>
-<div class='hero-vitrin' id='hero-sol'><img alt='' class='bos' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/img/logo/seckin-optik-isaret.svg'/></div>
+<div class='hero-vitrin' id='hero-sol'><img alt='' class='bos' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d79361a2bb04983437601e5b75193eb95944f88c/img/logo/seckin-optik-isaret.svg'/></div>
 <a class='hero-etiket gizli' href='#' id='hero-etiket'></a>
 </div>
 </div>
@@ -242,7 +242,7 @@ body{margin:0;background:#fff}
   <div class='kap'>
     <div class='alt-izgara'>
       <div>
-        <a class='alt-logo' href='/'><img alt='Seçkin Optik' height='40' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/img/logo/seckin-optik-logo-beyaz.svg' width='245'/></a>
+        <a class='alt-logo' href='/'><img alt='Seçkin Optik' height='40' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d79361a2bb04983437601e5b75193eb95944f88c/img/logo/seckin-optik-logo-beyaz.svg' width='245'/></a>
         <p>Bakışınıza seçkinlik. Orijinal güneş gözlükleri, optisyen güvencesiyle.</p>
         <div class='sosyal'>
           <a aria-label='Instagram' href='https://www.instagram.com/seckinoptik17/' rel='noopener' target='_blank'><svg fill='none' stroke='currentColor' stroke-width='1.8' viewBox='0 0 24 24'><rect height='18' rx='5' width='18' x='3' y='3'/><circle cx='12' cy='12' r='4'/><circle cx='17.5' cy='6.5' fill='currentColor' r='1'/></svg></a>
@@ -288,6 +288,6 @@ body{margin:0;background:#fff}
 <div class='mobil-al gizli' id='mobil-al'></div>
 <div class='modal gizli' id='modal' role='dialog' aria-modal='true' aria-labelledby='modal-baslik'></div>
 
-<script defer='defer' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@115c783dbc9f63f8397e8b2c90dfa62bbeb8c73d/tema/seckin.js'></script>
+<script defer='defer' src='https://cdn.jsdelivr.net/gh/cagataygulumser/seckin-optik@d79361a2bb04983437601e5b75193eb95944f88c/tema/seckin.js'></script>
 </body>
 </html>
