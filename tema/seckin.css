@@ -333,7 +333,7 @@ body:not(.v-tekil) .sadece-tekil{display:none}
 body.v-sayfa .yazi{max-width:900px}
 .sayfa-ust{background:var(--zemin-2);border-radius:var(--r-lg);padding:36px 40px;margin-bottom:36px}
 .sayfa-ust p{margin:10px 0 0;color:var(--ikincil);font-size:17px;max-width:640px}
-.yazi-govde .so-izgara{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin:24px 0}
+.yazi-govde .so-izgara{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:24px 0}
 .yazi-govde .so-kart{background:var(--zemin-2);border-radius:var(--r-md);padding:22px}
 .yazi-govde .so-kart h3{margin:0 0 6px;font-size:17px}
 .yazi-govde .so-kart p{margin:0;color:var(--ikincil);font-size:15px}
