@@ -177,7 +177,7 @@ function formCiz(){
     kok.innerHTML=adimlar(1)+"<div class='od-bos'>"+IK.canta+"<h2>Sepetiniz boş</h2><p>Ödeme adımına geçmek için önce sepetinize ürün ekleyin.</p><a class='btn btn-ana' href='/#koleksiyon'>Koleksiyona göz at</a></div>";
     return;
   }
-  var m=oku(MUSTERI,{}), kurumsal=m.faturaTuru==="kurumsal";
+  var m=oku(MUSTERI,{}), kurumsal=m.faturaTuru==="kurumsal", magazadan=m.teslimat==="magaza";
   kok.innerHTML=adimlar(2)+
   "<div class='od-izgara'><form class='od-form' id='od-form' novalidate>"+
     "<section class='od-kutu'><h2><span>1</span>İletişim bilgileri</h2><div class='od-alanlar'>"+
@@ -185,11 +185,15 @@ function formCiz(){
       alan("telefon","Cep telefonu","tel",m.telefon,{ac:"tel",ph:"05xx xxx xx xx",mod:"tel"})+
       alan("eposta","E-posta","email",m.eposta,{ac:"email",ph:"ornek@mail.com"})+
     "</div></section>"+
-    "<section class='od-kutu'><h2><span>2</span>Teslimat adresi</h2><div class='od-alanlar'>"+
+    "<section class='od-kutu'><h2><span>2</span>Teslimat</h2>"+
+      "<div class='od-secim'><label><input name='teslimat' type='radio' value='kargo'"+(magazadan?"":" checked")+"/><span>Adresime kargo</span></label><label><input name='teslimat' type='radio' value='magaza'"+(magazadan?" checked":"")+"/><span>Mağazadan teslim alacağım</span></label></div>"+
+      "<div class='od-alanlar od-adres"+(magazadan?" gizli":"")+"'>"+
       alan("il","İl","select",m.il,{secenek:ILLER})+
       alan("ilce","İlçe","text",m.ilce,{ac:"address-level2"})+
       alan("adres","Açık adres","textarea",m.adres,{genis:true,ph:"Mahalle, cadde/sokak, bina ve daire no"})+
-    "</div></section>"+
+      "</div>"+
+      "<p class='not od-magaza"+(magazadan?"":" gizli")+"' style='margin:14px 0 0'><b>Seçkin Optik, Demircioğlu Caddesi No: 37/A, Merkez / Çanakkale.</b> Pazartesi – Cumartesi 08:30 – 20:00. Siparişiniz hazır olduğunda size haber veririz; teslim alırken çerçeve ayarınızı da yaparız.</p>"+
+    "</section>"+
     "<section class='od-kutu'><h2><span>3</span>Fatura bilgileri</h2>"+
       "<div class='od-secim'><label><input name='faturaTuru' type='radio' value='bireysel'"+(kurumsal?"":" checked")+"/><span>Bireysel</span></label><label><input name='faturaTuru' type='radio' value='kurumsal'"+(kurumsal?" checked":"")+"/><span>Kurumsal</span></label></div>"+
       "<div class='od-alanlar od-kurumsal"+(kurumsal?"":" gizli")+"'>"+
@@ -199,7 +203,10 @@ function formCiz(){
       "</div>"+
       "<p class='od-kucuk'>Faturanız teslimat adresine düzenlenir ve e-posta adresinize gönderilir.</p>"+
     "</section>"+
-    "<section class='od-kutu'><h2><span>4</span>Sipariş notu</h2><div class='od-alanlar'>"+alan("not","Notunuz","textarea",m.not,{genis:true,gerekli:false,ph:"Hediye paketi, teslimat saati vb."})+"</div></section>"+
+    "<section class='od-kutu'><h2><span>4</span>Hediye ve sipariş notu</h2>"+
+      "<label class='onay-kutu' style='margin:0 0 14px'><input id='od-hediye' type='checkbox'"+(m.hediye?" checked":"")+"/><span><b>Hediye paketi istiyorum</b> (ücretsiz). Fiyat bilgisi pakete konmaz.</span></label>"+
+      "<div class='od-alanlar od-hediye-not"+(m.hediye?"":" gizli")+"'>"+alan("hediyeNot","Hediye notu","textarea",m.hediyeNot,{genis:true,gerekli:false,ph:"Pakete eklenecek kısa notunuz"})+"</div>"+
+      "<div class='od-alanlar'>"+alan("not","Sipariş notunuz","textarea",m.not,{genis:true,gerekli:false,ph:"Teslimat saati, özel isteğiniz vb."})+"</div></section>"+
     "<section class='od-kutu od-onaylar'>"+
       "<label class='onay-kutu'><input id='od-sozlesme' type='checkbox'/><span><a href='/p/on-bilgilendirme-formu.html' target='_blank'>Ön Bilgilendirme Formu</a>'nu ve <a href='/p/mesafeli-satis-sozlesmesi.html' target='_blank'>Mesafeli Satış Sözleşmesi</a>'ni okudum, onaylıyorum.</span></label>"+
       "<label class='onay-kutu'><input id='od-kvkk' type='checkbox'/><span><a href='/p/kvkk.html' target='_blank'>KVKK Aydınlatma Metni</a>'ni okudum.</span></label>"+
@@ -211,13 +218,17 @@ function formCiz(){
   "</form>"+ozetHTML()+"</div>";
   var f=$("#od-form");
   $$("input[name=faturaTuru]",f).forEach(function(r){r.addEventListener("change",function(){$(".od-kurumsal",f).classList.toggle("gizli",r.value!=="kurumsal"||!r.checked)})});
+  $$("input[name=teslimat]",f).forEach(function(r){r.addEventListener("change",function(){var mg=r.value==="magaza"&&r.checked;$(".od-adres",f).classList.toggle("gizli",mg);$(".od-magaza",f).classList.toggle("gizli",!mg);formuSakla(f)})});
+  $("#od-hediye",f).addEventListener("change",function(){$(".od-hediye-not",f).classList.toggle("gizli",!this.checked);formuSakla(f)});
   f.addEventListener("input",function(e){var l=e.target.closest(".od-alan");if(l)l.classList.remove("hatali");formuSakla(f)});
   f.addEventListener("submit",function(e){e.preventDefault();gonder(f)});
   $("#od-duzenle").addEventListener("click",ac);
 }
 function formVerisi(f){
-  var d={}; ["ad","telefon","eposta","il","ilce","adres","firma","vergiDairesi","vergiNo","not"].forEach(function(k){var el=$("#od-"+k,f);d[k]=el?el.value.trim():""});
+  var d={}; ["ad","telefon","eposta","il","ilce","adres","firma","vergiDairesi","vergiNo","not","hediyeNot"].forEach(function(k){var el=$("#od-"+k,f);d[k]=el?el.value.trim():""});
   var r=$("input[name=faturaTuru]:checked",f); d.faturaTuru=r?r.value:"bireysel";
+  var ts=$("input[name=teslimat]:checked",f); d.teslimat=ts?ts.value:"kargo";
+  var hd=$("#od-hediye",f); d.hediye=!!(hd&&hd.checked); if(!d.hediye)d.hediyeNot="";
   var il=$("#od-ileti",f); d.ileti=!!(il&&il.checked);
   return d;
 }
@@ -231,9 +242,12 @@ function dogrula(f,d){
   var tel=d.telefon.replace(/\D/g,"").replace(/^90/,"").replace(/^0/,"");
   if(!/^5\d{9}$/.test(tel))h("telefon","Geçerli bir cep telefonu yazın (05xx…)"); else d.telefon="0"+tel;
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(d.eposta))h("eposta","Geçerli bir e-posta yazın");
-  if(!d.il)h("il","İl seçin");
-  if(d.ilce.length<2)h("ilce","İlçe yazın");
-  if(d.adres.length<10)h("adres","Açık adresinizi eksiksiz yazın");
+  if(d.teslimat==="magaza"){d.il="Çanakkale";d.ilce="Merkez";d.adres="Mağazadan teslim (Demircioğlu Caddesi No: 37/A)"}
+  else{
+    if(!d.il)h("il","İl seçin");
+    if(d.ilce.length<2)h("ilce","İlçe yazın");
+    if(d.adres.length<10)h("adres","Açık adresinizi eksiksiz yazın");
+  }
   if(d.faturaTuru==="kurumsal"){
     if(d.firma.length<2)h("firma","Firma unvanını yazın");
     if(d.vergiDairesi.length<2)h("vergiDairesi","Vergi dairesini yazın");
@@ -248,6 +262,8 @@ function dogrula(f,d){
   else if(mesaj)g.scrollIntoView({block:"center",behavior:"smooth"});
   return ok;
 }
+/* sunucu ve sipariş tablosu yalnızca bilinen alanları saklar: teslimat ve hediye bilgisi sipariş notuna eklenir */
+function sunucuMusteri(d){var k={},n=[];for(var a in d)k[a]=d[a];if(d.teslimat==="magaza")n.push("MAĞAZADAN TESLİM");if(d.hediye)n.push("HEDİYE PAKETİ"+(d.hediyeNot?" (not: "+d.hediyeNot+")":""));if(d.not)n.push(d.not);k.not=n.join(" | ");return k}
 function siparisNoUret(){var t=new Date();function p(n){return ("0"+n).slice(-2)}return "SO"+String(t.getFullYear()).slice(2)+p(t.getMonth()+1)+p(t.getDate())+Math.random().toString(36).slice(2,6).toUpperCase()}
 function gonder(f){
   var d=formVerisi(f); if(!dogrula(f,d))return;
@@ -256,7 +272,7 @@ function gonder(f){
   var kalemler=sepet.map(function(s){return {url:s.url,adet:s.adet}});
   var kayit={no:null,tarih:new Date().toISOString(),sepet:JSON.parse(JSON.stringify(sepet)),toplam:araToplam(),musteri:d};
   if(!odemeAcik()){kayit.no=siparisNoUret();yazDepo(SON,kayit);whatsappAdimi(kayit);return}
-  fetch(A.sunucu.replace(/\/$/,"")+"/odeme-baslat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({sepet:kalemler,musteri:d})})
+  fetch(A.sunucu.replace(/\/$/,"")+"/odeme-baslat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({sepet:kalemler,musteri:sunucuMusteri(d)})})
   .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j}})})
   .then(function(x){
     if(!x.ok||!x.j.token)throw new Error((x.j&&x.j.hata)||"Ödeme başlatılamadı");
@@ -282,11 +298,12 @@ function siparisMetni(k){
   sat.push("Sipariş no: "+k.no);
   sat.push("");
   k.sepet.forEach(function(s){sat.push("• "+(s.marka+" "+(s.model||s.baslik)).trim()+" × "+s.adet+" = "+tl(s.fiyat*s.adet))});
-  sat.push("Toplam: "+tl(k.toplam)+" (kargo ücretsiz)");
+  sat.push("Toplam: "+tl(k.toplam)+(m.teslimat==="magaza"?"":" (kargo ücretsiz)"));
   sat.push("");
   sat.push("Ad soyad: "+m.ad); sat.push("Telefon: "+m.telefon); sat.push("E-posta: "+m.eposta);
-  sat.push("Adres: "+m.adres+", "+m.ilce+" / "+m.il);
+  sat.push(m.teslimat==="magaza"?"Teslimat: Mağazadan teslim alacağım":"Adres: "+m.adres+", "+m.ilce+" / "+m.il);
   if(m.faturaTuru==="kurumsal")sat.push("Fatura: "+m.firma+" · "+m.vergiDairesi+" VD · "+m.vergiNo);
+  if(m.hediye)sat.push("Hediye paketi: Evet"+(m.hediyeNot?" · Not: "+m.hediyeNot:""));
   if(m.not)sat.push("Not: "+m.not);
   return sat.join("\n");
 }

@@ -37,6 +37,10 @@ $("#menu-ac").addEventListener("click",function(){$("#menu").classList.toggle("a
 $("#arama-ac").addEventListener("click",function(){var c=$("#arama-cubuk");c.classList.toggle("gizli");if(!c.classList.contains("gizli"))$("#q").focus()});
 
 /* Ürün verisini çözümle */
+/* Yazıda data-sekil / data-deneme yoksa kullanılan yedek değerler */
+var EKV={"VJ2015 W44/71":{s:"oval"},"LMB AL909 C9":{s:"pilot"},"0VO5553S 314800 54":{s:"kare"},
+  "PR A01S 15O10C 53":{s:"koseli",d:"prada-pr-a01s-15o10c.png|144"},"GGS 6705/1":{s:"cat-eye",d:"gigi-studios-ggs-6705-1.png|146"},
+  "RB 0316S 6826J5 53":{s:"clubmaster",d:"ray-ban-rb0316s-6826j5.png|145"}};
 function cozumle(html){
   var doc=new DOMParser().parseFromString("<div id='k'>"+(html||"")+"</div>","text/html");
   var k=doc.getElementById("k"); var u=k.querySelector(".so-urun");
@@ -49,7 +53,7 @@ function cozumle(html){
     stok:(d.stok||"var").toLowerCase(),tur:(d.tur||"gunes").toLowerCase(),cinsiyet:d.cinsiyet||"",
     renk:d.renk||"",cerceve:d.cerceve||"",cerceveRenk:d.cerceveRenk||"",cam:d.cam||"",camRenk:d.camRenk||"",
     filtre:d.filtre||"",polarize:d.polarize||"",olcu:d.olcu||"",garanti:d.garanti||"",kutu:d.kutu||"",barkod:d.barkod||"",
-    yeni:(d.yeni||"")==="evet",resimler:resimler,aciklama:k.innerHTML.trim()};
+    yeni:(d.yeni||"")==="evet",sekil:(d.sekil||(EKV[d.model]||{}).s||"").toLowerCase(),deneme:d.deneme||(EKV[d.model]||{}).d||"",resimler:resimler,aciklama:k.innerHTML.trim()};
 }
 function indirimYuzde(u){return isFinite(u.eski)&&u.eski>u.fiyat?Math.round((1-u.fiyat/u.eski)*100):0}
 function katlari(u){
@@ -92,8 +96,10 @@ function feedGetir_(){
 
 /* Satın alma penceresi */
 var MODAL=$("#modal");
+function haberVer(u){window.open(waLink("Merhaba, "+(u.marka+" "+u.model).trim()+" stoğa gelince haber verir misiniz? "+(u.url||location.href)),"_blank","noopener")}
 function satinAl(u){
-  if(window.SoSepet&&u.stok!=="yok"){window.SoSepet.ekle(u,1);return}
+  if(u.stok==="yok"){haberVer(u);return}
+  if(window.SoSepet){window.SoSepet.ekle(u,1);return}
   var var_=u.stok!=="yok";
   var ilkResim=kucult(u.resimler[0],300)||"";
   if(!AYAR.satisAktif){
@@ -150,11 +156,11 @@ function kart(u,i){
   var y=indirimYuzde(u), r1=kucult(u.resimler[0],600), r2=kucult(u.resimler[1],600);
   var rozet=u.stok==="yok"?"<span class='rozet tukendi'>Tükendi</span>":(y?"<span class='rozet'>%"+y+" indirim</span>":(u.yeni?"<span class='rozet yeni'>Yeni</span>":""));
   var ozet=[u.cinsiyet,u.tur==="optik"?"Optik çerçeve":"Güneş gözlüğü",u.cerceve].filter(Boolean).join(" · ");
-  return "<article class='kart'>"+rozet+
+  return "<article class='kart' data-url='"+esc(u.url)+"'>"+rozet+
     "<a aria-label='"+esc(u.baslik)+"' class='kart-gorsel"+(r2?" cift":"")+"' href='"+esc(u.url)+"'>"+(r1?"<img alt='"+esc(u.baslik)+"' loading='lazy' src='"+esc(r1)+"'/>":"")+(r2?"<img alt='' class='ikinci' loading='lazy' src='"+esc(r2)+"'/>":"")+"</a>"+
     "<div class='kart-govde'><p class='eyebrow'>"+esc(u.marka)+"</p><h3><a href='"+esc(u.url)+"'>"+esc(u.model||u.baslik)+"</a></h3><p class='ozet'>"+esc(ozet)+"</p>"+
     "<div class='fiyat'><strong>"+tl(u.fiyat)+"</strong>"+(isFinite(u.eski)?"<del>"+tl(u.eski)+"</del>":"")+"</div>"+
-    "<div class='kart-aksiyon'><button class='btn btn-ana' data-al='"+i+"' type='button'"+(u.stok==="yok"?" disabled='disabled'":"")+">"+(u.stok==="yok"?"Tükendi":"Sepete ekle")+"</button><a class='btn btn-cizgi' href='"+esc(u.url)+"'>İncele</a></div></div></article>";
+    "<div class='kart-aksiyon'><button class='btn "+(u.stok==="yok"?"btn-cizgi":"btn-ana")+"' data-al='"+i+"' type='button'>"+(u.stok==="yok"?"Gelince haber ver":"Sepete ekle")+"</button><a class='btn btn-cizgi' href='"+esc(u.url)+"'>İncele</a></div></div></article>";
 }
 
 /* ---------- LİSTE GÖRÜNÜMÜ ---------- */
@@ -164,8 +170,20 @@ function listeKur(hepsi){
   var D={kat:"tumu",marka:"",q:"",sira:"yeni",goster:AYAR.sayfaBasi};
   var path=decodeURIComponent(location.pathname), qs=new URLSearchParams(location.search);
   var m=path.match(/\/search\/label\/([^\/?]+)/);
+  var rehberMi=false;
   if(m){var et=m[1], k=ETIKET_KAT[et.toLocaleLowerCase("tr-TR")];
-    if(k)D.kat=k; else D.marka=et;
+    if(k)D.kat=k; else if(norm(et)==="rehber")rehberMi=true; else D.marka=et;
+  }
+  if(rehberMi){
+    B.classList.add("rehber-liste");
+    $("#liste-ust").textContent="Gözlük Rehberi";$("#liste-baslik").textContent="Optisyeninizden notlar";
+    document.getElementById("koleksiyon").style.paddingTop="40px";
+    var rf=$(".filtre");if(rf)rf.style.display="none";
+    $("#sonuc-bilgi").textContent=yazilar.length?yazilar.length+" yazı":"Henüz yazı yok.";
+    var rg=$("#urunler");rg.className="rehber";
+    rg.innerHTML=yazilar.map(function(y){return "<a class='rehber-kart' href='"+esc(y.url)+"'><div class='rg' style=\"background-image:url('"+esc(kucult(y.resimler[0],800)||"")+"')\"></div><div class='ic'><p class='eyebrow'>Rehber</p><h3>"+esc(y.baslik)+"</h3></div></a>"}).join("");
+    try{document.dispatchEvent(new CustomEvent("so:liste"))}catch(e){}
+    return;
   }
   if(qs.get("q"))D.q=qs.get("q");
   if(qs.get("kategori")&&KAT[qs.get("kategori")])D.kat=qs.get("kategori");
@@ -208,7 +226,9 @@ function listeKur(hepsi){
     gorunen=urunler.filter(function(u){
       if(D.kat!=="tumu"&&katlari(u).indexOf(D.kat)<0)return false;
       if(D.marka&&u.marka!==D.marka)return false;
-      if(q&&norm([u.baslik,u.marka,u.model,u.renk,u.camRenk,u.cerceve,u.etiketler.join(" ")].join(" ")).indexOf(q)<0)return false;
+      if(window.SO_SUZ&&!window.SO_SUZ(u))return false;
+      if(q){if(window.SO_ARA){if(!window.SO_ARA(u,D.q,urunler))return false}
+        else if(norm([u.baslik,u.marka,u.model,u.renk,u.camRenk,u.cerceve,u.etiketler.join(" ")].join(" ")).indexOf(q)<0)return false}
       return true;
     });
     gorunen.sort(function(a,b){
@@ -222,7 +242,9 @@ function listeKur(hepsi){
     else g.innerHTML=gorunen.slice(0,D.goster).map(function(u,i){return kart(u,i)}).join("");
     $("#sonuc-bilgi").textContent=gorunen.length+" ürün"+(D.kat!=="tumu"?" · "+KAT[D.kat]:"")+(D.marka?" · "+D.marka:"");
     $("#daha").classList.toggle("gizli",gorunen.length<=D.goster);
+    try{document.dispatchEvent(new CustomEvent("so:liste"))}catch(e){}
   }
+  window.SO.liste={D:D,ciz:ciz,urunler:urunler,yazilar:yazilar,gorunen:function(){return gorunen}};
   $("#urunler").addEventListener("click",function(e){var b=e.target.closest("[data-al]");if(b)satinAl(gorunen[+b.getAttribute("data-al")])});
   $("#cipler").addEventListener("click",function(e){var c=e.target.closest(".cip");if(!c)return;D.kat=c.getAttribute("data-kat");D.goster=AYAR.sayfaBasi;$$(".cip").forEach(function(x){x.classList.toggle("aktif",x===c)});ciz()});
   ms.addEventListener("change",function(){D.marka=ms.value;D.goster=AYAR.sayfaBasi;ciz()});
@@ -290,7 +312,7 @@ function urunSayfa(){
   /* satın al */
   var ha=$("#hemen-al");if(ha)ha.addEventListener("click",function(){if(window.SoSepet){window.SoSepet.ekle(u,1,true);location.href=AYAR.odeme}});
   $("#satin-al").addEventListener("click",function(){
-    if(!var_){location.href=waLink("Merhaba, "+(u.marka+" "+u.model).trim()+" stoğa gelince haber verir misiniz? "+u.url);return}
+    if(!var_){haberVer(u);return}
     satinAl(u);
   });
   var mob=$("#mobil-al");
@@ -303,6 +325,7 @@ function urunSayfa(){
     offers:{"@type":"Offer",priceCurrency:"TRY",price:isFinite(u.fiyat)?u.fiyat.toFixed(2):undefined,availability:var_?"https://schema.org/InStock":"https://schema.org/OutOfStock",url:u.url,
       seller:{"@type":"Organization",name:"Seçkin Optik"},shippingDetails:{"@type":"OfferShippingDetails",shippingRate:{"@type":"MonetaryAmount",value:"0",currency:"TRY"},shippingDestination:{"@type":"DefinedRegion",addressCountry:"TR"}}}};
   var s=document.createElement("script");s.type="application/ld+json";s.textContent=JSON.stringify(ld);document.head.appendChild(s);
+  window.SO_URUN=u;try{document.dispatchEvent(new CustomEvent("so:urun"))}catch(e){}
   return u;
 }
 
@@ -317,6 +340,7 @@ function benzerKur(hepsi,u){
   g.addEventListener("click",function(e){var b=e.target.closest("[data-al]");if(b)satinAl(sec[+b.getAttribute("data-al")])});
 }
 
+window.SO={AYAR:AYAR,feedGetir:feedGetir,cozumle:cozumle,tl:tl,esc:esc,waLink:waLink,kucult:kucult,yolEsle:yolEsle,katlari:katlari,norm:norm,indirimYuzde:indirimYuzde,kart:kart,satinAl:satinAl,KAT:KAT};
 /* ---------- BAŞLAT ---------- */
 var tekil=B.classList.contains("v-tekil");
 function yolEsle(u){try{return new URL(u,location.href).pathname}catch(e){return u}}
@@ -325,5 +349,4 @@ function _sayfaOlay(){try{document.dispatchEvent(new CustomEvent("so:sayfa"))}ca
 function hataYaz(){var si=$("#sonuc-bilgi");if(si)si.textContent="Ürünler yüklenemedi. Sayfayı yenileyin."}
 function basla(){if(!tekil){feedGetir().then(listeKur).catch(hataYaz);return}var aktif=urunSayfa();if(aktif)feedGetir().then(function(h){benzerKur(h,aktif)}).catch(function(){})}
 if(tekil&&!$("#so-govde")){var sayfaMi=B.classList.contains("v-sayfa");fetch((sayfaMi?"/feeds/pages/default":"/feeds/posts/default")+"?alt=json&max-results=150").then(function(r){return r.json()}).then(function(j){var p=location.pathname,bul=null;((j.feed&&j.feed.entry)||[]).forEach(function(en){(en.link||[]).forEach(function(l){if(l.rel==="alternate"&&yolEsle(l.href)===p)bul=en})});if(bul)sayfaYaz(bul.title.$t,(bul.content&&bul.content.$t)||"",(bul.category||[]).map(function(c){return c.term}));basla();_sayfaOlay()}).catch(basla)}else{basla();_sayfaOlay()}
-window.SO={AYAR:AYAR,feedGetir:feedGetir,cozumle:cozumle,tl:tl,esc:esc,waLink:waLink,kucult:kucult,yolEsle:yolEsle,katlari:katlari};
 })();
