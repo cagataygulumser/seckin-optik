@@ -52,6 +52,7 @@
     var a = ARAC[kimlik], h = '<header class="sa-ust" style="background-image:linear-gradient(90deg,rgba(2,18,44,.96) 0%,rgba(2,18,44,.86) 42%,rgba(2,18,44,.35) 100%),url(' + gorsel(a.foto) + ')">' +
       '<div class="sa-ust-ic"><img class="sa-logo" alt="Seçkin Optik" width="171" height="28" src="' + logo('seckin-optik-logo-beyaz.svg') + '"/>' +
       '<p class="sa-etiket">Optik Araçlar</p><h1>' + esc(a.ad) + '</h1><p class="sa-ozet">' + esc(a.ozet) + '</p></div>' +
+      (kimlik === 'olcer' ? '' : '<button class="sa-tam" type="button" data-so-tam="' + kimlik + '">Tam ekran sunum</button>') +
       '<nav class="sa-gecis" aria-label="Diğer araçlar">';
     SIRA.forEach(function (k) { h += '<a href="' + SAYFA[k] + '"' + (k === kimlik ? ' class="on" aria-current="page"' : '') + '>' + esc(ARAC[k].kisa) + '</a>'; });
     return h + '<a href="' + SAYFA.merkez + '">Tüm araçlar</a></nav></header>';
@@ -64,6 +65,11 @@
       '<p class="sa-btnler"><a class="sa-btn" href="' + YOL + '" target="_blank" rel="noopener">Yol tarifi al</a>' +
       '<a class="sa-btn acik" href="' + wa('Merhaba Seçkin Optik, ' + ARAC[kimlik].ad + ' sayfanızdan yazıyorum.') + '" target="_blank" rel="noopener">WhatsApp\'tan yazın</a></p></div></aside>';
   }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-so-tam]'); if (!b) return;
+    var d = b.getAttribute('data-so-tam') === 'studyo' ? document.getElementById('cgsApp') : document.querySelector('#pdsim-app .pd-fsb');
+    if (d) d.click();
+  });
   function hata(el) { el.querySelector('.sa-govde').innerHTML = '<p class="sa-hata">Araç yüklenemedi. Sayfayı yenileyin; sorun sürerse bize WhatsApp\'tan yazın.</p>'; }
 
   /* innerHTML ile gelen <script> etiketleri çalışmaz; sırayla yeniden oluşturulur */
@@ -98,12 +104,20 @@
       degis('/p/pd-ve-montaj-yuksekligi-simulatoru.html', SAYFA.simulator, true);
       degis('/p/cam-gosterim-studyosu.html', SAYFA.studyo, true);
       degis("'#004aad'", "'#004EA9'", true);
+      /* Seçkin Optik mağaza fotoğrafları sahne olarak (İç Görünüm, Karşılaştır, Miyopi, Astigmat, Renkli ve Güneş) */
+      degis("var SC=[", "var SC=[{id:'magaza',n:'Mağaza',f:" + JSON.stringify(gorsel('magaza-ic-1.webp')) + "},{id:'reyon',n:'Güneş reyonu',f:" + JSON.stringify(gorsel('magaza-ic-2.webp')) + "},{id:'vitrin',n:'Vitrin',f:" + JSON.stringify(gorsel('magaza-cephe.webp')) + "},");
+      degis("if(!s.u||imgs[s.id])return;", "if(!(s.u||s.f)||imgs[s.id])return;");
+      degis("im.src=U+s.u+(s.q||Q)}", "im.src=s.f||(U+s.u+(s.q||Q))}");
+      degis("cr+=(i?', ':'')+SC[i].c;", "cr+=(/\\($/.test(cr)?'':', ')+SC[i].c;");
+      degis("var S={tab:'ic',scene:'kafe'", "var S={tab:'ic',scene:'magaza'");
       var s = document.createElement('script'); s.textContent = kod; document.body.appendChild(s);
       /* etkin sekmeyi köke yaz: Kalınlık ve Kaplamalar'da sahnede logo gösterilir (arac.css) */
       var kok = document.getElementById('cgs'), tb = document.getElementById('cgsTabs');
       if (kok && tb) {
         var sekme = function () { var on = tb.querySelector('.cgs-tab.on'), d = on ? on.getAttribute('data-t') : ''; if (kok.getAttribute('data-so-sekme') !== d) kok.setAttribute('data-so-sekme', d); };
         sekme(); new MutationObserver(sekme).observe(tb, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+        var tam = function () { document.body.classList.toggle('so-tam', kok.classList.contains('cgs-app') || kok.classList.contains('cgs-fs')); };
+        tam(); new MutationObserver(tam).observe(kok, { attributes: true, attributeFilter: ['class'] });
       }
     }).catch(function () { hata(el); });
   }
@@ -112,7 +126,8 @@
     var h = '<header class="sa-ust buyuk" style="background-image:linear-gradient(90deg,rgba(2,18,44,.96) 0%,rgba(2,18,44,.84) 45%,rgba(2,18,44,.3) 100%),url(' + gorsel('magaza-cephe.webp') + ')">' +
       '<div class="sa-ust-ic"><img class="sa-logo" alt="Seçkin Optik" width="171" height="28" src="' + logo('seckin-optik-logo-beyaz.svg') + '"/>' +
       '<p class="sa-etiket">Seçkin Optik · Çanakkale</p><h1>Optik Araçlar</h1>' +
-      '<p class="sa-ozet">Gözlük camınızı daha iyi tanımanız için hazırladığımız ücretsiz araçlar. Üyelik gerekmez; telefonda, tablette ve bilgisayarda çalışır.</p></div></header>' +
+      '<p class="sa-ozet">Gözlük camınızı daha iyi tanımanız için hazırladığımız ücretsiz araçlar. Üyelik gerekmez; telefonda, tablette ve bilgisayarda çalışır.</p>' +
+      '<p class="sa-btnler"><a class="sa-btn beyaz" href="' + SAYFA.studyo + '?app=1">Cam Gösterim Stüdyosu\'nu tam ekran aç</a></p></div></header>' +
       '<div class="sa-kartlar">';
     var foto = { olcer: 'magaza-ic-1.webp', simulator: 'magaza-ic-2.webp', studyo: 'magaza-ic-3.webp' };
     SIRA.forEach(function (k, i) {

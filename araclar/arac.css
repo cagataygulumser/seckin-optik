@@ -80,16 +80,17 @@ body.pdsim-printing .pdsim-ph::before{content:"";flex:0 0 150px;height:25px;alig
 #cgs{--b1:#004EA9;--b2:#2F7BDB;--y:#CFE2FF;--ink:#02122C;--mut:#5B6475;--line:#E6E9EF;--bg:#F4F6FA;
   font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
 #cgs .cgs-tabs,#cgs .cgs-links a{background:linear-gradient(120deg,#02122C,#004EA9)}
-#cgs .cgs-tabs::before{content:"";flex:0 0 128px;margin:0 12px 0 10px;background:url(../img/logo/seckin-optik-logo-beyaz.svg) left center/contain no-repeat}
+#cgs .cgs-tabs::before{content:"";flex:0 0 112px;height:26px;margin:0 8px 0 8px;background:url(../img/logo/seckin-optik-logo-beyaz.svg) left center/contain no-repeat}
 #cgs .cgs-tab.on{color:#02122C}
 #cgs .cgs-hud b{color:#8EC1FF}
 #cgs .cgs-hud .y,.cgs-vit b{background:#CFE2FF;color:#02122C}
 #cgs .cgs-hud .y b{color:#02122C}
 .cgs-bar button.y{background:#CFE2FF;border-color:#A9C8F5}
 .yazi-govde #cgs a{text-decoration:none}
-/* Kalınlık ve Kaplamalar sekmelerinde sahnenin sol altında Seçkin Optik logosu */
-#cgs[data-so-sekme="kal"] .cgs-stage::after,#cgs[data-so-sekme="kap"] .cgs-stage::after{content:"";position:absolute;left:12px;bottom:12px;z-index:3;width:156px;height:38px;border-radius:999px;pointer-events:none;
+/* Tüm sekmelerde sahnenin sol altında Seçkin Optik logosu */
+#cgs[data-so-sekme] .cgs-stage::after{content:"";position:absolute;left:12px;bottom:12px;z-index:3;width:156px;height:38px;border-radius:999px;pointer-events:none;
   background:rgba(2,18,44,.84) url(../img/logo/seckin-optik-logo-beyaz.svg) center/120px auto no-repeat;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+#cgs[data-so-sekme="ast"] .cgs-stage::after{left:16%}
 #cgs.cgs-fs[data-so-sekme] .cgs-stage::after{left:50%;transform:translateX(-50%)}
 #cgs.cgs-vt .cgs-stage::after{display:none}
 
@@ -112,3 +113,18 @@ body.pdsim-printing .pdsim-ph::before{content:"";flex:0 0 150px;height:25px;alig
 
 /* araç sayfalarında mağaza bandı zaten fotoğraflı; alttaki mağaza bölümünün fotoğrafı tekrar etmesin */
 body.so-arac-sayfa .magaza-foto{display:none}
+
+/* tam ekran sunum */
+.sa-tam{flex:0 0 auto;border:0;cursor:pointer;background:#fff;color:#02122C;font-family:inherit;font-weight:800;font-size:14px;line-height:18px;padding:13px 20px;border-radius:999px;box-shadow:0 8px 20px -8px rgba(0,0,0,.5)}
+.sa-tam:hover{background:#E8F0FB}
+.sa-tam::before{content:"";display:inline-block;width:14px;height:14px;margin-right:8px;vertical-align:-2px;background:linear-gradient(#02122C,#02122C) 0 0/5px 2px,linear-gradient(#02122C,#02122C) 0 0/2px 5px,linear-gradient(#02122C,#02122C) 100% 0/5px 2px,linear-gradient(#02122C,#02122C) 100% 0/2px 5px,linear-gradient(#02122C,#02122C) 0 100%/5px 2px,linear-gradient(#02122C,#02122C) 0 100%/2px 5px,linear-gradient(#02122C,#02122C) 100% 100%/5px 2px,linear-gradient(#02122C,#02122C) 100% 100%/2px 5px;background-repeat:no-repeat}
+.yazi-govde .so-arac a.sa-btn.beyaz,a.sa-btn.beyaz{background:#fff;color:#02122C}
+a.sa-btn.beyaz:hover{background:#E8F0FB}
+/* tam ekranda sitenin yüzen düğmeleri sunumun üstüne binmesin */
+body.so-tam .wa-yuzen,body.so-tam .mobil-al,html.pd-fs-on .wa-yuzen,html.pd-fs-on .mobil-al{display:none!important}
+
+/* sekme çubuğu: tüm sekmeler ve Tam ekran düğmesi kesilmeden sığsın; sığmazsa alt satıra geçsin */
+#cgs .cgs-tabs{flex-wrap:wrap;overflow:visible;gap:4px 2px;align-items:center}
+#cgs .cgs-tab{flex:1 1 auto;padding:10px 9px;font-size:13px}
+#cgs .cgs-appb{padding:10px 13px;font-size:13px;margin-left:4px}
+@media (max-width:1180px){#cgs .cgs-tabs::before{display:none}}
