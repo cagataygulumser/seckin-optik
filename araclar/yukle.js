@@ -99,6 +99,12 @@
       degis('/p/cam-gosterim-studyosu.html', SAYFA.studyo, true);
       degis("'#004aad'", "'#004EA9'", true);
       var s = document.createElement('script'); s.textContent = kod; document.body.appendChild(s);
+      /* etkin sekmeyi köke yaz: Kalınlık ve Kaplamalar'da sahnede logo gösterilir (arac.css) */
+      var kok = document.getElementById('cgs'), tb = document.getElementById('cgsTabs');
+      if (kok && tb) {
+        var sekme = function () { var on = tb.querySelector('.cgs-tab.on'), d = on ? on.getAttribute('data-t') : ''; if (kok.getAttribute('data-so-sekme') !== d) kok.setAttribute('data-so-sekme', d); };
+        sekme(); new MutationObserver(sekme).observe(tb, { childList: true, subtree: true, attributes: true, attributeFilter: ['class'] });
+      }
     }).catch(function () { hata(el); });
   }
 
