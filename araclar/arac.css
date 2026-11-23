@@ -1,0 +1,105 @@
+/* Seçkin Optik — Optik Araçlar (PD Ölçer, Gözlük Camı Simülatörü, Cam Gösterim Stüdyosu)
+   Renkler temadan: lacivert #02122C · mavi #004EA9 · Plus Jakarta Sans */
+
+/* sayfa: geniş düzen, tema başlığı yerine araç üst bandı */
+body.so-arac-sayfa .yazi{max-width:none;padding-bottom:56px}
+body.so-arac-sayfa #so-baslik{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+body.so-arac-sayfa .yol{margin-bottom:14px}
+.so-arac{font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif;color:#02122C}
+.so-arac *{box-sizing:border-box}
+.so-arac > p{color:#5B6475}
+
+/* tema yazı stillerinin araçlara taşmasını önle */
+.yazi-govde .so-arac a{text-decoration:none;font-weight:inherit}
+.yazi-govde .so-arac img{margin:0;border-radius:0}
+.yazi-govde .so-arac h2,.yazi-govde .so-arac h3{margin-top:0}
+.yazi-govde .so-arac table{width:auto}
+.yazi-govde .so-arac .pdsim td,.yazi-govde .so-arac .pdsim th,.yazi-govde .so-arac #cgs td,.yazi-govde .so-arac #cgs th{border:0;padding:0}
+
+/* ---------- üst bant ---------- */
+.sa-ust{display:flex;align-items:flex-end;justify-content:space-between;gap:20px 32px;flex-wrap:wrap;
+  background-color:#02122C;background-size:cover;background-position:center right;color:#fff;border-radius:24px;padding:26px 30px 22px;margin:0 0 18px}
+.sa-ust-ic{flex:1 1 420px;min-width:0;max-width:640px}
+.yazi-govde .so-arac .sa-ust .sa-logo,.sa-ust .sa-logo{display:block;width:171px;height:28px;margin:0 0 16px}
+.sa-etiket{font-weight:700;font-size:12px;line-height:16px;letter-spacing:.09em;text-transform:uppercase;color:#004EA9;margin:0 0 6px}
+.sa-ust .sa-etiket{color:#8EC1FF}
+.sa-ust h1{font-weight:800;font-size:clamp(24px,3.2vw,34px);line-height:1.15;margin:0 0 8px;color:#fff;letter-spacing:-.01em}
+.sa-ust .sa-ozet{margin:0;font-size:15.5px;line-height:1.55;color:rgba(255,255,255,.86)}
+.sa-gecis{display:flex;flex-wrap:wrap;gap:6px;padding:5px;border-radius:999px;background:rgba(255,255,255,.12);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.yazi-govde .so-arac .sa-gecis a,.sa-gecis a{color:#fff;font-weight:700;font-size:13.5px;line-height:18px;padding:8px 14px;border-radius:999px;white-space:nowrap}
+.sa-gecis a:hover{background:rgba(255,255,255,.16)}
+.yazi-govde .so-arac .sa-gecis a.on,.sa-gecis a.on{background:#fff;color:#02122C}
+.sa-ust.buyuk{padding:44px 40px 40px;min-height:300px;align-items:center}
+.sa-ust.buyuk h1{font-size:clamp(30px,4.4vw,46px)}
+.sa-ust.buyuk .sa-ozet{font-size:17px}
+
+.sa-govde{min-height:240px}
+.sa-bekle,.sa-hata{margin:0;padding:48px 20px;text-align:center;color:#5B6475;background:#F4F6FA;border-radius:16px}
+.sa-hata{background:#FEF3F2;color:#B42318}
+.sa-not{font-size:13.5px;color:#5B6475;margin:18px 0 0}
+
+/* ---------- mağaza bandı ---------- */
+.sa-alt{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);align-items:stretch;background:#F4F6FA;border-radius:24px;overflow:hidden;margin:28px 0 0}
+.yazi-govde .so-arac .sa-alt img,.sa-alt img{width:100%;height:100%;min-height:230px;object-fit:cover;display:block}
+.sa-alt > div{padding:30px 34px;align-self:center}
+.sa-alt h2{font-weight:800;font-size:clamp(21px,2.4vw,27px);line-height:1.2;margin:0 0 8px;color:#02122C}
+.sa-alt p{margin:0 0 10px;color:#3A4354;font-size:15.5px;line-height:1.6}
+.sa-alt .sa-adres{font-size:14px;color:#5B6475}
+.yazi-govde .so-arac .sa-adres a,.sa-adres a{color:#004EA9;font-weight:700}
+.sa-btnler{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 0!important}
+.yazi-govde .so-arac a.sa-btn,a.sa-btn{display:inline-flex;align-items:center;justify-content:center;background:#004EA9;color:#fff;font-weight:700;font-size:14.5px;line-height:20px;padding:12px 22px;border-radius:999px;transition:background .2s}
+a.sa-btn:hover{background:#003D86}
+.yazi-govde .so-arac a.sa-btn.acik,a.sa-btn.acik{background:#fff;color:#02122C;box-shadow:inset 0 0 0 1.5px #D5DBE6}
+a.sa-btn.acik:hover{background:#E8F0FB}
+
+/* ---------- araçlar sayfası kartları ---------- */
+.sa-kartlar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin:0}
+.yazi-govde .so-arac a.sa-kart,a.sa-kart{display:flex;flex-direction:column;background:#fff;border:1px solid #E6E9EF;border-radius:20px;overflow:hidden;color:#02122C;transition:box-shadow .2s,transform .2s,border-color .2s}
+a.sa-kart:hover{box-shadow:0 1px 2px rgba(2,18,44,.06),0 18px 36px -16px rgba(2,18,44,.28);transform:translateY(-3px);border-color:#C9D8EE}
+.sa-kart-g{display:block;aspect-ratio:16/9;background-size:cover;background-position:center}
+.sa-kart-ic{display:flex;flex-direction:column;gap:6px;padding:20px 22px 22px;flex:1}
+.sa-kart .sa-no{font-weight:800;font-size:12px;line-height:16px;letter-spacing:.1em;color:#004EA9}
+.sa-kart b{font-weight:800;font-size:19px;line-height:1.25}
+.sa-kart-ic > span:not(.sa-no){font-size:14.5px;line-height:1.55;color:#5B6475}
+.sa-kart em{font-style:normal;font-weight:700;font-size:14.5px;color:#004EA9;margin-top:auto;padding-top:10px}
+.sa-kart em::after{content:" →"}
+
+/* ---------- PD Ölçer ---------- */
+.so-arac #cgpd{font-family:inherit}
+.so-arac #cgpd .card h3{margin:0 0 10px}
+
+/* ---------- Gözlük Camı Simülatörü ---------- */
+.so-arac .pdsim{margin:0 auto;max-width:none;border-radius:20px;border-color:#E6E9EF}
+#pdsim-app.pdsim .pd-fsb{background:#004EA9;border-color:#004EA9;color:#fff}
+#pdsim-app.pdsim .pd-fsb:hover{background:#003D86}
+#pdsim-app.pd-fs{font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+body.pdsim-printing .sa-ust,body.pdsim-printing .sa-alt,body.pdsim-printing .yol{display:none!important}
+body.pdsim-printing .pdsim-ph::before{content:"";flex:0 0 150px;height:25px;align-self:center;background:url(../img/logo/seckin-optik-logo.svg) left center/contain no-repeat}
+
+/* ---------- Cam Gösterim Stüdyosu ---------- */
+#cgs{--b1:#004EA9;--b2:#2F7BDB;--y:#CFE2FF;--ink:#02122C;--mut:#5B6475;--line:#E6E9EF;--bg:#F4F6FA;
+  font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+#cgs .cgs-tabs,#cgs .cgs-links a{background:linear-gradient(120deg,#02122C,#004EA9)}
+#cgs .cgs-tabs::before{content:"";flex:0 0 128px;margin:0 12px 0 10px;background:url(../img/logo/seckin-optik-logo-beyaz.svg) left center/contain no-repeat}
+#cgs .cgs-tab.on{color:#02122C}
+#cgs .cgs-hud b{color:#8EC1FF}
+#cgs .cgs-hud .y,.cgs-vit b{background:#CFE2FF;color:#02122C}
+#cgs .cgs-hud .y b{color:#02122C}
+.cgs-bar button.y{background:#CFE2FF;border-color:#A9C8F5}
+.yazi-govde #cgs a{text-decoration:none}
+
+@media (max-width:900px){
+  .sa-kartlar{grid-template-columns:1fr}
+  .sa-alt{grid-template-columns:1fr}
+  .yazi-govde .so-arac .sa-alt img,.sa-alt img{min-height:0;aspect-ratio:16/9;height:auto}
+  .sa-ust{background-image:linear-gradient(rgba(2,18,44,.93),rgba(2,18,44,.93))!important}
+}
+@media (max-width:720px){
+  #cgs .cgs-tabs::before{display:none}
+  .sa-ust{padding:20px 18px 16px;border-radius:18px}
+  .sa-ust.buyuk{padding:28px 20px;min-height:0}
+  .yazi-govde .so-arac .sa-ust .sa-logo,.sa-ust .sa-logo{width:147px;height:24px;margin-bottom:12px}
+  .sa-gecis{border-radius:16px;width:100%}
+  .sa-gecis a{flex:1 1 auto;text-align:center;padding:8px 10px}
+  .sa-alt > div{padding:22px 20px}
+}

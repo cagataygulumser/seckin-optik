@@ -1,0 +1,369 @@
+<div id="cgpd">
+<style>
+#cgpd{--b1:#004EA9;--b2:#2F7BDB;--y:#CFE2FF;--ink:#14233b;--mut:#5b6b82;--line:#d6e2f5;--bg:#f3f7ff;max-width:none;margin:0 auto;color:var(--ink);font:16px/1.55 "Plus Jakarta Sans",system-ui,Arial,sans-serif;text-align:left}
+#cgpd *{box-sizing:border-box}
+#cgpd h2,#cgpd h3,#cgpd .num{font-family:"Plus Jakarta Sans",system-ui,Arial,sans-serif}
+#cgpd .hd{background:linear-gradient(120deg,var(--b1),var(--b2));color:#fff;border-radius:16px;padding:22px 22px 18px}
+#cgpd .hd h2{margin:0 0 6px;font-size:1.55em;line-height:1.2;color:#fff;text-transform:none}
+#cgpd .hd p{margin:0;font-size:1.05em;color:#fff!important}
+#cgpd .steps{display:flex;gap:6px;list-style:none;margin:14px 0;padding:0}
+#cgpd .steps li{flex:1;text-align:center;font-size:.8em;font-weight:700;color:var(--mut);padding:8px 4px;border-radius:10px;background:var(--bg);border:1px solid var(--line);margin:0}
+#cgpd .steps li.on{background:var(--b1);color:#fff;border-color:var(--b1)}
+#cgpd .steps li.ok{color:var(--b1)}
+#cgpd .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:0 0 14px}
+#cgpd .card h3{margin:0 0 10px;font-size:1.12em;color:var(--b1)!important}
+#cgpd [data-s]{display:none}
+#cgpd [data-s].show{display:block}
+#cgpd .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+#cgpd label.f{display:block;font-size:.86em;font-weight:700;color:var(--mut);margin:0 0 4px}
+#cgpd input[type=number],#cgpd select{width:100%;font:inherit;font-size:1.05em;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);height:auto;margin:0}
+#cgpd input[type=number]:focus,#cgpd select:focus{outline:2px solid var(--b2);border-color:var(--b2)}
+#cgpd .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:700;border:0;border-radius:11px;padding:12px 18px;cursor:pointer;background:var(--b1);color:#fff;text-decoration:none;line-height:1.2}
+#cgpd .btn:hover{background:#003D86}
+#cgpd .btn.alt{background:#fff;color:var(--b1);border:1.5px solid var(--b1)}
+#cgpd .btn.alt:hover{background:var(--bg)}
+#cgpd .btn.y{background:var(--y);color:#14233b}
+#cgpd .btn[disabled]{opacity:.5;cursor:default}
+#cgpd .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+#cgpd .note{font-size:.88em;color:var(--mut);margin:10px 0 0}
+#cgpd .warn{background:#fff8e8;border:1px solid #f1d28a;border-radius:10px;padding:11px 14px;font-size:.92em;margin:12px 0 0}
+#cgpd .err{background:#ffeceb;border:1px solid #f0aaa5;border-radius:10px;padding:11px 14px;font-size:.92em;margin:12px 0 0;display:none}
+#cgpd .priv{display:flex;gap:8px;align-items:flex-start;font-size:.88em;color:var(--mut);margin-top:12px}
+#cgpd .priv svg{flex:none;margin-top:2px}
+#cgpd ul.chk{margin:0;padding:0 0 0 18px}
+#cgpd ul.chk li{margin:0 0 5px;font-size:.95em}
+#cgpd .temple{width:100%;max-width:380px;display:block;margin:6px 0 0}
+#cgpd .stage{position:relative;background:#0b1730;border-radius:14px;overflow:hidden;max-width:460px;margin:0 auto}
+#cgpd .stage video{display:block;width:100%;height:auto;transform:scaleX(-1)}
+#cgpd .stage .gl{position:absolute;left:0;right:0;top:50%;border-top:2px dashed rgba(255,212,0,.9)}
+#cgpd .stage .gl span{position:absolute;right:8px;top:-22px;font-size:11px;font-weight:700;color:#14233b;background:var(--y);border-radius:6px;padding:1px 6px}
+#cgpd .stage .ov{position:absolute;left:50%;top:50%;width:54%;aspect-ratio:3/4;transform:translate(-50%,-52%);border:3px solid rgba(255,255,255,.75);border-radius:50%}
+#cgpd .stage.good .ov{border-color:#3ddc84}
+#cgpd .stage .cd{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font:800 110px "Plus Jakarta Sans",system-ui,Arial,sans-serif;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.6)}
+#cgpd .msg{font-weight:700;font-size:1.08em;text-align:center;margin:12px 0 8px;min-height:1.6em}
+#cgpd .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:0 0 12px}
+#cgpd .chip{font-size:.78em;font-weight:700;padding:4px 10px;border-radius:99px;background:#eef1f6;color:var(--mut);border:1px solid #dde3ec}
+#cgpd .chip.ok{background:#e6f8ee;color:#12753f;border-color:#b4e3c8}
+#cgpd .chip.no{background:#ffeceb;color:#b3261e;border-color:#f0aaa5}
+#cgpd .tabs{display:flex;gap:6px;margin:0 0 10px}
+#cgpd .tabs button{flex:1;font:inherit;font-size:.86em;font-weight:700;padding:10px 6px;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--mut);cursor:pointer;line-height:1.25}
+#cgpd .tabs button.on{background:var(--b1);border-color:var(--b1);color:#fff}
+#cgpd .tabs button b{display:block;font-size:.8em;font-weight:400;opacity:.85}
+#cgpd .hint{font-size:.93em;margin:0 0 10px;min-height:2.9em}
+#cgpd canvas{display:block;max-width:100%}
+#cgpd #pdView{width:100%;border-radius:12px;touch-action:none;cursor:grab;background:#0b1730}
+#cgpd .tools{display:grid;grid-template-columns:150px 1fr;gap:14px;margin-top:12px;align-items:center}
+#cgpd #pdLoupe{width:150px;height:150px;border-radius:12px;border:2px solid var(--b1);background:#0b1730}
+#cgpd .pad{display:grid;grid-template-columns:repeat(3,46px);grid-template-rows:repeat(3,46px);gap:5px}
+#cgpd .pad button{font:700 18px Arial;border-radius:10px;border:1.5px solid var(--line);background:#fff;color:var(--b1);cursor:pointer;padding:0}
+#cgpd .pad button:active{background:var(--bg)}
+#cgpd .pad .mid{display:flex;align-items:center;justify-content:center;font-size:.62em;font-weight:700;color:var(--mut);text-align:center;line-height:1.1}
+#cgpd .side{display:flex;gap:6px;margin:0 0 8px}
+#cgpd .side button{font:inherit;font-size:.84em;font-weight:700;padding:7px 14px;border-radius:9px;border:1.5px solid var(--line);background:#fff;color:var(--mut);cursor:pointer}
+#cgpd .side button.on{background:var(--y);border-color:var(--y);color:#14233b}
+#cgpd .adv{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+#cgpd .adv summary{cursor:pointer;font-weight:700;color:var(--b1);font-size:.93em}
+#cgpd input[type=range]{width:100%;margin:6px 0 0;padding:0}
+#cgpd .res{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#cgpd .box{border-radius:14px;padding:16px;background:var(--bg);border:1px solid var(--line)}
+#cgpd .box.main{background:linear-gradient(120deg,var(--b1),var(--b2));color:#fff;border:0}
+#cgpd .box small{display:block;font-size:.8em;font-weight:700;opacity:.85;text-transform:uppercase;letter-spacing:.04em}
+#cgpd .box .num{font-size:2.3em;font-weight:800;line-height:1.1;margin:2px 0}
+#cgpd .box .num i{font-style:normal;font-size:.45em;font-weight:700;margin-left:4px}
+#cgpd .box .sub{font-size:.95em}
+#cgpd .box .sub b{font-size:1.1em}
+#cgpd table.det{width:100%;border-collapse:collapse;font-size:.9em;margin:0}
+#cgpd table.det td{padding:6px 4px;border-bottom:1px solid var(--line)}
+#cgpd table.det td:last-child{text-align:right;font-weight:700}
+#cgpd #pdOut{width:100%;border-radius:12px;margin-bottom:12px}
+#cgpd .load{display:none;align-items:center;gap:10px;font-weight:700;color:var(--b1);margin-top:12px}
+#cgpd .spin{width:18px;height:18px;border:3px solid var(--line);border-top-color:var(--b1);border-radius:50%;animation:cgpdspin .8s linear infinite}
+@keyframes cgpdspin{to{transform:rotate(360deg)}}
+@media(max-width:640px){#cgpd .grid2,#cgpd .res{grid-template-columns:1fr}#cgpd .hd h2{font-size:1.3em}#cgpd .steps li{font-size:.7em;padding:7px 2px}#cgpd .card{padding:14px}#cgpd .tools{grid-template-columns:130px 1fr}#cgpd #pdLoupe{width:130px;height:130px}#cgpd .box .num{font-size:2em}}
+@media(min-width:900px){#cgpd [data-s="1"].show,#cgpd [data-s="4"].show{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}#cgpd [data-s="1"] .card,#cgpd [data-s="4"] .card{margin:0}#cgpd [data-s="3"] .card{display:grid;grid-template-columns:minmax(0,1fr) 330px;column-gap:20px;align-items:start}#cgpd [data-s="3"] .card>h3,#cgpd #pdTabs,#cgpd #pdHint{grid-column:1/-1}#cgpd #pdHint{min-height:0}#cgpd #pdView{grid-column:1;grid-row:4/span 3}#cgpd [data-s="3"] .tools,#cgpd [data-s="3"] .adv,#cgpd [data-s="3"] .card>.row{grid-column:2}#cgpd [data-s="3"] .tools{margin-top:0}#cgpd [data-s="3"] .adv .grid2{grid-template-columns:1fr}}
+@media print{#cgpd .btn,#cgpd .steps,#cgpd .noprint{display:none!important}}
+</style>
+
+<ol class="steps">
+<li data-st="1" class="on">1 &#183; Çerçeve</li><li data-st="2">2 &#183; Çekim</li><li data-st="3">3 &#183; İşaretleme</li><li data-st="4">4 &#183; Sonuç</li>
+</ol>
+
+<section data-s="1" class="show">
+<div class="card">
+<h3>Çerçeve ölçünüz</h3>
+<p style="margin:0 0 6px;font-size:.95em">Gözlüğünüzün sapının iç yüzünde <b>52 &#9633; 18 140</b> gibi bir yazı bulunur. İlk sayı cam genişliği, ikincisi köprü genişliğidir. Bu iki sayı, fotoğraftaki pikselleri milimetreye çevirmek için kullanılır.</p>
+<svg class="temple" viewBox="0 0 380 78" role="img" aria-label="Gözlük sapındaki ölçü yazısı örneği"><path d="M6 34 H292 q44 0 70 30 l6 8 h-22 l-4 -6 q-18 -14 -50 -14 H6 z" fill="#14233b"/><text x="70" y="47" font-family="Arial" font-size="13" fill="#fff"><tspan fill="#8EC1FF" font-weight="700">52</tspan> &#9633; <tspan fill="#8EC1FF" font-weight="700">18</tspan>  140</text><path d="M77 30 v-11 M107 30 v-11" stroke="#004EA9" stroke-width="1.5"/><text x="90" y="13" text-anchor="end" font-family="Arial" font-size="11" fill="#004EA9" font-weight="700">cam genişliği</text><text x="100" y="13" font-family="Arial" font-size="11" fill="#004EA9" font-weight="700">köprü genişliği</text></svg>
+<div class="grid2" style="margin-top:12px">
+<div><label class="f" for="pdA">Cam genişliği (mm)</label><input type="number" id="pdA" min="38" max="66" step="0.5" value="52" inputmode="decimal"></div>
+<div><label class="f" for="pdD">Köprü genişliği (mm)</label><input type="number" id="pdD" min="10" max="28" step="0.5" value="18" inputmode="decimal"></div>
+<div><label class="f" for="pdT">Çerçeve tipi</label><select id="pdT"><option value="0.5">Tam çerçeve (kemik veya metal)</option><option value="0">Yarım çerçeve (misinalı) veya çerçevesiz</option></select></div>
+<div><label class="f" for="pdM">Ölçek yöntemi</label><select id="pdM"><option value="frame">Çerçeve ölçüsüyle (önerilen)</option><option value="iris">Ölçüleri bilmiyorum (yaklaşık sonuç)</option></select></div>
+</div>
+</div>
+<div class="card">
+<h3>Çekimden önce</h3>
+<ul class="chk">
+<li>Gözlüğünüzü her zaman taktığınız gibi takın, burnunuzda kaymış olmasın.</li>
+<li>Telefonu <b>dik</b> ve <b>göz hizanızda</b>, yaklaşık bir kol boyu (45&#8211;60 cm) uzakta tutun.</li>
+<li>Başınızı doğal duruşunda tutun; ekrana değil, <b>kameranın merceğine</b> bakın.</li>
+<li>Işık yüzünüze önden gelsin; camlarda parlama varsa hafifçe yön değiştirin.</li>
+</ul>
+<div class="row" style="margin-top:14px">
+<button class="btn" id="pdCam" type="button">Kamerayı aç</button>
+<button class="btn alt" id="pdUp" type="button">Fotoğraf yükle</button>
+<input type="file" id="pdFile" accept="image/*" hidden>
+</div>
+<div class="load" id="pdLoad"><span class="spin"></span><span id="pdLoadT">Ölçüm modeli yükleniyor&#8230;</span></div>
+<div class="err" id="pdErr"></div>
+<div class="priv"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#004EA9" stroke-width="2.2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Görüntünüz cihazınızdan çıkmaz. Ölçüm tamamen tarayıcınızda yapılır; fotoğraf hiçbir sunucuya gönderilmez ve kaydedilmez.</span></div>
+</div>
+</section>
+
+<section data-s="2">
+<div class="card">
+<div class="stage" id="pdStage"><video id="pdVid" playsinline muted autoplay></video><div class="ov"></div><div class="gl"><span>gözleriniz bu çizgide</span></div><div class="cd" id="pdCd"></div></div>
+<div class="msg" id="pdMsg">Kamera açılıyor&#8230;</div>
+<div class="chips" id="pdChips"></div>
+<div class="row" style="justify-content:center">
+<button class="btn y" id="pdShot" type="button">Şimdi çek</button>
+<button class="btn alt" id="pdBack1" type="button">Vazgeç</button>
+</div>
+<p class="note" style="text-align:center">Koşullar uygun olduğunda fotoğraf geri sayımla kendiliğinden çekilir.</p>
+</div>
+</section>
+
+<section data-s="3">
+<div class="card">
+<h3>İşaretleri kontrol edin</h3>
+<div class="tabs" id="pdTabs">
+<button type="button" data-g="p" class="on">1 &#183; Göz bebekleri<b>merkeze oturtun</b></button>
+<button type="button" data-g="v">2 &#183; Cam dış kenarları<b>şakak tarafı</b></button>
+<button type="button" data-g="b">3 &#183; Cam alt kenarları<b>en alt nokta</b></button>
+</div>
+<p class="hint" id="pdHint"></p>
+<canvas id="pdView"></canvas>
+<div class="tools">
+<canvas id="pdLoupe"></canvas>
+<div>
+<div class="side" id="pdSide"><button type="button" data-k="lo"></button><button type="button" data-k="hi"></button></div>
+<div class="pad" id="pdPad">
+<span></span><button type="button" data-n="0,-1" aria-label="Yukarı">&#9650;</button><span></span>
+<button type="button" data-n="-1,0" aria-label="Sola">&#9664;</button><span class="mid">ince ayar<br>0,1 mm</span><button type="button" data-n="1,0" aria-label="Sağa">&#9654;</button>
+<span></span><button type="button" data-n="0,1" aria-label="Aşağı">&#9660;</button><span></span>
+</div>
+</div>
+</div>
+<details class="adv">
+<summary>Gelişmiş ayarlar</summary>
+<div class="grid2" style="margin-top:10px">
+<div><label class="f" for="pdRot">Eğim düzeltme: <span id="pdRotV">0,0</span>&#176;</label><input type="range" id="pdRot" min="-6" max="6" step="0.1" value="0"><p class="note" style="margin-top:4px">Çerçevenin üst kenarı yatay görünmüyorsa düzeltin.</p></div>
+<div><label class="f" for="pdDist">Çekim mesafesi (cm)</label><input type="number" id="pdDist" min="25" max="400" step="1" inputmode="decimal"><p class="note" style="margin-top:4px" id="pdDistN">Otomatik tahmin edilir. Mezurayla ölçtüyseniz gerçek değeri yazın.</p></div>
+</div>
+<div class="row" style="margin-top:10px" id="pdSwapRow"><button class="btn alt" type="button" id="pdSwap" style="padding:8px 12px;font-size:.86em">Sağ&#8211;sol etiketlerini değiştir</button><span class="note" style="margin:0">Fotoğraf ayna görüntüsüyse kullanın.</span></div>
+</details>
+<div class="row" style="margin-top:16px">
+<button class="btn" id="pdNext" type="button">Sonraki: cam dış kenarları</button>
+<button class="btn alt" id="pdRetake" type="button">Yeniden çek</button>
+</div>
+</div>
+</section>
+
+<section data-s="4">
+<div class="card">
+<h3>Ön ölçüm sonucunuz</h3>
+<canvas id="pdOut"></canvas>
+<div class="res">
+<div class="box main"><small>Uzak PD</small><div class="num"><span id="rPD">&#8211;</span><i>mm</i></div><div class="sub">Sağ <b id="rPDr">&#8211;</b> &#183; Sol <b id="rPDl">&#8211;</b></div></div>
+<div class="box"><small>Montaj yüksekliği</small><div class="num" style="color:var(--b1);font-size:1.7em">Sağ <span id="rFHr">&#8211;</span> &#183; Sol <span id="rFHl">&#8211;</span><i>mm</i></div><div class="sub">Göz bebeği merkezinden camın en alt noktasına</div></div>
+</div>
+<div class="warn" id="pdWarn" style="display:none"></div>
+<div class="warn"><b>Bu bir ön ölçümdür.</b> Baş duruşu, kamera yüksekliği ve gözlüğün yüzdeki konumu sonucu etkiler. Sipariş öncesinde değerlerin optisyeniniz tarafından doğrulanması gerekir; özellikle progresif camlarda montaj yüksekliği mutlaka mağazada ölçülmelidir.</div>
+</div>
+<div class="card">
+<h3>Ayrıntılar</h3>
+<table class="det"><tbody id="pdDet"></tbody></table>
+<div id="pdHist"></div>
+<div class="row noprint" style="margin-top:16px">
+<button class="btn" id="pdAgain" type="button">Tekrar ölç</button>
+<button class="btn alt" id="pdEdit" type="button">İşaretleri düzelt</button>
+<button class="btn alt" id="pdCopy" type="button">Sonucu kopyala</button>
+<button class="btn alt" id="pdSave" type="button">İşaretli fotoğrafı kaydet</button>
+</div>
+<p class="note">İpucu: 2&#8211;3 kez ölçüp ortalamaya bakmak tek ölçümden daha güvenilirdir.</p>
+</div>
+</section>
+
+<script>
+(function(){
+var root=document.getElementById('cgpd');if(!root||root.getAttribute('data-init'))return;root.setAttribute('data-init','1');
+function $(s){return root.querySelector(s)}
+function $$(s){return Array.prototype.slice.call(root.querySelectorAll(s))}
+var CDN='https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.2.2';
+var MODEL='https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task';
+var FOCAL=0.78,ROTC=27,IRIS=11.7,IRISZ=15;
+var S={step:1,fl:null,flP:null,ts:0,stream:null,raf:0,lastDet:0,okSince:0,tilt:null,hist:[],grp:'p',sel:'hi',rightHi:true,fromCam:true,dUser:false};
+var vid=$('#pdVid'),src=document.createElement('canvas'),work=document.createElement('canvas');
+var view=$('#pdView'),loupe=$('#pdLoupe'),out=$('#pdOut');
+function fmt(v,d){return (Math.round(v*Math.pow(10,d))/Math.pow(10,d)).toFixed(d).replace('.',',')}
+function half(v){return Math.round(v*2)/2}
+function num(id,def){var v=parseFloat(String($(id).value).replace(',','.'));return isFinite(v)?v:def}
+function err(t){var e=$('#pdErr');e.textContent=t||'';e.style.display=t?'block':'none'}
+function loading(t){var l=$('#pdLoad');l.style.display=t?'flex':'none';if(t)$('#pdLoadT').textContent=t}
+function go(n){S.step=n;$$('[data-s]').forEach(function(s){s.classList.toggle('show',+s.getAttribute('data-s')===n)});
+ $$('.steps li').forEach(function(l){var k=+l.getAttribute('data-st');l.classList.toggle('on',k===n);l.classList.toggle('ok',k<n)});
+ if(n!==2)stopCam();var r=root.getBoundingClientRect();if(r.top<0)window.scrollTo(0,window.pageYOffset+r.top-10)}
+
+function loadModel(){if(S.flP)return S.flP;
+ S.flP=import(CDN+'/vision_bundle.mjs').then(function(v){return v.FilesetResolver.forVisionTasks(CDN+'/wasm').then(function(fs){
+  function mk(dg){return v.FaceLandmarker.createFromOptions(fs,{baseOptions:{modelAssetPath:MODEL,delegate:dg},runningMode:'VIDEO',numFaces:1,outputFacialTransformationMatrixes:true})}
+  return mk('GPU').catch(function(){return mk('CPU')})})}).then(function(fl){S.fl=fl;return fl});
+ S.flP.catch(function(){S.flP=null});return S.flP}
+
+function detect(el,w,h){var t=Math.max(performance.now(),S.ts+1);S.ts=t;var r;try{r=S.fl.detectForVideo(el,t)}catch(e){return null}
+ if(!r||!r.faceLandmarks||!r.faceLandmarks[0]||r.faceLandmarks[0].length<478)return null;var lm=r.faceLandmarks[0];
+ function P(i){return{x:lm[i].x*w,y:lm[i].y*h}}function D(a,b){return Math.hypot(a.x-b.x,a.y-b.y)}
+ var a=P(468),b=P(473),lo=a.x<b.x?a:b,hi=a.x<b.x?b:a;
+ var ir=(Math.max(D(P(469),P(471)),D(P(470),P(472)))+Math.max(D(P(474),P(476)),D(P(475),P(477))))/2;
+ var c1=P(33),c2=P(263),cl=c1.x<c2.x?c1:c2,ch=c1.x<c2.x?c2:c1,roll=Math.atan2(ch.y-cl.y,ch.x-cl.x);
+ var yaw=0,pitch=0,m=r.facialTransformationMatrixes&&r.facialTransformationMatrixes[0]&&r.facialTransformationMatrixes[0].data;
+ if(m){yaw=Math.atan2(m[8],Math.abs(m[10]))*57.2958;pitch=Math.atan2(-m[9],Math.hypot(m[8],m[10]))*57.2958}
+ return{lo:lo,hi:hi,iris:ir,roll:roll,yaw:yaw,pitch:pitch,nose:P(168),w:w,h:h}}
+
+/* ---------- 2: kamera ---------- */
+function stopCam(){cancelAnimationFrame(S.raf);if(S.stream){S.stream.getTracks().forEach(function(t){t.stop()});S.stream=null}vid.srcObject=null;S.okSince=0;$('#pdCd').style.display='none'}
+function onOri(e){if(e.beta==null||window.innerWidth>window.innerHeight){S.tilt=null;return}S.tilt=e.beta-90}
+function askOri(){try{var D=window.DeviceOrientationEvent;if(!D)return;if(typeof D.requestPermission==='function'){D.requestPermission().then(function(r){if(r==='granted')window.addEventListener('deviceorientation',onOri)}).catch(function(){})}else window.addEventListener('deviceorientation',onOri)}catch(e){}}
+function startCam(){err('');if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){err('Bu tarayıcı kameraya erişimi desteklemiyor. \u201cFotoğraf yükle\u201d seçeneğini kullanabilirsiniz.');return}
+ askOri();loading('Kamera ve ölçüm modeli hazırlanıyor\u2026');
+ var cam=navigator.mediaDevices.getUserMedia({audio:false,video:{facingMode:'user',width:{ideal:1920},height:{ideal:1080}}});
+ Promise.all([cam,loadModel()]).then(function(r){loading('');S.stream=r[0];S.fromCam=true;S.rightHi=true;vid.srcObject=S.stream;go(2);S.stream=r[0];vid.srcObject=S.stream;
+  var p=vid.play();if(p&&p.catch)p.catch(function(){});$('#pdMsg').textContent='Yüzünüzü ovalin içine alın';S.lastDet=0;loop()})
+ .catch(function(e){loading('');cam.then(function(s){s.getTracks().forEach(function(t){t.stop()})}).catch(function(){});
+  var n=e&&e.name;err(n==='NotAllowedError'||n==='SecurityError'?'Kamera izni verilmedi. Tarayıcınızın adres çubuğundaki kamera simgesinden izin verip tekrar deneyin ya da \u201cFotoğraf yükle\u201d seçeneğini kullanın.':n==='NotFoundError'||n==='OverconstrainedError'?'Kamera bulunamadı. \u201cFotoğraf yükle\u201d seçeneğini kullanabilirsiniz.':'Kamera veya ölçüm modeli açılamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.')})}
+function chip(t,ok){return '<span class="chip '+(ok==null?'':ok?'ok':'no')+'">'+t+'</span>'}
+function loop(){if(S.step!==2||!S.stream)return;S.raf=requestAnimationFrame(loop);var now=performance.now();if(now-S.lastDet<70||vid.readyState<2||!vid.videoWidth)return;S.lastDet=now;
+ var w=vid.videoWidth,h=vid.videoHeight,f=detect(vid,w,h),msg='',ok=false,cs='';
+ if(!f){msg='Yüzünüzü ovalin içine alın';cs=chip('Yüz',false)}
+ else{var d=FOCAL*Math.max(w,h)*IRIS/f.iris,cx=((f.lo.x+f.hi.x)/2)/w-.5,cy=((f.lo.y+f.hi.y)/2)/h-.5,roll=f.roll*57.2958;
+  var kD=d>=400&&d<=680,kC=Math.abs(cx)<.06&&Math.abs(cy)<.045,kA=Math.abs(f.yaw)<5&&Math.abs(roll)<5&&Math.abs(f.pitch)<15,kT=S.tilt==null||Math.abs(S.tilt)<6;
+  cs=chip('Yüz',true)+chip('Mesafe \u2248 '+Math.round(d/10)+' cm',kD)+chip('Hizalama',kC)+chip('Baş açısı',kA)+(S.tilt==null?'':chip('Telefon dik',kT));
+  if(!kD)msg=d<400?'Biraz uzaklaşın':'Biraz yaklaşın';
+  else if(Math.abs(cx)>=.06)msg='Yüzünüzü ortalayın';
+  else if(Math.abs(cy)>=.045)msg=cy<0?'Telefonu biraz yukarı kaldırın':'Telefonu biraz aşağı indirin';
+  else if(!kT)msg='Telefonu dik tutun';
+  else if(Math.abs(roll)>=5)msg='Başınızı omzunuza yatırmayın';
+  else if(Math.abs(f.yaw)>=5)msg='Kameraya tam karşıdan bakın';
+  else if(Math.abs(f.pitch)>=15)msg='Çenenizi doğal duruşuna getirin';
+  else{ok=true;msg='Kameranın merceğine bakın, kıpırdamayın'}}
+ $('#pdChips').innerHTML=cs;$('#pdStage').classList.toggle('good',ok);var cd=$('#pdCd');
+ if(ok){if(!S.okSince)S.okSince=now;var el=now-S.okSince-500;if(el>0){var n=3-Math.floor(el/700);if(n<=0){capture();return}cd.style.display='flex';cd.textContent=n}}
+ else{S.okSince=0;cd.style.display='none'}
+ $('#pdMsg').textContent=msg}
+function capture(){if(!vid.videoWidth)return;var w=vid.videoWidth,h=vid.videoHeight;src.width=w;src.height=h;var c=src.getContext('2d');c.setTransform(-1,0,0,1,w,0);c.drawImage(vid,0,0,w,h);c.setTransform(1,0,0,1,0,0);stopCam();process()}
+
+/* ---------- yükleme ---------- */
+function onFile(e){var f=e.target.files&&e.target.files[0];e.target.value='';if(!f)return;err('');loading('Fotoğraf hazırlanıyor\u2026');
+ var img=new Image(),url=URL.createObjectURL(f);img.onload=function(){var k=Math.min(1,2560/Math.max(img.naturalWidth,img.naturalHeight));src.width=Math.round(img.naturalWidth*k);src.height=Math.round(img.naturalHeight*k);
+  src.getContext('2d').drawImage(img,0,0,src.width,src.height);URL.revokeObjectURL(url);S.fromCam=false;S.rightHi=false;loadModel().then(function(){loading('');process()}).catch(function(){loading('');err('Ölçüm modeli yüklenemedi. İnternet bağlantınızı kontrol edip tekrar deneyin.')})};
+ img.onerror=function(){loading('');err('Bu dosya açılamadı. JPEG veya PNG bir fotoğraf seçin.')};img.src=url}
+
+/* ---------- 3: işaretleme ---------- */
+function rotPt(p,a,W,H){var cx=W/2,cy=H/2,c=Math.cos(a),s=Math.sin(a),x=p.x-cx,y=p.y-cy;return{x:cx+x*c-y*s,y:cy+x*s+y*c}}
+function buildWork(){var W=src.width,H=src.height;work.width=W;work.height=H;var c=work.getContext('2d');c.fillStyle='#0b1730';c.fillRect(0,0,W,H);c.translate(W/2,H/2);c.rotate(S.rot);c.drawImage(src,-W/2,-H/2);c.setTransform(1,0,0,1,0,0)}
+function process(){var W=src.width,H=src.height,f=detect(src,W,H);if(!f)f=detect(src,W,H);
+ if(!f){go(1);err('Fotoğrafta yüz bulunamadı. Yüzünüz önden, net ve iyi ışıkta görünecek şekilde tekrar deneyin.');return}
+ S.W=W;S.H=H;S.f=f;S.rot=-f.roll;S.rot0=S.rot;buildWork();
+ var lo=rotPt(f.lo,S.rot,W,H),hi=rotPt(f.hi,S.rot,W,H),s0=f.iris/IRIS,A=num('#pdA',52),D=num('#pdD',18),xc=(lo.x+hi.x)/2;
+ S.s0=s0;S.P={lo:lo,hi:hi};S.V={lo:xc-(A+D/2)*s0,hi:xc+(A+D/2)*s0};var fh=(0.4*A+3)*s0;S.B={lo:lo.y+fh,hi:hi.y+fh};
+ var cw=Math.min(W,Math.max((hi.x-lo.x)*2.9,(2*A+D+34)*s0)),chh=cw*.62;S.crop={x:Math.max(0,Math.min(W-cw,xc-cw/2)),y:Math.max(0,Math.min(H-chh,(lo.y+hi.y)/2-chh*.47)),w:cw,h:chh};
+ S.dUser=!S.fromCam;if(!S.fromCam)$('#pdDist').value=100;root.querySelector('details.adv').open=!S.fromCam;$('#pdRot').value=0;$('#pdRotV').textContent='0,0';$('#pdSwapRow').style.display=S.fromCam?'none':'flex';
+ $('#pdDistN').textContent=S.fromCam?'Otomatik tahmin edilir. Mezurayla ölçtüyseniz gerçek değeri yazın.':'Yüklenen fotoğrafta mesafe tahmin edilemez; 100 cm varsayıldı. Fotoğrafın kaç cm uzaktan çekildiğini yazmanız sonucu iyileştirir.';
+ setGrp('p');go(3);sizeView();draw()}
+function lab(k){return (k==='hi')===S.rightHi?'Sağ':'Sol'}
+var HINT={p:'Sarı artıları göz bebeklerinizin tam ortasına getirin. Sürükleyin ya da ince ayar oklarını kullanın.',v:'Dikey çizgileri her iki camın şakak tarafındaki dış kenarına getirin (camın çerçeveyle birleştiği yer).',b:'Yatay çizgileri her camın en alt noktasına getirin (camın çerçeveyle birleştiği alt kenar).'};
+function setGrp(g){S.grp=g;$$('#pdTabs button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-g')===g)});$('#pdHint').textContent=HINT[g];
+ $('#pdNext').textContent=g==='p'?'Sonraki: cam dış kenarları':g==='v'?'Sonraki: cam alt kenarları':'Sonucu hesapla';setSel(S.sel);updDist()}
+function setSel(k){S.sel=k;$$('#pdSide button').forEach(function(b){var kk=b.getAttribute('data-k');b.textContent=lab(kk)+(S.grp==='p'?' göz':' cam');b.classList.toggle('on',kk===k)});if(S.step===3)draw()}
+function sizeView(){var cssW=view.clientWidth||view.parentNode.clientWidth,dpr=Math.min(window.devicePixelRatio||1,2.5);view.style.height=Math.round(cssW*.62)+'px';view.width=Math.round(cssW*dpr);view.height=Math.round(cssW*.62*dpr);
+ var lw=loupe.clientWidth||150;loupe.width=loupe.height=Math.round(lw*dpr)}
+function marks(c,k,ox,oy,all,lw,fs){/* k: canvas px / work px */
+ function X(x){return (x-ox)*k}function Y(y){return (y-oy)*k}var xc=(S.V.lo+S.V.hi)/2;
+ function on(g,s){return all||(S.grp===g)}
+ c.lineCap='round';c.font='700 '+fs+'px Arial';c.textBaseline='middle';
+ ['lo','hi'].forEach(function(s){var p=S.P[s],sel=!all&&S.sel===s;
+  /* dikey */ c.globalAlpha=on('v')?1:.4;c.strokeStyle='#0b1730';c.lineWidth=lw*2.4;c.beginPath();c.moveTo(X(S.V[s]),Y(p.y-S.s0*26));c.lineTo(X(S.V[s]),Y(S.B[s]+S.s0*5));c.stroke();
+  c.strokeStyle=(S.grp==='v'&&sel)?'#ffd400':'#6fd3ff';c.lineWidth=lw;c.stroke();
+  /* yatay */ c.globalAlpha=on('b')?1:.4;var x1=s==='lo'?S.V.lo:xc+S.s0*2,x2=s==='lo'?xc-S.s0*2:S.V.hi;c.strokeStyle='#0b1730';c.lineWidth=lw*2.4;c.beginPath();c.moveTo(X(x1),Y(S.B[s]));c.lineTo(X(x2),Y(S.B[s]));c.stroke();
+  c.strokeStyle=(S.grp==='b'&&sel)?'#ffd400':'#6fd3ff';c.lineWidth=lw;c.stroke();
+  /* göz bebeği */ c.globalAlpha=on('p')?1:.5;var r=S.s0*4.2*k,g=S.s0*1.1*k,px=X(p.x),py=Y(p.y);
+  [['#0b1730',lw*2.4],[(S.grp==='p'&&sel)||all?'#ffd400':'#fff',lw]].forEach(function(q){c.strokeStyle=q[0];c.lineWidth=q[1];c.beginPath();c.moveTo(px-r,py);c.lineTo(px-g,py);c.moveTo(px+g,py);c.lineTo(px+r,py);c.moveTo(px,py-r);c.lineTo(px,py-g);c.moveTo(px,py+g);c.lineTo(px,py+r);c.stroke()});
+  if(fs){c.globalAlpha=1;var t=lab(s),tw=c.measureText(t).width,tx=px-tw/2,ty=Y(p.y-S.s0*24);c.fillStyle='rgba(11,23,48,.78)';c.fillRect(tx-6,ty-fs*.75,tw+12,fs*1.5);c.fillStyle='#fff';c.fillText(t,tx,ty)}
+ });c.globalAlpha=1}
+function draw(){var c=view.getContext('2d'),cr=S.crop,k=view.width/cr.w;c.imageSmoothingQuality='high';c.drawImage(work,cr.x,cr.y,cr.w,cr.h,0,0,view.width,view.height);
+ var dpr=view.width/(view.clientWidth||view.width);marks(c,k,cr.x,cr.y,false,1.6*dpr,12*dpr);drawLoupe()}
+function selPt(){var s=S.sel;return S.grp==='p'?{x:S.P[s].x,y:S.P[s].y}:S.grp==='v'?{x:S.V[s],y:S.P[s].y}:{x:(S.P[s].x),y:S.B[s]}}
+function drawLoupe(){var c=loupe.getContext('2d'),n=loupe.width,p=selPt(),reg=S.s0*13,k=n/reg;c.fillStyle='#0b1730';c.fillRect(0,0,n,n);c.imageSmoothingQuality='high';
+ c.drawImage(work,p.x-reg/2,p.y-reg/2,reg,reg,0,0,n,n);var dpr=n/(loupe.clientWidth||150);c.lineWidth=1.2*dpr;c.strokeStyle='#ffd400';c.beginPath();
+ if(S.grp!=='b'){c.moveTo(n/2,0);c.lineTo(n/2,S.grp==='p'?n*.42:n);if(S.grp==='p'){c.moveTo(n/2,n*.58);c.lineTo(n/2,n)}}
+ if(S.grp!=='v'){c.moveTo(0,n/2);c.lineTo(S.grp==='p'?n*.42:n,n/2);if(S.grp==='p'){c.moveTo(n*.58,n/2);c.lineTo(n,n/2)}}c.stroke()}
+function move(dx,dy){var s=S.sel,W=S.W,H=S.H;if(S.grp==='p'){S.P[s].x=Math.max(0,Math.min(W,S.P[s].x+dx));S.P[s].y=Math.max(0,Math.min(H,S.P[s].y+dy))}
+ else if(S.grp==='v')S.V[s]=Math.max(0,Math.min(W,S.V[s]+dx));else S.B[s]=Math.max(0,Math.min(H,S.B[s]+dy));updDist();draw()}
+var drag=null;
+view.addEventListener('pointerdown',function(e){if(S.step!==3)return;var r=view.getBoundingClientRect(),k=S.crop.w/r.width,x=S.crop.x+(e.clientX-r.left)*k,y=S.crop.y+(e.clientY-r.top)*k,s;
+ if(S.grp==='p')s=Math.hypot(x-S.P.lo.x,y-S.P.lo.y)<Math.hypot(x-S.P.hi.x,y-S.P.hi.y)?'lo':'hi';else if(S.grp==='v')s=Math.abs(x-S.V.lo)<Math.abs(x-S.V.hi)?'lo':'hi';else s=x<(S.V.lo+S.V.hi)/2?'lo':'hi';
+ setSel(s);drag={x:e.clientX,y:e.clientY,k:k};try{view.setPointerCapture(e.pointerId)}catch(_){}view.style.cursor='grabbing';e.preventDefault()});
+view.addEventListener('pointermove',function(e){if(!drag)return;move((e.clientX-drag.x)*drag.k*.6,(e.clientY-drag.y)*drag.k*.6);drag.x=e.clientX;drag.y=e.clientY});
+function endDrag(){drag=null;view.style.cursor='grab'}view.addEventListener('pointerup',endDrag);view.addEventListener('pointercancel',endDrag);
+$('#pdPad').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var n=b.getAttribute('data-n').split(','),st=S.s0*.1;move(+n[0]*st,+n[1]*st)});
+$('#pdSide').addEventListener('click',function(e){var b=e.target.closest('button');if(b)setSel(b.getAttribute('data-k'))});
+$('#pdTabs').addEventListener('click',function(e){var b=e.target.closest('button');if(b)setGrp(b.getAttribute('data-g'))});
+$('#pdRot').addEventListener('input',function(){var v=+this.value,nr=S.rot0+v*Math.PI/180,d=nr-S.rot,W=S.W,H=S.H;$('#pdRotV').textContent=fmt(v,1);
+ ['lo','hi'].forEach(function(s){var vp=rotPt({x:S.V[s],y:S.P[s].y},d,W,H),bp=rotPt({x:S.P[s].x,y:S.B[s]},d,W,H);S.P[s]=rotPt(S.P[s],d,W,H);S.V[s]=vp.x;S.B[s]=bp.y});S.rot=nr;buildWork();draw()});
+$('#pdDist').addEventListener('input',function(){S.dUser=this.value!==''});
+$('#pdSwap').addEventListener('click',function(){S.rightHi=!S.rightHi;setSel(S.sel)});
+function geom(){var A=num('#pdA',52),D=num('#pdD',18),g=num('#pdT',.5),iris=$('#pdM').value==='iris',Wmm=2*A+D-2*g,wpx=S.V.hi-S.V.lo,s,d,f=FOCAL*Math.max(S.W,S.H);
+ if(iris){var di=f*IRIS/S.f.iris;d=Math.max(150,di-IRISZ);s=(S.f.iris/IRIS)*di/d}else{s=wpx/Wmm;d=f*Wmm/wpx}
+ return{A:A,D:D,g:g,iris:iris,Wmm:Wmm,s:s,dAuto:d}}
+function updDist(){if(S.dUser||!S.P)return;$('#pdDist').value=Math.round(geom().dAuto/10)}
+function calc(){var G=geom(),s=G.s,d=S.dUser?Math.max(250,num('#pdDist',50)*10):G.dAuto,xc=(S.V.lo+S.V.hi)/2,k=(d+ROTC)/d;
+ var Xb=S.fromCam?(xc-S.W/2)/s:0,mHi=(S.P.hi.x-xc)/s,mLo=(xc-S.P.lo.x)/s,fHi=mHi*k+Xb*ROTC/d,fLo=mLo*k-Xb*ROTC/d;
+ function fh(q){var m=(S.B[q]-S.P[q].y)/s+G.g,yp=S.fromCam?(S.P[q].y-S.H/2)/s:0;return m-yp*ROTC/d}
+ var R=S.rightHi?'hi':'lo',L=S.rightHi?'lo':'hi',o={pdR:S.rightHi?fHi:fLo,pdL:S.rightHi?fLo:fHi,fhR:fh(R),fhL:fh(L),d:d,G:G,meas:mHi+mLo,frameW:(S.V.hi-S.V.lo)/s+2*G.g,rot:S.rot*57.2958,dUser:S.dUser,cam:S.fromCam};
+ o.pd=o.pdR+o.pdL;o.near=o.pd*400/(400+ROTC);return o}
+function showRes(){var o=calc();S.last=o;go(4);
+ $('#rPD').textContent=fmt(half(o.pd),1);$('#rPDr').textContent=fmt(half(o.pdR),1);$('#rPDl').textContent=fmt(half(o.pdL),1);$('#rFHr').textContent=fmt(half(o.fhR),1);$('#rFHl').textContent=fmt(half(o.fhL),1);
+ var w=[];if(o.pd<48||o.pd>78)w.push('PD değeri olağan aralığın (48\u201378 mm) dışında çıktı.');if(o.fhR<8||o.fhR>38||o.fhL<8||o.fhL>38)w.push('Montaj yüksekliği olağan aralığın dışında çıktı.');
+ if(Math.abs(o.pdR-o.pdL)>4)w.push('Sağ ve sol PD arasında 4 mm\u2019den fazla fark var; baş hafif dönük olabilir.');if(!o.G.iris&&o.cam&&!o.dUser&&(o.d<300||o.d>900))w.push('Tahmin edilen çekim mesafesi beklenenden farklı; çerçeve ölçülerini ve dikey çizgileri kontrol edin.');
+ var we=$('#pdWarn');we.style.display=w.length?'block':'none';we.innerHTML=w.length?'<b>Kontrol edin:</b> '+w.join(' ')+' İşaretleri ve çerçeve ölçülerini gözden geçirin.':'';
+ var q=o.G.iris?'Yaklaşık (iris çapına göre, \u00b13 mm)':(o.cam?'İyi (çerçeve ölçüsüne göre)':'Orta (yüklenen fotoğraf)');
+ var rows=[['Yakın PD (40 cm okuma mesafesi)',fmt(half(o.near),1)+' mm'],['Hesaplanan ham değerler','PD '+fmt(o.pd,1)+' \u00b7 Sağ '+fmt(o.pdR,1)+' / Sol '+fmt(o.pdL,1)+' mm'],['Montaj yüksekliği (ham)','Sağ '+fmt(o.fhR,1)+' / Sol '+fmt(o.fhL,1)+' mm'],
+  ['Çerçeve',o.G.iris?'ölçü girilmedi':fmt(o.G.A,1)+' \u25a1 '+fmt(o.G.D,1)],['Fotoğrafta ölçülen çerçeve iç genişliği',fmt(o.frameW,1)+' mm'],['Çekim mesafesi',Math.round(o.d/10)+' cm'+(o.dUser?' (elle girildi)':' (tahmin)')],['Eğim düzeltmesi',fmt(o.rot,1)+'\u00b0'],['Ölçüm güveni',q]];
+ $('#pdDet').innerHTML=rows.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'}).join('');
+ var cssW=out.clientWidth||out.parentNode.clientWidth,dpr=Math.min(window.devicePixelRatio||1,2.5);out.style.height=Math.round(cssW*.62)+'px';out.width=Math.round(cssW*dpr);out.height=Math.round(cssW*.62*dpr);
+ var c=out.getContext('2d'),cr=S.crop,k=out.width/cr.w;c.imageSmoothingQuality='high';c.drawImage(work,cr.x,cr.y,cr.w,cr.h,0,0,out.width,out.height);marks(c,k,cr.x,cr.y,true,1.5*dpr,12*dpr);hist()}
+function hist(){var h=S.hist,e=$('#pdHist');if(h.length<2){e.innerHTML='';return}function av(k){return h.reduce(function(a,o){return a+o[k]},0)/h.length}
+ e.innerHTML='<h3 style="margin-top:16px">Bu oturumdaki ölçümler</h3><table class="det"><tbody>'+h.map(function(o,i){return '<tr><td>'+(i+1)+'. ölçüm</td><td>PD '+fmt(o.pd,1)+' \u00b7 MY '+fmt(o.fhR,1)+' / '+fmt(o.fhL,1)+'</td></tr>'}).join('')+
+ '<tr><td><b>Ortalama</b></td><td>PD '+fmt(half(av('pd')),1)+' (Sağ '+fmt(half(av('pdR')),1)+' / Sol '+fmt(half(av('pdL')),1)+') \u00b7 MY '+fmt(half(av('fhR')),1)+' / '+fmt(half(av('fhL')),1)+'</td></tr></tbody></table>'}
+function text(){var o=S.last;return 'PD ve montaj yüksekliği ön ölçümü (Seçkin Optik, Çanakkale)\nUzak PD: '+fmt(half(o.pd),1)+' mm (Sağ '+fmt(half(o.pdR),1)+' / Sol '+fmt(half(o.pdL),1)+')\nYakın PD (40 cm): '+fmt(half(o.near),1)+' mm\nMontaj yüksekliği: Sağ '+fmt(half(o.fhR),1)+' / Sol '+fmt(half(o.fhL),1)+' mm'+(o.G.iris?'':'\nÇerçeve: '+fmt(o.G.A,1)+' \u25a1 '+fmt(o.G.D,1))+'\nNot: Ön ölçümdür; sipariş öncesinde optisyen tarafından doğrulanmalıdır.'}
+
+$('#pdCam').addEventListener('click',startCam);
+$('#pdUp').addEventListener('click',function(){$('#pdFile').click()});
+$('#pdFile').addEventListener('change',onFile);
+$('#pdShot').addEventListener('click',capture);
+$('#pdBack1').addEventListener('click',function(){go(1)});
+$('#pdRetake').addEventListener('click',function(){go(1)});
+$('#pdNext').addEventListener('click',function(){if(S.grp==='p')setGrp('v');else if(S.grp==='v')setGrp('b');else{showRes();S.hist.push(S.last);hist()}});
+$('#pdAgain').addEventListener('click',function(){go(1)});
+$('#pdEdit').addEventListener('click',function(){S.hist.pop();go(3);sizeView();draw()});
+$('#pdCopy').addEventListener('click',function(){var b=this,t=text();function done(){b.textContent='Kopyalandı';setTimeout(function(){b.textContent='Sonucu kopyala'},1600)}
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(done).catch(function(){});else{var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done()}catch(e){}document.body.removeChild(ta)}});
+$('#pdSave').addEventListener('click',function(){var o=S.last,c=document.createElement('canvas'),bar=Math.round(out.width*.11);c.width=out.width;c.height=out.height+bar;var x=c.getContext('2d');x.fillStyle='#02122C';x.fillRect(0,0,c.width,c.height);x.drawImage(out,0,0);
+ x.fillStyle='#fff';x.font='700 '+Math.round(bar*.3)+'px Arial';x.textBaseline='middle';x.fillText('PD '+fmt(half(o.pd),1)+' (Sağ '+fmt(half(o.pdR),1)+' / Sol '+fmt(half(o.pdL),1)+')  \u00b7  MY Sağ '+fmt(half(o.fhR),1)+' / Sol '+fmt(half(o.fhL),1)+' mm',bar*.25,out.height+bar*.36);
+ x.font=Math.round(bar*.2)+'px Arial';x.globalAlpha=.85;x.fillText('Ön ölçüm \u00b7 Seçkin Optik \u00b7 Çanakkale',bar*.25,out.height+bar*.74);
+ c.toBlob(function(b){var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='pd-on-olcum.jpg';document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(a.href)},2000)},'image/jpeg',.92)});
+window.addEventListener('resize',function(){if(S.step===3&&S.P){sizeView();draw()}});
+document.addEventListener('visibilitychange',function(){if(document.hidden&&S.step===2)go(1)});
+root.__pd=S;root.__pdCalc=calc;
+})();
+</script>
+</div>

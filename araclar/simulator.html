@@ -1,0 +1,813 @@
+<style>
+.pdsim{--ink:#02122C;--mut:#5b6777;--line:#dfe4ea;--bg:#f6f8fa;--acc:#f5b301;--ok:#12824a;--bad:#d3301f;--lens:#2f7fd1;
+max-width:1320px;margin:16px auto;padding:14px;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:16px;
+font-family:inherit;font-size:15px;line-height:1.4;box-sizing:border-box;text-align:left}
+.pdsim *{box-sizing:border-box}
+.pdsim p{margin:0;color:var(--mut)}
+.pdsim button,.pdsim select,.pdsim input{font-family:inherit;color:var(--ink)}
+.pdsim-head{display:flex;flex-wrap:wrap;gap:10px 12px;align-items:center;margin-bottom:12px}
+.pdsim-head .pdsim-chips{flex:1 1 300px;align-items:center}
+.pdsim-chips em{font-style:normal;font-size:12.5px;color:var(--mut);margin-right:2px}
+.pdsim-form input[type=number]{font-size:14px;padding:5px 1px}
+.pdsim-form select{font-size:13.5px}
+.pdsim-secs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px}
+.pdsim-secs svg{display:block;width:100%;height:auto}
+.pdsim-tip{font-weight:700;color:var(--ink)}
+.pdsim-seg{display:inline-flex;border:1px solid #c9d1da;border-radius:10px;overflow:hidden}
+.pdsim-seg button{font-size:14px;font-weight:600;padding:7px 14px;border:0;background:#fff;color:var(--mut);cursor:pointer}
+.pdsim-seg button.on{background:var(--ink);color:#fff}
+.pdsim-btn{font-size:13px;font-weight:600;padding:6px 10px;border-radius:8px;border:1px solid #c9d1da;background:#fff;cursor:pointer}
+.pdsim-btn:hover,.pdsim-chips button:hover,.pdsim-pad button:hover,.pdsim-h button:hover{background:var(--bg)}
+.pdsim-main{display:grid;grid-template-columns:240px minmax(0,1fr) minmax(0,410px);gap:14px;align-items:start}
+.pdsim-col{display:grid;gap:8px;min-width:0}
+.pdsim-card{border:1px solid var(--line);border-radius:12px;padding:9px 10px;background:#fff;min-width:0}
+.pdsim-h{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:0 0 6px;font-size:11.5px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.05em}
+.pdsim-h span{text-transform:none;letter-spacing:0;font-weight:400}
+.pdsim-h button{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:6px;border:1px solid #c9d1da;background:#fff;cursor:pointer;text-transform:none;letter-spacing:0}
+.pdsim-chips{display:flex;flex-wrap:wrap;gap:5px}
+.pdsim-chips button{font-size:12.5px;padding:4px 9px;border-radius:99px;border:1px solid #c9d1da;background:#fff;cursor:pointer}
+.pdsim-grid{display:grid;grid-template-columns:26px repeat(3,minmax(0,1fr));gap:5px;align-items:center}
+.pdsim.pal .pdsim-grid.rx{grid-template-columns:26px repeat(4,minmax(0,1fr))}
+.pdsim-grid.ms{grid-template-columns:26px repeat(3,minmax(0,1fr))}
+.pdsim-grid i{font-style:normal;font-size:11px;color:var(--mut);text-align:center}
+.pdsim-grid em{font-style:normal;font-weight:700;font-size:12.5px}
+.pdsim:not(.pal):not(.bif) .pdsim-add{display:none!important}
+.pdsim.bif .pdsim-grid.rx,.pdsim.bif .pdsim-grid.ms{grid-template-columns:26px repeat(4,minmax(0,1fr))}
+.pdsim:not(.bif) .pdsim-sgf{display:none!important}
+.pdsim-grid.ms i{font-size:10.5px;white-space:nowrap}
+.pdsim-grid.pz{grid-template-columns:26px minmax(0,1fr) minmax(0,1.2fr);margin:6px 0}
+.pdsim input[type=number],.pdsim select{display:block;width:100%;min-width:0;margin:0;padding:5px 2px;font-size:15px;text-align:center;background:#fff;border:1px solid #c9d1da;border-radius:8px;font-variant-numeric:tabular-nums}
+.pdsim input[type=number]{-moz-appearance:textfield}
+.pdsim input::-webkit-outer-spin-button,.pdsim input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.pdsim input[type=number]:focus,.pdsim select:focus{outline:2px solid var(--acc);outline-offset:1px;border-color:var(--acc)}
+.pdsim-f{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.pdsim-f+.pdsim-f{margin-top:6px}
+.pdsim-f label{display:block;margin:0;font-size:11px;color:var(--mut);white-space:nowrap}
+.pdsim:not(.pal) .pdsim-corl{display:none}
+.pdsim-det>summary,.pdsim-notes>summary{cursor:pointer;font-size:11.5px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.05em;list-style:none}
+.pdsim-det>summary::-webkit-details-marker,.pdsim-notes>summary::-webkit-details-marker{display:none}
+.pdsim-det>summary:before,.pdsim-notes>summary:before{content:"+";display:inline-block;width:14px}
+.pdsim-det[open]>summary:before,.pdsim-notes[open]>summary:before{content:"-"}
+.pdsim-det[open]>summary{margin-bottom:6px}
+.pdsim-sub{margin-top:8px;padding-top:7px;border-top:1px solid var(--line)}
+.pdsim.pal .pdsim-sub{display:none}
+.pdsim-sub .pdsim-btn{font-size:12px;padding:4px 8px}
+.pdsim-notes{margin-top:10px}
+.pdsim-notes .pdsim-note{margin-top:6px!important}
+.pdsim:not(.quiz) .pdsim-quiz,.pdsim.quiz .pdsim-out>*:not(.pdsim-quiz),.pdsim.qhide .pdsim-vis>.pdsim-card{display:none}
+.pdsim.quiz .pdsim-form{opacity:.55;pointer-events:none}
+.pdsim-quiz p{font-size:14.5px;color:var(--ink);margin:4px 0 10px}
+.pdsim-qrow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pdsim-qrow label{display:block;margin:0;font-size:11px;color:var(--mut)}
+.pdsim-qbtn{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.pdsim-qres{margin-top:10px;font-size:13.5px;line-height:1.45}
+.pdsim-qres.ok,.pdsim-qres.no{padding:8px 10px;border-radius:10px}
+.pdsim-qres.ok{background:#eef7f1;border:1px solid #cfe6d8}
+.pdsim-qres.no{background:#fdf0ee;border:1px solid #f3cfca}
+.pdsim-btn.pri{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pdsim-stage{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:6px}
+.pdsim-stage svg{display:block;width:100%;height:auto;user-select:none;-webkit-user-select:none}
+.pdsim-stage text{font-weight:600}
+.pdsim-lens{cursor:grab;touch-action:none;outline:none}
+.pdsim-lens:active{cursor:grabbing}
+.pdsim-lens:focus-visible{stroke-width:1.5}
+.pdsim-zoom{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pdsim-zc{display:grid;grid-template-columns:84px minmax(0,1fr);gap:6px 10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:8px;background:#fff}
+.pdsim-zc svg{display:block;width:84px;height:84px}
+.pdsim-zc svg.pdsim-sec{grid-column:1/-1;width:100%;height:auto}
+.pdsim-zi{min-width:0;font-size:13px;color:var(--mut)}
+.pdsim-zi b{display:block;font-size:12px;font-weight:600;color:var(--mut)}
+.pdsim-zi span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;color:var(--ink);font-size:14px;font-weight:700;font-variant-numeric:tabular-nums;margin:2px 0 6px;min-height:1.3em}
+.pdsim-pad{display:flex;gap:4px}
+.pdsim-pad button{font-size:15px;line-height:1;width:28px;height:30px;padding:0;border:1px solid #c9d1da;border-radius:8px;background:#fff;cursor:pointer}
+.pdsim-leg{display:flex;flex-wrap:wrap;gap:3px 12px;font-size:12px;color:var(--mut)}
+.pdsim-leg span,.pdsim-leg label{white-space:nowrap;margin:0}
+.pdsim-chk{display:inline-flex;align-items:center;gap:4px;cursor:pointer;font-size:12px;color:var(--mut)}
+.pdsim-chk input{margin:0;width:13px;height:13px;accent-color:#7b3fb5}
+.pdsim-chk i{margin:0!important}
+.pdsim-leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.pdsim.pal .pdsim-sv,.pdsim:not(.pal) .pdsim-pl{display:none}
+.pdsim-view{position:relative;height:38px;border-radius:8px;background:var(--bg);overflow:hidden;display:flex;align-items:center;justify-content:space-around;font-weight:800;font-size:22px;letter-spacing:.06em;color:var(--ink)}
+.pdsim-view b{position:absolute;left:0;right:0;top:0;line-height:38px;text-align:center;mix-blend-mode:multiply}
+.pdsim-view b.r{color:#e2574a}
+.pdsim-view b.l{color:#3d8bdc}
+.pdsim-viewc{font-size:12px;color:var(--mut);margin-top:5px}
+.pdsim-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px}
+.pdsim-tile{border:1px solid var(--line);border-radius:12px;padding:7px 10px;min-width:0}
+.pdsim-tile small,.pdsim-tile b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pdsim-tile .pdsim-badge{margin-top:3px;white-space:nowrap}
+.pdsim-tile small{display:block;color:var(--mut);font-size:11.5px;line-height:1.25}
+.pdsim-tile b{display:block;font-size:16px;line-height:1.2;margin:0;font-variant-numeric:tabular-nums}
+.pdsim-badge{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:99px;color:#fff;background:var(--ok);vertical-align:middle}
+.pdsim-badge.bad{background:var(--bad)}
+.pdsim-verdict{list-style:none;min-height:38px;margin:0;padding:8px 12px;border-radius:12px;background:#eef7f1;border:1px solid #cfe6d8;font-size:13.5px}
+.pdsim-verdict.bad{background:#fdf0ee;border-color:#f3cfca}
+.pdsim-verdict li{margin:0;padding:1px 0;color:var(--ink)}
+.pdsim-res{display:grid;grid-template-columns:.95fr 1fr 1fr;font-size:12.5px}
+.pdsim-res div{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:2px 4px;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
+.pdsim-res div:nth-child(-n+3){border-top:0;font-weight:700;color:var(--mut);font-size:12px}
+.pdsim-res div:nth-child(3n+1){color:var(--mut)}
+.pdsim-res div:not(:nth-child(3n+1)){font-weight:600}
+.pdsim-res .w{color:var(--bad)}
+.pdsim-res div:first-child{text-transform:uppercase;letter-spacing:.05em;font-size:11.5px}
+.pdsim-note{font-size:12px;margin-top:12px!important}
+@media(max-width:1100px){
+.pdsim-main{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.pdsim-form{grid-column:1/-1;grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:760px){
+.pdsim{padding:10px;border-radius:12px}
+.pdsim-main,.pdsim-form{grid-template-columns:minmax(0,1fr)}
+.pdsim-vis{order:1}
+.pdsim-form{order:2}
+.pdsim-out{order:3}
+.pdsim-stage text{font-size:5.6px}
+.pdsim-stage [data-art] text{font-size:4.6px}
+.pdsim-zc{grid-template-columns:1fr;text-align:center}
+.pdsim-zc svg{width:100%;max-width:120px;height:auto;margin:0 auto}
+.pdsim-zc svg.pdsim-sec{max-width:none}
+.pdsim-pad{justify-content:center}
+.pdsim-pad button{width:34px;height:34px}
+.pdsim input[type=number],.pdsim select{font-size:16px;padding:7px 2px}
+}
+.pdsim-ph{display:none}
+@media print{
+@page{size:A4 landscape;margin:8mm}
+body.pdsim-printing>*:not(#pdsim-app){display:none!important}
+body.pdsim-printing{background:#fff!important;margin:0!important;padding:0!important;min-width:0!important}
+body.pdsim-printing #pdsim-app{width:1286px;max-width:none;margin:0;padding:0;border:0;border-radius:0;zoom:.8;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body.pdsim-printing .pdsim-main{grid-template-columns:240px minmax(0,1fr) minmax(0,410px)!important}
+body.pdsim-printing .pdsim-form{grid-column:auto!important;grid-template-columns:minmax(0,1fr)!important}
+body.pdsim-printing .pdsim-form,body.pdsim-printing .pdsim-vis,body.pdsim-printing .pdsim-out{order:0!important}
+body.pdsim-printing .pdsim-ph{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin:0 0 10px;padding-bottom:8px;border-bottom:2px solid var(--ink);font-size:13px;color:var(--mut)}
+body.pdsim-printing .pdsim-ph b{font-size:20px;color:var(--ink)}
+body.pdsim-printing .pdsim-btn,body.pdsim-printing .pdsim-pad,body.pdsim-printing .pdsim-chips,body.pdsim-printing .pdsim-h button{display:none!important}
+body.pdsim-printing .pdsim-seg button:not(.on){display:none}
+}
+</style>
+<div class="pdsim" id="pdsim-app">
+<div class="pdsim-ph"><b>Gözlük Camı Simülatörü</b><span>Seçkin Optik &#183; Demircioğlu Cad. No: 37/A, Çanakkale &#183; 0286 217 66 36</span><span data-out="date"></span></div>
+<div class="pdsim-head">
+<div class="pdsim-seg">
+<button type="button" data-mode="sv" class="on">Tek odak</button>
+<button type="button" data-mode="bif">Bifokal</button>
+<button type="button" data-mode="pal">Progresif</button>
+</div>
+<div class="pdsim-chips">
+<em>Örnek:</em>
+<button type="button" data-preset="myop">Miyop</button>
+<button type="button" data-preset="hip">Hipermetrop</button>
+<button type="button" data-preset="ast">Astigmat</button>
+<button type="button" data-preset="ani">Anizometropi</button>
+<button type="button" data-preset="high">Yüksek miyop</button>
+</div>
+<button type="button" class="pdsim-btn" data-quiz>Alıştırma</button>
+<button type="button" class="pdsim-btn" data-share>Bağlantıyı paylaş</button>
+<button type="button" class="pdsim-btn" data-print>Yazdır</button>
+</div>
+<div class="pdsim-main">
+<div class="pdsim-col pdsim-form">
+<div class="pdsim-card">
+<div class="pdsim-h">Reçete <button type="button" data-tr title="Silindiri artı / eksi yazıma çevir">&#177; çevir</button></div>
+<div data-out="rx"></div>
+<details class="pdsim-det pdsim-sub">
+<summary>Reçeteli prizma</summary>
+<div data-out="pz"></div>
+<button type="button" class="pdsim-btn" data-goto>Camı hedefe kaydır</button>
+</details>
+</div>
+<div class="pdsim-card">
+<div class="pdsim-h">Ölçüler (mm)</div>
+<div data-out="ms"></div>
+</div>
+<div class="pdsim-card">
+<div class="pdsim-h">Çerçeve ve cam</div>
+<div class="pdsim-f">
+<label>Cam gen. A<input type="number" data-f="A" step="1" min="36" max="62"></label>
+<label>Cam yük. B<input type="number" data-f="B" step="1" min="24" max="55"></label>
+<label>Köprü<input type="number" data-f="DBL" step="1" min="12" max="26"></label>
+</div>
+<div class="pdsim-f">
+<label>Şekil<select data-fs="shape" aria-label="Çerçeve şekli">
+<option value="pan">Klasik</option>
+<option value="oval">Oval</option>
+<option value="rect">Köşeli</option>
+<option value="pilot">Pilot</option>
+<option value="cat">Kedi gözü</option>
+</select></label>
+<label>İndeks<select data-f="idx" aria-label="Cam indeksi">
+<option value="1.5">1,50</option>
+<option value="1.53">1,53</option>
+<option value="1.56">1,56</option>
+<option value="1.59">1,59</option>
+<option value="1.6">1,60</option>
+<option value="1.67">1,67</option>
+<option value="1.74">1,74</option>
+</select></label>
+<label>Karşılaştır<select data-f="cmp" aria-label="Karşılaştırma indeksi">
+<option value="0">Yok</option>
+<option value="1.5">1,50</option>
+<option value="1.53">1,53</option>
+<option value="1.56">1,56</option>
+<option value="1.59">1,59</option>
+<option value="1.6">1,60</option>
+<option value="1.67">1,67</option>
+<option value="1.74">1,74</option>
+</select></label>
+</div>
+<div class="pdsim-f pdsim-corl">
+<label>Koridor<select data-f="COR" aria-label="Koridor uzunluğu">
+<option value="11">11 mm</option>
+<option value="14">14 mm</option>
+<option value="17">17 mm</option>
+</select></label>
+</div>
+</div>
+<details class="pdsim-card pdsim-det">
+<summary>Gelişmiş ayarlar</summary>
+<div class="pdsim-f">
+<label>Eğim (&#176;)<input type="number" data-f="tilt" step="1" min="0" max="25"></label>
+<label>Verteks (mm)<input type="number" data-f="vd" step="1" min="6" max="20"></label>
+<label>Okuma (cm)<input type="number" data-f="wd" step="5" min="20" max="100"></label>
+</div>
+</details>
+</div>
+<div class="pdsim-col pdsim-vis">
+<div class="pdsim-stage">
+<svg viewBox="-80 -66 160 92" role="img" aria-label="Çerçeve önünde kaydırılabilir gözlük camları">
+<g data-layer="static"></g>
+<g data-layer="lenses"></g>
+<g data-layer="over" pointer-events="none"></g>
+</svg>
+</div>
+<div class="pdsim-zoom" data-out="zoom"></div>
+<div class="pdsim-card">
+<div class="pdsim-h">Kullanıcı ne görür <span data-out="viewc"></span></div>
+<div class="pdsim-view" data-out="view"></div>
+</div>
+<div class="pdsim-leg">
+<span class="pdsim-tip">Camı sürükleyin ya da okları kullanın</span>
+<span><i style="background:#f5b301"></i>Göz bebeği</span>
+<span class="pdsim-sv"><i style="background:#0e4f91"></i>Optik merkez</span>
+<span class="pdsim-pl"><i style="background:#0e4f91"></i>Montaj artısı</span>
+<span class="pdsim-sv"><i style="background:#12824a"></i>Prizma (ok taban yönünü gösterir)</span>
+<span class="pdsim-pl"><i style="background:#e8862a;opacity:.55"></i>Bulanık çevre bölgesi</span>
+<span><i style="background:#d3301f"></i>Karşılaştırma indeksi</span>
+<label class="pdsim-chk"><input type="checkbox" data-gc checked><i style="background:#7b3fb5"></i>Geometrik merkez ve desantrasyon</label>
+<span>Büyüteç: 1 kare = 1 mm</span>
+<span>N: nazal, T: temporal, &#8593;&#8595;: yukarı / aşağı (mm)</span>
+</div>
+</div>
+<div class="pdsim-col pdsim-out">
+<div class="pdsim-card pdsim-quiz">
+<div class="pdsim-h">Alıştırma <span data-out="qscore"></span></div>
+<p data-out="qtext"></p>
+<div class="pdsim-qrow">
+<label>Prizma (Δ)<input type="number" inputmode="decimal" step="0.05" min="0" max="20" data-q="m"></label>
+<label>Taban yönü<select data-q="b" aria-label="Taban yönü">
+<option value="in">İçe</option>
+<option value="out">Dışa</option>
+<option value="up">Yukarı</option>
+<option value="down">Aşağı</option>
+</select></label>
+</div>
+<div class="pdsim-qbtn">
+<button type="button" class="pdsim-btn pri" data-qcheck>Kontrol et</button>
+<button type="button" class="pdsim-btn" data-qnext>Yeni soru</button>
+<button type="button" class="pdsim-btn" data-qexit>Alıştırmadan çık</button>
+</div>
+<div class="pdsim-qres" data-out="qres"></div>
+</div>
+<div class="pdsim-tiles" data-out="tiles"></div>
+<div class="pdsim-card">
+<div class="pdsim-res" data-out="res"></div>
+</div>
+<div class="pdsim-card">
+<div class="pdsim-secs"><svg class="pdsim-sec" viewBox="0 0 70 20" aria-hidden="true" data-s="R"></svg><svg class="pdsim-sec" viewBox="0 0 70 20" aria-hidden="true" data-s="L"></svg></div>
+<div class="pdsim-res" data-out="res2"></div>
+</div>
+<ul class="pdsim-verdict" data-out="verdict"></ul>
+</div>
+</div>
+<details class="pdsim-notes">
+<summary>Hesaplama notları ve varsayımlar</summary>
+<p class="pdsim-note" data-out="note"></p>
+</details>
+</div>
+<script>
+(function(){
+var root=document.getElementById('pdsim-app'); if(!root) return;
+var svg=root.querySelector('svg');
+var gS=svg.querySelector('[data-layer=static]'), gL=svg.querySelector('[data-layer=lenses]'), gO=svg.querySelector('[data-layer=over]');
+function out(n){ return root.querySelector('[data-out='+n+']'); }
+var NS='http://www.w3.org/2000/svg', LIM=12, INSET=2.5, PRP=4;
+var EYES=['R','L'], NAME={R:'Sağ',L:'Sol'};
+var S={mode:'sv',A:52,B:40,DBL:18,COR:14,idx:1.6,cmp:0,gc:true,shape:'pan',tilt:0,vd:12,wd:40,
+R:{sph:-4,cyl:0,ax:180,add:2,pd:32,h:22,dx:0,dy:0,dia:65,pr:0,pb:'in',sh:17},
+L:{sph:-4,cyl:0,ax:180,add:2,pd:32,h:22,dx:0,dy:0,dia:65,pr:0,pb:'in',sh:17}};
+var RANGE={sph:[-20,20],cyl:[-8,8],ax:[0,180],add:[0.75,3.5],pd:[22,42],h:[8,40],A:[36,62],B:[24,55],DBL:[12,26],dia:[50,80],COR:[11,17],idx:[1.5,1.74],cmp:[0,1.74],pr:[0,10],sh:[8,30],tilt:[0,25],vd:[6,20],wd:[20,100]};
+var TCMIN={1.5:2,1.53:1.5,1.56:1.8,1.59:1.5,1.6:1.5,1.67:1.2,1.74:1.1};
+var DENS={1.5:1.32,1.53:1.11,1.56:1.23,1.59:1.2,1.6:1.3,1.67:1.36,1.74:1.47};
+var ABBE={1.5:58,1.53:45,1.56:38,1.59:30,1.6:41,1.67:32,1.74:33};
+var PRE={myop:[-4,0,180,-4,0,180],hip:[4,0,180,4,0,180],ast:[-1,-2,10,-1,-2,170],ani:[-5,0,180,-1,0,180],high:[-8,0,180,-8,0,180]};
+function mag(e){ var o=S[e]; return clamp(1/(1-S.vd/1000*(o.sph+o.cyl/2)),0.6,1.5); }
+var QZ=null, QS={c:0,t:0}, TGT={R:null,L:null}, BASE={in:'içe',out:'dışa',up:'yukarı',down:'aşağı'};
+var MODES=['sv','bif','pal'], SHAPES=['pan','oval','rect','pilot','cat'], EK=['sph','cyl','ax','add','pd','h','dx','dy','dia','pr','sh'], GK=['A','B','DBL','COR','idx','cmp','tilt','vd','wd'];
+function inset(e){ return S[e].pd*27/(S.wd*10+27); }
+function rxPrism(e){ var o=S[e], m=o.pr||0, d={in:[sgn(e),0],out:[-sgn(e),0],up:[0,1],down:[0,-1]}[o.pb]||[0,0]; return {x:d[0]*m,y:d[1]*m}; }
+function needDec(e){
+var o=S[e], t=o.ax*Math.PI/180, s=Math.sin(t), c=Math.cos(t), xx=o.sph+o.cyl*s*s, yy=o.sph+o.cyl*c*c, xy=-o.cyl*s*c, det=xx*yy-xy*xy, q=rxPrism(e);
+if(Math.abs(det)<0.05) return null;
+return {x:10*(yy*q.x-xy*q.y)/det, y:10*(xx*q.y-xy*q.x)/det};
+}
+function inPoly(p,x,y){ var c=false,i,j; for(i=0,j=p.length-1;i<p.length;j=i++){ if((p[i].y>y)!==(p[j].y>y)&&x<(p[j].x-p[i].x)*(y-p[i].y)/(p[j].y-p[i].y)+p[i].x) c=!c; } return c; }
+function withS(o,fn){ var k,old={},r; for(k in o){ old[k]=S[k]; S[k]=o[k]; } r=fn(); for(k in old) S[k]=old[k]; return r; }
+function fmt(n,d){ if(Math.abs(n)<0.5*Math.pow(10,-d)) n=0; return n.toFixed(d).replace('.',','); }
+function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
+function snap(v){ return Math.round(v*2)/2; }
+function sm(t){ t=clamp(t,0,1); return t*t*(3-2*t); }
+function sgn(e){ return e==='R'?1:-1; }
+function pupil(e){ return {x:-sgn(e)*S[e].pd, y:S[e].h}; }
+function boxC(e){ return {x:-sgn(e)*(S.DBL/2+S.A/2), y:S.B/2}; }
+function rimPts(e){
+var c=boxC(e), sh=S.shape, n={oval:2,pan:2.6,rect:5,pilot:2.4,cat:2.5}[sh]||2.6, ns=sgn(e), p=[], i, x0=1e9, x1=-1e9, y0=1e9, y1=-1e9;
+for(i=0;i<72;i++){
+var t=i/72*2*Math.PI, cs=Math.cos(t), sn=Math.sin(t);
+var u=(cs<0?-1:1)*Math.pow(Math.abs(cs),2/n), v=(sn<0?-1:1)*Math.pow(Math.abs(sn),2/n), nz=u*ns;
+if(sh==='pilot'){ if(v<0){ u*=1-0.3*(-v)*Math.max(0,nz); v*=1+0.12*Math.max(0,-nz); } else v*=0.9; }
+if(sh==='cat'){ var tz=Math.max(0,-nz); if(v>0){ v*=1+0.75*tz*tz; u*=1+0.1*v*tz; } else u*=1-0.16*(-v); }
+p.push({x:u,y:v}); x0=Math.min(x0,u); x1=Math.max(x1,u); y0=Math.min(y0,v); y1=Math.max(y1,v);
+}
+return p.map(function(q){ return {x:c.x+((q.x-x0)/(x1-x0)-.5)*S.A, y:c.y+((q.y-y0)/(y1-y0)-.5)*S.B}; });
+}
+function prism(e,ox,oy){
+var o=S[e], t=o.ax*Math.PI/180, s=Math.sin(t), c=Math.cos(t);
+var fxx=o.sph+o.cyl*s*s, fyy=o.sph+o.cyl*c*c, fxy=-o.cyl*s*c;
+var dx=(o.dx+(ox||0))/10, dy=(o.dy+(oy||0))/10;
+return {x:fxx*dx+fxy*dy, y:fxy*dx+fyy*dy};
+}
+function isNasal(e,x){ return sgn(e)*x>0; }
+function shiftTxt(e,c){
+var o=S[e];
+if(!o.dx&&!o.dy) return 'yok';
+var a=[];
+if(o.dx) a.push(fmt(Math.abs(o.dx),1)+(c?' ':' mm ')+(c?(isNasal(e,o.dx)?'N':'T'):(isNasal(e,o.dx)?'nazal':'temporal')));
+if(o.dy) a.push(fmt(Math.abs(o.dy),1)+(c?' '+(o.dy>0?'\u2191':'\u2193'):' mm '+(o.dy>0?'yukarı':'aşağı')));
+return a.join(' \u00b7 ');
+}
+function kAdd(e){ return clamp(2/S[e].add,0.75,1.5); }
+function chanW(e){ return 2.2*kAdd(e); }
+function cX(e,y){ return sgn(e)*inset(e)*sm(y/S.COR); }
+function clearW(e,y){
+if(y<-1) return 99;
+return chanW(e)+3.3*kAdd(e)*sm((y-(S.COR-5))/6)+34*Math.exp(-Math.max(y,0)/2);
+}
+function localAdd(e){ var py=S[e].dy; return py>0? S[e].add*sm(py/S.COR):0; }
+var lens={};
+EYES.forEach(function(e){
+var g=document.createElementNS(NS,'g');
+g.innerHTML='<clipPath id="pdsim-clip-'+e+'"><circle data-clip r="32.5"/></clipPath>'+
+'<circle class="pdsim-lens" data-lens="'+e+'" tabindex="0" r="32.5" fill="#2f7fd1" fill-opacity=".15" stroke="#2f7fd1" stroke-width=".7"><title>'+NAME[e]+' cam \u2014 sürükle veya ok tuşlarıyla kaydır</title></circle>'+
+'<g data-art pointer-events="none"></g>';
+gL.appendChild(g); lens[e]=g;
+});
+function svArt(e){
+var o=S[e], r=o.dia/2, t=o.ax*Math.PI/180, a='';
+if(o.cyl) a+='<line x1="'+(-r*Math.cos(t))+'" y1="'+(r*Math.sin(t))+'" x2="'+(r*Math.cos(t))+'" y2="'+(-r*Math.sin(t))+'" stroke="#2f7fd1" stroke-width=".4" stroke-dasharray="1.6 1.6"/>';
+a+='<path d="M-3.4 0H3.4M0 -3.4V3.4" stroke="#0e4f91" stroke-width=".8" fill="none"/><circle r=".8" fill="#0e4f91"/>';
+return a;
+}
+function bifArt(e){
+var o=S[e], x=sgn(e)*inset(e), y=o.h-o.sh, w=13.26;
+return svArt(e)+'<path d="M'+(x-w)+' '+y+'H'+(x+w)+'A14 14 0 1 1 '+(x-w)+' '+y+'Z" fill="#0e4f91" fill-opacity=".1" stroke="#0e4f91" stroke-width=".45" clip-path="url(#pdsim-clip-'+e+')"/>'+
+'<text x="'+x+'" y="'+(y+9)+'" font-size="3.6" text-anchor="middle" fill="#0e4f91">YAKIN</text>';
+}
+function palArt(e){
+var a='', yEnd=S[e].dia/2+PRP+2, nx=sgn(e)*inset(e);
+[-1,1].forEach(function(side){
+var d='M'+(side*46)+' -1';
+for(var y=-1;y<=yEnd;y+=1) d+='L'+clamp(cX(e,y)+side*clearW(e,y),-46,46).toFixed(2)+' '+y;
+d+='L'+(side*46)+' '+yEnd+'Z';
+a+='<path d="'+d+'" fill="#e8862a" fill-opacity=".24" clip-path="url(#pdsim-clip-'+e+')"/>';
+});
+var c='M0 0'; for(var y=1;y<=S.COR;y++) c+='L'+cX(e,y).toFixed(2)+' '+y;
+a+='<path d="'+c+'" fill="none" stroke="#0e4f91" stroke-width=".35" stroke-dasharray="1 1"/>';
+a+='<path d="M-17 '+PRP+'h-5M17 '+PRP+'h5" stroke="#0e4f91" stroke-width=".3" stroke-dasharray="1 1" fill="none"/>'+
+'<circle cx="-17" cy="'+PRP+'" r="1.3" fill="none" stroke="#0e4f91" stroke-width=".35"/>'+
+'<circle cx="17" cy="'+PRP+'" r="1.3" fill="none" stroke="#0e4f91" stroke-width=".35"/>'+
+'<circle cx="0" cy="'+PRP+'" r=".6" fill="#0e4f91"/>';
+a+='<path d="M-4.5 -6.5A4.5 4.5 0 0 1 4.5 -6.5" fill="none" stroke="#0e4f91" stroke-width=".4"/>'+
+'<text x="0" y="-12.5" font-size="3.8" text-anchor="middle" fill="#0e4f91">UZAK</text>';
+a+='<circle cx="'+nx+'" cy="'+S.COR+'" r="4" fill="#fff" fill-opacity=".35" stroke="#0e4f91" stroke-width=".4"/>'+
+'<text x="'+(nx-sgn(e)*6)+'" y="'+(S.COR+1.4)+'" font-size="3.8" text-anchor="'+(e==='R'?'end':'start')+'" fill="#0e4f91">YAKIN</text>';
+a+='<path d="M-4.2 0H4.2M0 -4.2V4.2" stroke="#0e4f91" stroke-width=".9" fill="none"/>';
+return a;
+}
+(function(){
+function cell(e,k,step,cls){ return '<input type="number" inputmode="decimal" aria-label="'+NAME[e]+' '+k+'" data-e="'+e+'" data-k="'+k+'" step="'+step+'" min="'+RANGE[k][0]+'" max="'+RANGE[k][1]+'"'+(cls?' class="'+cls+'"':'')+'>'; }
+var h='<div class="pdsim-grid rx"><i></i><i>SPH</i><i>CYL</i><i>AKS</i><i class="pdsim-add">ADD</i>';
+EYES.forEach(function(e){ h+='<em>'+NAME[e]+'</em>'+cell(e,'sph',0.25)+cell(e,'cyl',0.25)+cell(e,'ax',1)+cell(e,'add',0.25,'pdsim-add'); });
+h+='</div>'; out('rx').innerHTML=h; h='<div class="pdsim-grid ms"><i></i><i>PD</i><i>Yükseklik</i><i>Ham \u00d8</i><i class="pdsim-sgf">Segment</i>';
+EYES.forEach(function(e){ h+='<em>'+NAME[e]+'</em>'+cell(e,'pd',0.5)+cell(e,'h',0.5)+cell(e,'dia',5)+cell(e,'sh',0.5,'pdsim-sgf'); });
+h+='</div>'; out('ms').innerHTML=h;
+h='<div class="pdsim-grid pz"><i></i><i>Prizma (\u0394)</i><i>Taban</i>';
+EYES.forEach(function(e){ h+='<em>'+NAME[e]+'</em>'+cell(e,'pr',0.25)+'<select data-e="'+e+'" data-ks="pb" aria-label="'+NAME[e]+' taban yönü"><option value="in">İçe</option><option value="out">Dışa</option><option value="up">Yukarı</option><option value="down">Aşağı</option></select>'; });
+h+='</div>'; out('pz').innerHTML=h;
+})();
+var ZK=4, ZR=20;
+(function(){
+var h='', B=[['-1,0','\u2190','sola'],['0,1','\u2191','yukarı'],['0,-1','\u2193','aşağı'],['1,0','\u2192','sağa']];
+EYES.forEach(function(e){
+h+='<div class="pdsim-zc"><svg viewBox="-21 -21 42 42" aria-hidden="true"><defs><clipPath id="pdsim-zclip-'+e+'"><circle r="'+ZR+'"/></clipPath></defs><g data-z="'+e+'"></g></svg>'+
+'<div class="pdsim-zi"><b>'+NAME[e]+' göz \u00b7 büyüteç</b><span data-zt="'+e+'"></span><div class="pdsim-pad">'+
+B.map(function(b){ return '<button type="button" data-nudge="'+e+'" data-d="'+b[0]+'" aria-label="'+NAME[e]+' camı '+b[2]+' 0,5 mm kaydır">'+b[1]+'</button>'; }).join('')+
+'<button type="button" data-center="'+e+'" aria-label="'+NAME[e]+' camı merkezle" title="Merkezle">\u25ce</button>'+
+'</div></div></div>';
+});
+out('zoom').innerHTML=h;
+})();
+function zoomArt(e){
+var o=S[e], g='<circle r="'+ZR+'" fill="#fff"/><g clip-path="url(#pdsim-zclip-'+e+')">'+
+'<circle r="'+(5.5*ZK)+'" fill="#7a5632" fill-opacity=".3"/><circle r="'+(1.8*ZK)+'" fill="#111" fill-opacity=".7"/>';
+for(var i=-5;i<=5;i++){
+var w=i===0?.45:.25;
+g+='<line x1="'+i*ZK+'" y1="-'+ZR+'" x2="'+i*ZK+'" y2="'+ZR+'" stroke="#2f7fd1" stroke-opacity=".45" stroke-width="'+w+'"/>'+
+'<line x1="-'+ZR+'" y1="'+i*ZK+'" x2="'+ZR+'" y2="'+i*ZK+'" stroke="#2f7fd1" stroke-opacity=".45" stroke-width="'+w+'"/>';
+}
+g+='</g><path d="M-3 0H3M0 -3V3" stroke="#f5b301" stroke-width="1.1"/>';
+if(TGT[e]&&Math.hypot(TGT[e].x,TGT[e].y)*ZK<ZR-2) g+='<circle cx="'+(TGT[e].x*ZK)+'" cy="'+(-TGT[e].y*ZK)+'" r="3" fill="none" stroke="#12824a" stroke-width="1" stroke-dasharray="1.6 1.1"/>';
+var x=o.dx*ZK, y=-o.dy*ZK, d=Math.hypot(x,y), lim=ZR-3, far=d>lim;
+if(d>0.01){
+var cx=far?x/d*lim:x, cy=far?y/d*lim:y;
+g+='<line x1="0" y1="0" x2="'+cx+'" y2="'+cy+'" stroke="#d3301f" stroke-width=".9"'+(far?' stroke-dasharray="1.5 1"':'')+'/>';
+}
+if(far){
+var ux=x/d, uy=y/d, tx=ux*(ZR-1.5), ty=uy*(ZR-1.5), nx=-uy, ny=ux;
+g+='<polygon points="'+tx+','+ty+' '+(tx-ux*3.5+nx*2)+','+(ty-uy*3.5+ny*2)+' '+(tx-ux*3.5-nx*2)+','+(ty-uy*3.5-ny*2)+'" fill="#0e4f91"/>';
+} else {
+g+='<path d="M'+(x-4.5)+' '+y+'H'+(x+4.5)+'M'+x+' '+(y-4.5)+'V'+(y+4.5)+'" stroke="#0e4f91" stroke-width="1.2"/><circle cx="'+x+'" cy="'+y+'" r="1" fill="#0e4f91"/>';
+}
+return g+'<circle r="'+ZR+'" fill="none" stroke="#9aa5b1" stroke-width=".6"/>';
+}
+function thick(e,c){
+var o=S[e], t=o.ax*Math.PI/180, s=Math.sin(t), cs=Math.cos(t), k=2000*(S.idx-1);
+var fxx=o.sph+o.cyl*s*s, fyy=o.sph+o.cyl*cs*cs, fxy=-o.cyl*s*cs;
+function sag(x,y){ var vx=x-c.x, vy=y-c.y; return (fxx*vx*vx+2*fxy*vx*vy+fyy*vy*vy)/k; }
+var pts=rimPts(e), mx=-1e9, sum=0, mxE=0;
+pts.forEach(function(q){ mx=Math.max(mx,sag(q.x,q.y)); });
+var tc=Math.max(TCMIN[S.idx]||1.5, 1+mx);
+pts.forEach(function(q){ var v=tc-sag(q.x,q.y); sum+=v; mxE=Math.max(mxE,v); });
+var b=boxC(e);
+var vol=0, x, y;
+for(x=b.x-S.A/2+1;x<b.x+S.A/2;x+=2) for(y=b.y-S.B/2+1;y<b.y+S.B/2;y+=2) if(inPoly(pts,x,y)) vol+=4*Math.max(0,tc-sag(x,y));
+return {w:vol/1000*(DENS[S.idx]||1.3), tc:tc, avg:sum/pts.length, max:mxE, nas:tc-sag(b.x+sgn(e)*S.A/2,b.y), tem:tc-sag(b.x-sgn(e)*S.A/2,b.y), sag:sag};
+}
+function secArt(e,T,T2){
+var b=boxC(e), sc=60/S.A, N=30, f='', bk='', b2='', i;
+for(i=0;i<=N;i++){
+var u=-S.A/2+S.A*i/N, X=(5+(u+S.A/2)*sc).toFixed(2), yf=2+sc*0.004*u*u, th=Math.max(0.3,T.tc-T.sag(b.x+u,b.y));
+f+=(i?'L':'M')+X+' '+yf.toFixed(2);
+bk='L'+X+' '+(yf+sc*th).toFixed(2)+bk;
+if(T2) b2+=(i?'L':'M')+X+' '+(yf+sc*Math.max(0.3,T2.tc-T2.sag(b.x+u,b.y))).toFixed(2);
+}
+var px=5+(pupil(e).x-b.x+S.A/2)*sc, L=e==='R'?'T '+fmt(T.tem,1):'N '+fmt(T.nas,1), R=e==='R'?'N '+fmt(T.nas,1):'T '+fmt(T.tem,1);
+return '<path d="'+f+bk+'Z" fill="#2f7fd1" fill-opacity=".22" stroke="#2f7fd1" stroke-width=".4"/>'+
+(T2?'<path d="'+b2+'" fill="none" stroke="#d3301f" stroke-width=".5" stroke-dasharray="1.4 1"/>':'')+
+'<path d="M'+px.toFixed(2)+' 0v2.4" stroke="#f5b301" stroke-width=".9"/>'+
+'<text x="1" y="19" font-size="3.6" fill="#16202e">'+L+'</text>'+
+'<text class="pdsim-mid" x="35" y="19" font-size="3.6" text-anchor="middle" fill="#5b6777">'+NAME[e]+' kesit \u00b7 merkez '+fmt(T.tc,1)+' mm</text>'+
+'<text x="69" y="19" font-size="3.6" text-anchor="end" fill="#16202e">'+R+'</text>';
+}
+function syncInputs(skip){
+root.querySelectorAll('input[data-k]').forEach(function(i){ if(i!==skip) i.value=S[i.dataset.e][i.dataset.k]; });
+root.querySelectorAll('[data-f]').forEach(function(i){ if(i!==skip) i.value=S[i.dataset.f]; });
+root.querySelectorAll('[data-fs]').forEach(function(i){ i.value=S[i.dataset.fs]; });
+root.querySelectorAll('[data-ks]').forEach(function(i){ i.value=S[i.dataset.e][i.dataset.ks]; });
+}
+function txt(x,y,s,anchor,col,size){
+return '<text x="'+x+'" y="'+y+'" font-size="'+(size||4.6)+'" text-anchor="'+(anchor||'middle')+'" fill="'+(col||'#16202e')+
+'" stroke="#f6f8fa" stroke-width="1.2" paint-order="stroke">'+s+'</text>';
+}
+function tile(label,val,bad,badge){
+return '<div class="pdsim-tile"><small>'+label+'</small><b>'+val+'</b><span class="pdsim-badge'+(bad?' bad':'')+'">'+badge+'</span></div>';
+}
+function render(skip){
+var pal=S.mode==='pal', bif=S.mode==='bif', quiz=!!QZ&&!QZ.done, off=pal?PRP:0, st='', ov='', P={}, E={}, need={}, short={}, T={}, T2={}, T3={};
+root.classList.toggle('pal',pal); root.classList.toggle('bif',bif); root.classList.toggle('quiz',!!QZ); root.classList.toggle('qhide',quiz);
+var VW=2*(S.DBL/2+S.A+8)+6; svg.setAttribute('viewBox',(-VW/2)+' '+(-(S.B+26))+' '+VW+' '+(S.B+46));
+root.querySelectorAll('[data-mode]').forEach(function(b){ b.classList.toggle('on',b.dataset.mode===S.mode); });
+st+='<line x1="0" y1="-70" x2="0" y2="12" stroke="#9aa5b1" stroke-width=".3" stroke-dasharray="1.5 1.5"/>';
+EYES.forEach(function(e){
+var p=pupil(e), M=mag(e);
+st+='<ellipse cx="'+p.x+'" cy="'+(-p.y)+'" rx="'+(12.5*M)+'" ry="'+(6.2*M)+'" fill="#fff" stroke="#9aa5b1" stroke-width=".4"/>'+
+'<circle cx="'+p.x+'" cy="'+(-p.y)+'" r="'+(5.3*M)+'" fill="#7a5632"/><circle cx="'+p.x+'" cy="'+(-p.y)+'" r="'+(2.1*M)+'" fill="#111"/>';
+});
+EYES.forEach(function(e){
+var d='';
+rimPts(e).forEach(function(q,i){ d+=(i?'L':'M')+q.x.toFixed(2)+' '+(-q.y).toFixed(2); });
+st+='<path d="'+d+'Z" fill="none" stroke="#1d2433" stroke-width="2.4" stroke-linejoin="round"/>';
+var sx=-sgn(e), ox=sx*(S.DBL/2+S.A-1.5);
+st+='<line x1="'+ox+'" y1="'+(-S.B*0.72)+'" x2="'+(ox+sx*8)+'" y2="'+(-S.B*0.74)+'" stroke="#1d2433" stroke-width="2.4" stroke-linecap="round"/>';
+});
+var bx=S.DBL/2+1.2;
+st+='<path d="M'+(-bx)+' '+(-S.B*0.6)+'Q0 '+(-S.B*0.82)+' '+bx+' '+(-S.B*0.6)+'" fill="none" stroke="#1d2433" stroke-width="2.4" stroke-linecap="round"/>';
+gS.innerHTML=st;
+EYES.forEach(function(e){
+P[e]=prism(e);
+var rq=pal?{x:0,y:0}:rxPrism(e); E[e]={x:P[e].x-rq.x,y:P[e].y-rq.y}; TGT[e]=(!pal&&S[e].pr)?needDec(e):null;
+var p=pupil(e), c={x:p.x+S[e].dx,y:p.y+S[e].dy-off}, m=0;
+rimPts(e).forEach(function(q){ m=Math.max(m,Math.hypot(q.x-c.x,q.y-c.y)); });
+need[e]=2*m+2; short[e]=!pal&&need[e]>S[e].dia+1e-9; T[e]=thick(e,c);
+T2[e]=S.cmp?withS({idx:S.cmp},function(){ return thick(e,c); }):null;
+T3[e]=withS({A:S.A-4,B:S.B*(S.A-4)/S.A},function(){ return thick(e,c); });
+});
+function tx(e){ return TGT[e]?TGT[e].x:0; }
+function ty(e){ return TGT[e]?TGT[e].y:0; }
+var netIn=E.R.x-E.L.x, vDiff=E.R.y-E.L.y;
+var pdErr=Math.abs((S.R.dx-tx('R'))-(S.L.dx-tx('L'))), hErr=Math.abs((S.R.dy-ty('R'))-(S.L.dy-ty('L')));
+var badH=Math.abs(netIn)>0.67+1e-9 && pdErr>2.5+1e-9;
+var badV=Math.abs(vDiff)>0.33+1e-9 && hErr>1+1e-9;
+var aCol=(badH||badV)?'#d3301f':'#12824a';
+EYES.forEach(function(e){
+var o=S[e], p=pupil(e), g=lens[e], r=o.dia/2;
+g.setAttribute('transform','translate('+(p.x+o.dx)+' '+(-(p.y+o.dy))+')');
+[g.querySelector('[data-lens]'),g.querySelector('[data-clip]')].forEach(function(c){ c.setAttribute('r',r); c.setAttribute('cy',off); });
+var c=g.querySelector('[data-lens]');
+c.setAttribute('stroke',short[e]?'#d3301f':'#2f7fd1'); c.setAttribute('stroke-width',short[e]?1.1:.7);
+g.querySelector('[data-art]').innerHTML=pal?palArt(e):(bif?bifArt(e):svArt(e));
+var yPD=-(S.B+7);
+ov+='<path d="M0 '+yPD+'H'+p.x+'M'+p.x+' '+(yPD-1.6)+'V'+(yPD+1.6)+'" stroke="#16202e" stroke-width=".4" fill="none"/>'+
+txt(p.x/2,yPD-2,'PD '+fmt(o.pd,1));
+ov+='<path d="M'+p.x+' 0V'+(-p.y)+'M'+(p.x-3)+' 0H'+(p.x+3)+'" stroke="#16202e" stroke-width=".4" stroke-dasharray="1.2 1.2" fill="none"/>'+
+txt(p.x,8,'Yük. '+fmt(o.h,1));
+ov+='<path d="M'+(p.x-2.4)+' '+(-p.y)+'h4.8M'+p.x+' '+(-p.y-2.4)+'v4.8" stroke="#f5b301" stroke-width=".8" fill="none"/>';
+if(S.gc){
+var gb=boxC(e);
+ov+='<rect x="'+(gb.x-S.A/2)+'" y="'+(-(gb.y+S.B/2))+'" width="'+S.A+'" height="'+S.B+'" fill="none" stroke="#7b3fb5" stroke-opacity=".55" stroke-width=".3" stroke-dasharray="1.6 1.4"/>'+
+'<line x1="'+gb.x+'" y1="'+(-gb.y)+'" x2="'+p.x+'" y2="'+(-p.y)+'" stroke="#7b3fb5" stroke-width=".7"/>'+
+'<circle cx="'+gb.x+'" cy="'+(-gb.y)+'" r="1.7" fill="#fff" stroke="#7b3fb5" stroke-width=".7"/><circle cx="'+gb.x+'" cy="'+(-gb.y)+'" r=".55" fill="#7b3fb5"/>';
+}
+ov+=txt(p.x,-(S.B+18),e==='R'?'SAĞ':'SOL','middle','#5b6777');
+if(pal||bif){
+var gx=p.x+sgn(e)*inset(e), gy=-p.y+(pal?S.COR:10);
+ov+='<circle cx="'+gx+'" cy="'+gy+'" r="2.2" fill="none" stroke="#f5b301" stroke-width="1"/><circle cx="'+gx+'" cy="'+gy+'" r=".6" fill="#f5b301"/>';
+}
+if(TGT[e]) ov+='<circle cx="'+(p.x+clamp(TGT[e].x,-LIM,LIM))+'" cy="'+(-(p.y+clamp(TGT[e].y,-LIM,LIM)))+'" r="2.2" fill="none" stroke="#12824a" stroke-width=".8" stroke-dasharray="1.1 .8"/>';
+if(!pal&&!quiz){
+var mag=Math.hypot(P[e].x,P[e].y);
+if(mag>0.02){
+var len=clamp(mag*7,5,26), ux=P[e].x/mag, uy=-P[e].y/mag;
+var x2=p.x+ux*len, y2=-p.y+uy*len, h=3, nx=-uy, ny=ux;
+ov+='<line x1="'+p.x+'" y1="'+(-p.y)+'" x2="'+(x2-ux*h)+'" y2="'+(y2-uy*h)+'" stroke="'+aCol+'" stroke-width="1.2" stroke-linecap="round"/>'+
+'<polygon points="'+x2+','+y2+' '+(x2-ux*h+nx*1.7)+','+(y2-uy*h+ny*1.7)+' '+(x2-ux*h-nx*1.7)+','+(y2-uy*h-ny*1.7)+'" fill="'+aCol+'"/>'+
+txt(x2+ux*5.5,y2+uy*5.5+1.6,fmt(mag,2)+'\u0394','middle',aCol);
+}
+}
+});
+gO.innerHTML=ov;
+EYES.forEach(function(e){
+var m=Math.hypot(P[e].x,P[e].y);
+root.querySelector('[data-z='+e+']').innerHTML=zoomArt(e);
+root.querySelector('[data-s='+e+']').innerHTML=secArt(e,T[e],T2[e]);
+root.querySelector('[data-zt='+e+']').textContent=(!S[e].dx&&!S[e].dy)?'Tam merkezde':shiftTxt(e,1)+(pal||quiz?'':' \u2192 '+fmt(m,2)+'\u0394');
+});
+var tiles='', v=[], bad=false, rows=[], rows2=[];
+function row2(l,a,b){ rows2.push('<div>'+l+'</div><div>'+a+'</div><div>'+b+'</div>'); }
+function row(l,a,b,wa,wb){ rows.push('<div>'+l+'</div><div'+(wa?' class="w"':'')+'>'+a+'</div><div'+(wb?' class="w"':'')+'>'+b+'</div>'); }
+function hP(e){ return Math.abs(P[e].x)<0.005?'0,00\u0394':fmt(Math.abs(P[e].x),2)+'\u0394 taban '+(isNasal(e,P[e].x)?'içe':'dışa'); }
+function vP(e){ return Math.abs(P[e].y)<0.005?'0,00\u0394':fmt(Math.abs(P[e].y),2)+'\u0394 taban '+(P[e].y>0?'yukarı':'aşağı'); }
+function mm(v){ return fmt(v,1)+' mm'; }
+function thRows(){
+function mg(t){ return mm(t.max)+' \u00b7 '+fmt(t.w,1)+' g'; }
+function mgf(e){ var m=mag(e), d=Math.round(Math.abs(m-1)*100); return d?'%'+d+(m<1?' küçük':' büyük'):'değişmez'; }
+function ab(e){ var o=S[e], F=Math.max(Math.abs(o.sph),Math.abs(o.sph+o.cyl)); return ABBE[S.idx]+' \u00b7 '+fmt(F/ABBE[S.idx],2)+'\u0394'; }
+row2('Cam', 'Sağ', 'Sol');
+row2('Merkez \u00b7 ort. kenar', fmt(T.R.tc,1)+' \u00b7 '+mm(T.R.avg), fmt(T.L.tc,1)+' \u00b7 '+mm(T.L.avg));
+row2('En kalın \u00b7 ağırlık', mg(T.R), mg(T.L));
+if(S.cmp) row2('\u2192 İndeks '+fmt(S.cmp,2)+' ile', mg(T2.R), mg(T2.L));
+row2('\u2192 A '+(S.A-4)+' mm çerçeve', mg(T3.R), mg(T3.L));
+function sf(n){ return (n>0?'+':'')+fmt(n,2); }
+function tl(e){ var F=S[e].sph, th=S.tilt*Math.PI/180; return sf(F*(1+Math.pow(Math.sin(th),2)/(2*S.idx)))+' / '+sf(F*Math.pow(Math.tan(th),2))+' \u00d7180'; }
+function vt(e){ var F=S[e].sph; return 'etkin '+sf(F/(1-(S.vd-12)/1000*F))+' D'; }
+if(S.tilt){ row2('Eğim '+S.tilt+'\u00b0 etkisi', tl('R'), tl('L')); row2('\u2192 OM alçaltma', mm(S.tilt/2), mm(S.tilt/2)); }
+if(S.vd!==12) row2('Verteks '+S.vd+' mm', vt('R'), vt('L'));
+row2('Göz görünümü', mgf('R'), mgf('L'));
+row2('Abbe \u00b7 saçılma', ab('R'), ab('L'));
+}
+function npd(e){ return fmt(S[e].pd-inset(e),1)+' ('+fmt(inset(e),1)+' içe)'; }
+if(!pal){
+var hasRx=S.R.pr>0||S.L.pr>0, atT=EYES.every(function(e){ return Math.abs(S[e].dx-tx(e))<0.26&&Math.abs(S[e].dy-ty(e))<0.26; });
+tiles+=tile(hasRx?'Yatay sapma':'Yatay prizma'+(bif?'':' (toplam)'), fmt(Math.abs(netIn),2)+'\u0394'+(Math.abs(netIn)<0.005?'':' taban '+(netIn>0?'içe':'dışa')), badH, badH?'Tolerans aşıldı':'Tolerans içinde');
+tiles+=tile(hasRx?'Dikey sapma':'Dikey prizma'+(bif?'':' (fark)'), fmt(Math.abs(vDiff),2)+'\u0394', badV, badV?'Tolerans aşıldı':'Tolerans içinde');
+var sg={R:0,L:0}, sgHi=false, sgLo=false, sgDif=false;
+if(bif){
+EYES.forEach(function(e){ sg[e]=(S[e].h-S[e].sh)-S[e].dy; });
+sgHi=Math.min(sg.R,sg.L)<2-1e-9; sgLo=Math.max(sg.R,sg.L)>8+1e-9; sgDif=Math.abs(sg.R-sg.L)>1+1e-9;
+tiles+=tile('Segment üst çizgisi', fmt((sg.R+sg.L)/2,1)+' mm altta', sgHi||sgLo, sgHi?'Yüksek':(sgLo?'Alçak':'Uygun'));
+}
+if(badH) v.push('Yatay prizma toleransı aşıyor: gözler '+(netIn>0?'dışa açılmaya':'içe dönmeye')+' zorlanır; göz yorgunluğu, baş ağrısı ve çift görme eğilimi oluşabilir.');
+if(badV) v.push('Dikey prizma farkı toleransı aşıyor: gözlerin dikey yönde uyum payı çok dardır; çift görme ve baş ağrısına en kolay yol açan hata budur.');
+if(sgHi) v.push('Segment yüksek kalmış: üst çizgisi göz bebeğine çok yakın, düz bakışta yakın bölge görüşe girer ve yürürken rahatsız eder.');
+if(sgLo) v.push('Segment alçak kalmış: okumak için gözü çok indirmek ya da çeneyi kaldırmak gerekir.');
+if(sgDif) v.push('İki segment farklı yükseklikte: üst çizgiler aynı hizada görünmez.');
+if(short.R||short.L) v.push((short.R&&short.L?'İki ham cam da':(short.R?'Sağ ham cam (\u00d8'+S.R.dia+')':'Sol ham cam (\u00d8'+S.L.dia+')'))+' bu konumda çerçeveyi doldurmuyor; daha büyük çaplı cam gerekir.');
+bad=badH||badV||short.R||short.L||sgHi||sgLo||sgDif;
+if(!v.length) v.push(hasRx
+? (atT ? 'Camlar, reçeteli prizmayı desantrasyonla verecek konumda.' : 'Reçeteli prizmadan sapma var ama tolerans içinde kalıyor.')
+: (Math.abs(netIn)<0.005&&Math.abs(vDiff)<0.005&&!S.R.dx&&!S.R.dy&&!S.L.dx&&!S.L.dy
+? 'Optik merkezler göz bebeklerinin tam önünde: istenmeyen prizmatik etki yok.'
+: 'İstenmeyen prizmatik etki var ama tolerans içinde kalıyor.'));
+function rxT(e){ return S[e].pr?fmt(S[e].pr,2)+'\u0394 '+BASE[S[e].pb]:'yok'; }
+function tgT(e){
+if(!S[e].pr) return '\u2014';
+var t=TGT[e], a=[]; if(!t||Math.hypot(t.x,t.y)>LIM) return 'verilemez';
+if(Math.abs(t.x)>0.05) a.push(fmt(Math.abs(t.x),1)+' '+(isNasal(e,t.x)?'N':'T'));
+if(Math.abs(t.y)>0.05) a.push(fmt(Math.abs(t.y),1)+' '+(t.y>0?'\u2191':'\u2193'));
+return a.join(' \u00b7 ')||'0';
+}
+row('Merkezleme', 'Sağ', 'Sol');
+row('Kayma (mm)', shiftTxt('R',1), shiftTxt('L',1));
+row('Yatay prizma', hP('R'), hP('L'));
+row('Dikey prizma', vP('R'), vP('L'));
+if(hasRx){ row('Reçeteli prizma', rxT('R'), rxT('L')); row('Gereken kayma (mm)', tgT('R'), tgT('L')); }
+if(bif){
+row('Segment üstü', fmt(sg.R,1)+' mm altta', fmt(sg.L,1)+' mm altta', sg.R<2-1e-9||sg.R>8+1e-9, sg.L<2-1e-9||sg.L>8+1e-9);
+row('Görüntü sıçraması', fmt(.5*S.R.add,2)+'\u0394', fmt(.5*S.L.add,2)+'\u0394');
+} else {
+var rp={R:prism('R',-sgn('R')*inset('R'),10),L:prism('L',-sgn('L')*inset('L'),10)};
+row('Okumada dikey fark', fmt(Math.abs(rp.R.y-rp.L.y),2)+'\u0394', '10 mm aşağı bakış');
+}
+row('Desantrasyon (mm)', dec('R'), dec('L'));
+row('En küçük cam çapı', '\u00d8'+Math.ceil(need.R)+' mm', '\u00d8'+Math.ceil(need.L)+' mm', short.R, short.L);
+row('Yakın PD ('+S.wd+' cm)', npd('R'), npd('L'));
+thRows();
+} else {
+var la={R:localAdd('R'),L:localAdd('L')}, maxAdd=Math.max(la.R,la.L), blur=maxAdd>=0.25-1e-9;
+var wc=Math.min(chanW('R'),chanW('L')), pct=Math.round(100*Math.max(0,2*wc-pdErr)/(2*wc)), mid=(S.R.dx+S.L.dx)/2;
+var room={R:S.R.h+S.R.dy-S.COR, L:S.L.h+S.L.dy-S.COR}, cut=room.R<4-1e-9||room.L<4-1e-9;
+var low=Math.max(-S.R.dy,-S.L.dy,0), high=Math.max(S.R.dy,S.L.dy,0);
+var narrow=pct<75, turned=Math.abs(mid)>=1.5;
+tiles+=tile('Uzak bakış', blur?'+'+fmt(maxAdd,2)+' D':'Net', blur, blur?'Bulanık':'Sorun yok');
+tiles+=tile('Ara net alan', '%'+pct, narrow||turned, narrow?'Daraldı':(turned?'Yana kaymış':'Sorun yok'));
+tiles+=tile('Yakın bölge', cut?'Kesiliyor':(low>1?fmt(low,1)+' mm alçak':'Ulaşılabilir'), cut||low>1, cut?'Sığmıyor':(low>1?'Zor ulaşılır':'Sorun yok'));
+function who(f){ var a=EYES.filter(f); return a.length===2?'İki cam da':NAME[a[0]]+' cam'; }
+if(blur) v.push(who(function(e){return la[e]>=0.25-1e-9;})+' yüksek kalmış: düz bakışta göz koridora giriyor ve uzak görüşe fazladan ilave biniyor. Kullanıcı net görmek için çenesini indirmek zorunda kalır.');
+if(low>1) v.push(who(function(e){return -S[e].dy>1;})+' alçak kalmış: yakın bölgeye inmek için gözü daha çok indirmek ya da çeneyi kaldırmak gerekir; okuma yorucu olur.');
+if(narrow) v.push('Yatay montaj hatası: iki gözün koridoru üst üste gelmiyor, ara ve yakın mesafede net görüş alanı daralıyor.');
+else if(turned) v.push('İki cam da aynı yöne kaymış: net alan kullanıcının '+(mid>0?'soluna':'sağına')+' kayar, başını çevirerek bakması gerekir.');
+if(hErr>1+1e-9) v.push('İki cam arasında '+fmt(hErr,1)+' mm yükseklik farkı var: gözler farklı ilave değerlerinden bakar, okuma rahatsız olur.');
+if(cut) v.push('Yakın bölge çerçeveye sığmıyor (koridor '+S.COR+' mm + en az 4 mm gerekir): daha kısa koridor ya da daha yüksek montaj gerekir.');
+bad=v.length>0;
+if(!bad) v.push((S.R.dx||S.R.dy||S.L.dx||S.L.dy)
+? 'Küçük bir montaj sapması var ama uzak, ara ve yakın bölgeler kullanılabilir durumda.'
+: 'Montaj doğru: düz bakışta göz montaj artısında, okuma bakışı yakın bölgenin içinde.');
+function tolW(e){ return Math.abs(S[e].dx)>1+1e-9||Math.abs(S[e].dy)>1+1e-9; }
+function addT(e){ return la[e]<0.005?'yok':'+'+fmt(la[e],2)+' D'; }
+function roomT(e){ return fmt(room[e],1)+' mm'; }
+function prT(e){ var m=Math.hypot(P[e].x,P[e].y); return m<0.005?'0,00\u0394':fmt(m,2)+'\u0394'; }
+row('Merkezleme', 'Sağ', 'Sol');
+row('Sapma (\u00b11 mm)', shiftTxt('R',1), shiftTxt('L',1), tolW('R'), tolW('L'));
+row('Uzakta ek ilave', addT('R'), addT('L'), la.R>=0.25-1e-9, la.L>=0.25-1e-9);
+row('Yakın\u2013alt kenar', roomT('R'), roomT('L'), room.R<4-1e-9, room.L<4-1e-9);
+row('Prizma (yaklaşık)', prT('R'), prT('L'));
+row('Yakın PD ('+S.wd+' cm)', npd('R'), npd('L'));
+thRows();
+}
+function dec(e){
+var o=S[e], dH=(S.A+S.DBL)/2-o.pd, dV=o.h-S.B/2;
+return fmt(Math.abs(dH),1)+(Math.abs(dH)<0.05?'':' '+(dH>0?'N':'T'))+' \u00b7 '+fmt(Math.abs(dV),1)+(Math.abs(dV)<0.05?'':' '+(dV>0?'\u2191':'\u2193'));
+}
+out('tiles').innerHTML=tiles;
+var ve=out('verdict'); ve.className='pdsim-verdict'+(bad?' bad':''); ve.innerHTML=v.map(function(s){ return '<li>'+s+'</li>'; }).join('');
+out('res').innerHTML=rows.join('');
+out('res2').innerHTML=rows2.join('');
+if(QZ) fillQuiz();
+var kx=clamp(netIn*6,-60,60), ky=clamp(vDiff*6,-16,16);
+out('view').innerHTML=pal
+? '<span style="filter:blur('+Math.min(4,maxAdd*3).toFixed(1)+'px)">UZAK</span><span style="filter:blur('+((100-pct)/100*3.5).toFixed(1)+'px)">ARA</span><span style="'+(cut?'opacity:.2;':'')+'filter:blur('+(cut?3:Math.min(3.5,low*0.5)).toFixed(1)+'px)">YAKIN</span>'
+: '<b class="r" style="transform:translate('+(-kx/2)+'px,'+(ky/2)+'px)">OPTİK</b><b class="l" style="transform:translate('+(kx/2)+'px,'+(-ky/2)+'px)">OPTİK</b>';
+out('viewc').textContent=pal
+? 'bakış mesafesine göre netlik (temsili)'
+: ((Math.abs(netIn)<0.005&&Math.abs(vDiff)<0.005) ? 'görüntüler üst üste (temsili)' : 'kırmızı sağ, mavi sol göz (temsili)');
+out('note').textContent=(pal
+? 'Progresif cam çizimi şematiktir; bölge genişlikleri ve ilave artışı markaya ve tasarıma göre değişir. Montaj toleransı olarak her göz için \u00b11 mm alınmıştır. Eğitim amaçlıdır; ölçüm ve montaj kararının yerini tutmaz.'
+: 'Hesap Prentice kuralıyla yapılır: prizma (\u0394) = kayma (cm) \u00d7 cam gücü (D); silindir ve aks hesaba katılır. Mor nokta çerçevenin geometrik (kutu) merkezidir; mor çizgi bu merkezden göz bebeğine olan desantrasyonu gösterir. Tolerans için ANSI Z80.1 yaklaşımı esas alınmıştır: yatay 0,67\u0394 ya da toplam 2,5 mm, dikey 0,33\u0394 ya da 1 mm. Eğitim amaçlıdır; ölçüm ve montaj kararının yerini tutmaz.')+' Kalınlıklar yaklaşık değerdir: küresel yüzey kabul edilir; asferik tasarım, taban eğrisi ve üretici farkları dahil değildir. Ağırlık, çerçeveye kesilmiş cam için malzeme yoğunluğundan yaklaşık hesaplanır. Göz görünümü 12 mm verteks mesafesi için, renk saçılması optik merkezden 10 mm uzaktaki bakış için verilmiştir. Reçeteli prizma girildiğinde yeşil kesik halka, o prizmayı desantrasyonla veren optik merkez konumunu gösterir ve tolerans bu hedefe göre hesaplanır. Bifokal modunda düz üstlü 28 mm segment kabul edilir; görüntü sıçraması = ilave \u00d7 0,5 cm. Yakın PD, gözün dönme merkezi camın 27 mm gerisinde kabul edilerek hesaplanır. Pantoskopik eğim etkisi Martin formülüyle, eğime göre optik merkez alçaltması her 2\u00b0 için 1 mm kuralıyla verilir.';
+syncInputs(skip);
+}
+root.addEventListener('input',function(ev){
+var i=ev.target, v=parseFloat(String(i.value).replace(',','.'));
+if(i.hasAttribute('data-gc')){ S.gc=i.checked; render(); return; }
+if(i.dataset.fs){ S[i.dataset.fs]=i.value; render(); return; }
+if(i.dataset.ks){ S[i.dataset.e][i.dataset.ks]=i.value; render(); return; }
+if(isNaN(v)) return;
+if(i.dataset.k){ var k=i.dataset.k; S[i.dataset.e][k]=clamp(v,RANGE[k][0],RANGE[k][1]); }
+else if(i.dataset.f){ var f=i.dataset.f; S[f]=clamp(v,RANGE[f][0],RANGE[f][1]); }
+else return;
+render(i.type==='number'?i:null);
+});
+root.addEventListener('change',function(ev){ if(ev.target.hasAttribute&&ev.target.hasAttribute('data-gc')) S.gc=ev.target.checked; render(); });
+function newQuiz(){
+var sp=[-6,-5,-4,-3,-2.5,-2,2,2.5,3,4,5][Math.floor(Math.random()*11)], e=Math.random()<.5?'R':'L', ax=Math.random()<.5?'dx':'dy', mg=[1,1.5,2,2.5,3,4][Math.floor(Math.random()*6)]*(Math.random()<.5?-1:1);
+S.mode='sv'; EYES.forEach(function(k){ var o=S[k]; o.sph=sp; o.cyl=0; o.ax=180; o.dx=0; o.dy=0; o.pr=0; });
+S[e][ax]=mg; QZ={e:e,done:false,ok:false}; root.querySelector('[data-q=m]').value='';
+render();
+}
+function quizTruth(){ var e=QZ.e, q=prism(e), h=Math.abs(q.x)>Math.abs(q.y); return {m:Math.hypot(q.x,q.y), b:h?(isNasal(e,q.x)?'in':'out'):(q.y>0?'up':'down')}; }
+function fillQuiz(){
+var e=QZ.e, o=S[e], t=quizTruth(), d=Math.abs(o.dx||o.dy), dir=o.dx?(isNasal(e,o.dx)?'buruna doğru (nazal)':'şakağa doğru (temporal)'):(o.dy>0?'yukarı':'aşağı');
+out('qscore').textContent=QS.t?QS.c+' / '+QS.t+' doğru':'';
+out('qtext').textContent=NAME[e]+' camın optik merkezi '+fmt(d,1)+' mm '+dir+' kaymış. Cam gücü '+(o.sph>0?'+':'')+fmt(o.sph,2)+' D. Göz bebeğinde oluşan prizma kaç \u0394, tabanı ne yöne?';
+var r=out('qres'); r.className='pdsim-qres'+(QZ.done?(QZ.ok?' ok':' no'):'');
+r.textContent=QZ.done?((QZ.ok?'Doğru. ':'Olmadı. ')+'Prentice: '+fmt(d/10,2)+' cm \u00d7 '+fmt(Math.abs(o.sph),2)+' D = '+fmt(t.m,2)+'\u0394. '+(o.sph<0?'Eksi camda taban, optik merkezin kaydığı yönün tersine':'Artı camda taban, optik merkezin kaydığı yöne')+' bakar: taban '+BASE[t.b]+'.'):'';
+}
+function checkQuiz(){
+if(!QZ||QZ.done) return;
+var t=quizTruth(), m=parseFloat(String(root.querySelector('[data-q=m]').value).replace(',','.')), b=root.querySelector('[data-q=b]').value;
+if(isNaN(m)) return;
+QZ.done=true; QZ.ok=Math.abs(m-t.m)<0.06&&b===t.b; QS.t++; if(QZ.ok) QS.c++; render();
+}
+function encode(){ return [1,S.mode,S.shape].concat(GK.map(function(k){ return S[k]; })).join(',')+';'+EYES.map(function(e){ return EK.map(function(k){ return S[e][k]; }).concat([S[e].pb]).join(','); }).join(';'); }
+function decode(h){
+try{
+var p=decodeURIComponent(h).split(';'), g=p[0].split(',');
+if(g[0]!=='1'||p.length<3) return;
+if(MODES.indexOf(g[1])>=0) S.mode=g[1];
+if(SHAPES.indexOf(g[2])>=0) S.shape=g[2];
+GK.forEach(function(k,i){ var v=parseFloat(g[3+i]); if(!isNaN(v)) S[k]=clamp(v,RANGE[k][0],RANGE[k][1]); });
+EYES.forEach(function(e,j){
+var a=p[1+j].split(',');
+EK.forEach(function(k,i){ var v=parseFloat(a[i]); if(!isNaN(v)) S[e][k]=(k==='dx'||k==='dy')?clamp(v,-LIM,LIM):clamp(v,RANGE[k][0],RANGE[k][1]); });
+if(BASE[a[EK.length]]) S[e].pb=a[EK.length];
+});
+if(!TCMIN[S.idx]) S.idx=1.6;
+if(S.cmp&&!TCMIN[S.cmp]) S.cmp=0;
+if([11,14,17].indexOf(S.COR)<0) S.COR=14;
+}catch(x){}
+}
+function share(btn){
+var url=location.href.split('#')[0]+'#sim='+encode();
+function done(){ var t=btn.textContent; btn.textContent='Bağlantı kopyalandı'; setTimeout(function(){ btn.textContent=t; },1800); }
+function fallback(){ var ta=document.createElement('textarea'); ta.value=url; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{ if(document.execCommand('copy')) done(); else throw 0; }catch(x){ try{ history.replaceState(null,'',url); btn.textContent='Bağlantı adres çubuğunda'; setTimeout(function(){ btn.textContent='Bağlantıyı paylaş'; },2500); }catch(y){} } document.body.removeChild(ta); }
+if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done,fallback); else fallback();
+}
+function doPrint(){
+var ph=document.createComment('pdsim'), done=false, nd=root.querySelector('.pdsim-notes'); if(nd) nd.open=true;
+out('date').textContent=new Date().toLocaleDateString('tr-TR');
+root.parentNode.insertBefore(ph,root); document.body.appendChild(root); document.body.classList.add('pdsim-printing');
+function back(){ if(done) return; done=true; document.body.classList.remove('pdsim-printing'); ph.parentNode.insertBefore(root,ph); ph.parentNode.removeChild(ph); window.removeEventListener('afterprint',back); }
+window.addEventListener('afterprint',back);
+window.print();
+setTimeout(function(){ window.addEventListener('focus',back,{once:true}); },500);
+}
+root.addEventListener('click',function(ev){
+if(ev.target.closest('[data-print]')){ doPrint(); return; }
+var sb=ev.target.closest('[data-share]'); if(sb){ share(sb); return; }
+if(ev.target.closest('[data-quiz]')||ev.target.closest('[data-qnext]')){ newQuiz(); return; }
+if(ev.target.closest('[data-qcheck]')){ checkQuiz(); return; }
+if(ev.target.closest('[data-qexit]')){ QZ=null; EYES.forEach(function(e){ S[e].dx=0; S[e].dy=0; }); render(); return; }
+if(QZ&&!QZ.done&&(ev.target.closest('[data-nudge]')||ev.target.closest('[data-center]')||ev.target.closest('[data-preset]'))) return;
+var ce=ev.target.closest('[data-center]'); if(ce){ S[ce.dataset.center].dx=0; S[ce.dataset.center].dy=0; render(); return; }
+if(ev.target.closest('[data-goto]')){ EYES.forEach(function(e){ var t=needDec(e); if(S[e].pr&&t){ S[e].dx=clamp(snap(t.x),-LIM,LIM); S[e].dy=clamp(snap(t.y),-LIM,LIM); } }); render(); return; }
+var n=ev.target.closest('[data-nudge]');
+if(n){ var dd=n.dataset.d.split(','), no=S[n.dataset.nudge];
+no.dx=clamp(no.dx+0.5*dd[0],-LIM,LIM); no.dy=clamp(no.dy+0.5*dd[1],-LIM,LIM); render(); return; }
+var pr=ev.target.closest('[data-preset]');
+if(pr){ var pq=PRE[pr.dataset.preset]; EYES.forEach(function(e,i){ S[e].sph=pq[i*3]; S[e].cyl=pq[i*3+1]; S[e].ax=pq[i*3+2]; }); render(); return; }
+if(ev.target.closest('[data-tr]')){ EYES.forEach(function(e){ var o=S[e]; if(o.cyl){ o.sph+=o.cyl; o.cyl=-o.cyl; o.ax=o.ax>90?o.ax-90:o.ax+90; } }); render(); return; }
+var m=ev.target.closest('[data-mode]');
+if(m){ QZ=null; S.mode=m.dataset.mode; render(); return; }
+if(ev.target.closest('[data-reset]')){ EYES.forEach(function(e){ S[e].dx=0; S[e].dy=0; }); render(); }
+});
+root.addEventListener('keydown',function(ev){
+if(ev.key==='Enter'&&ev.target.hasAttribute&&ev.target.hasAttribute('data-q')){ checkQuiz(); return; }
+var c=ev.target.closest&&ev.target.closest('[data-lens]'); if(!c||(QZ&&!QZ.done)) return;
+var d={ArrowLeft:[-.5,0],ArrowRight:[.5,0],ArrowUp:[0,.5],ArrowDown:[0,-.5]}[ev.key]; if(!d) return;
+var o=S[c.dataset.lens]; o.dx=clamp(o.dx+d[0],-LIM,LIM); o.dy=clamp(o.dy+d[1],-LIM,LIM);
+ev.preventDefault(); render();
+});
+var drag=null;
+function pt(ev){ var p=svg.createSVGPoint(); p.x=ev.clientX; p.y=ev.clientY; return p.matrixTransform(svg.getScreenCTM().inverse()); }
+svg.addEventListener('pointerdown',function(ev){
+if(!ev.target.closest('[data-lens]')||(QZ&&!QZ.done)) return;
+var q=pt(ev), best=null, bd=1e9;
+EYES.forEach(function(e){
+var p=pupil(e), ox=p.x+S[e].dx, oy=-(p.y+S[e].dy), d=Math.hypot(q.x-ox,q.y-oy);
+if(d<bd){ bd=d; best={e:e,ox:q.x-ox,oy:q.y-oy}; }
+});
+drag=best; try{ svg.setPointerCapture(ev.pointerId); }catch(_){}
+ev.preventDefault();
+});
+svg.addEventListener('pointermove',function(ev){
+if(!drag) return;
+var q=pt(ev), p=pupil(drag.e);
+S[drag.e].dx=clamp(snap((q.x-drag.ox)-p.x),-LIM,LIM);
+S[drag.e].dy=clamp(snap(-(q.y-drag.oy)-p.y),-LIM,LIM);
+render();
+});
+['pointerup','pointercancel'].forEach(function(n){ svg.addEventListener(n,function(){ drag=null; }); });
+if(location.hash.indexOf('#sim=')===0) decode(location.hash.slice(5));
+window.PDSIM={S:S,thick:thick,rimPts:rimPts,boxC:boxC,oc:function(e){var p=pupil(e);return{x:p.x+S[e].dx,y:p.y+S[e].dy-(S.mode==='pal'?PRP:0)};}};
+render();
+})();
+</script>
+<script charset="utf-8" src="https://cdn.jsdelivr.net/gh/cagataygulumser/blog-font@42e42441498fbb29b9bf2ee924ea617fb253df1f/cam-gosterim/pd3d.js"></script>
