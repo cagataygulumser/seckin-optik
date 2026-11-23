@@ -40,7 +40,7 @@
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   function gorsel(d) { return KOK + 'img/magaza/' + d; }
   function logo(d) { return KOK + 'img/logo/' + d; }
-  function wa(m) { try { if (window.SO && window.SO.waLink) return window.SO.waLink(m); } catch (e) {} return 'https://wa.me/905054596402?text=' + encodeURIComponent(m); }
+  function wa(m) { try { if (window.SO && window.SO.waLink) return window.SO.waLink(m); } catch (e) {} return 'https://wa.me/905418672454?text=' + encodeURIComponent(m); }
   var YOL = 'https://www.google.com/maps/search/?api=1&query=Se%C3%A7kin+Optik+Demircio%C4%9Flu+Caddesi+37%2FA+%C3%87anakkale';
 
   function stil() {
