@@ -18,20 +18,20 @@
   var ARAC = {
     olcer: {
       ad: 'PD ve Montaj Yüksekliği Ölçer', kisa: 'PD Ölçer', foto: 'magaza-ic-1.webp',
-      ozet: 'Gözlüğünüz yüzünüzdeyken kameranıza bakın; göz bebeği mesafenizi (PD) ve montaj yüksekliğinizi birkaç adımda ön ölçüm olarak görün.',
-      kart: 'Kamerayla, gözlük yüzünüzdeyken göz bebeği mesafenizi ve montaj yüksekliğinizi ön ölçüm olarak görün.',
+      ozet: 'Gözlük müşterinin yüzündeyken kameradan göz bebeği mesafesini (PD) ve montaj yüksekliğini birkaç adımda ön ölçüm olarak alın.',
+      kart: 'Kamerayla, gözlük müşterinin yüzündeyken göz bebeği mesafesini ve montaj yüksekliğini ön ölçüm olarak alın.',
       cta: ['Kesin ölçüm mağazamızda', 'Buradaki sonuç bir ön ölçümdür. Camınız sipariş edilmeden önce ölçünüzü mağazamızda optisyenimiz alır ve doğrular.']
     },
     simulator: {
       ad: 'Gözlük Camı Simülatörü', kisa: 'Cam Simülatörü', foto: 'magaza-ic-2.webp',
-      ozet: 'Cam merkezi göz bebeğinden kaydığında ne olur? Merkezleme, prizmatik etki, kenar kalınlığı ve ağırlığı kendi değerlerinizle deneyin.',
-      kart: 'Merkezleme, prizmatik etki, kenar kalınlığı ve ağırlığı kendi değerlerinizle deneyin; 3 boyutlu önizleyin.',
+      ozet: 'Cam merkezi göz bebeğinden kaydığında ne olur? Merkezleme, prizmatik etki, kenar kalınlığı ve ağırlığı müşterinin reçete ve çerçeve değerleriyle gösterin.',
+      kart: 'Merkezleme, prizmatik etki, kenar kalınlığı ve ağırlığı müşterinin değerleriyle gösterin; 3 boyutlu önizleyin.',
       cta: ['Camınızı birlikte seçelim', 'Numaranıza ve çerçevenize uygun cam seçeneklerini mağazamızda bu ekran üzerinden birlikte inceleyebiliriz.']
     },
     studyo: {
       ad: 'Cam Gösterim Stüdyosu', kisa: 'Cam Stüdyosu', foto: 'magaza-ic-1.webp',
-      ozet: 'Cam tasarımı, numara, kalınlık, kaplama ve renk farkını tek ekranda görün; gözlüğü 3 boyutlu olarak yüzde inceleyin. Mağazamızda da bu ekranla gösteriyoruz.',
-      kart: 'Tasarım, kalınlık, kaplama ve renk farkını tek ekranda görün; gözlüğü 3 boyutlu olarak yüzde inceleyin.',
+      ozet: 'Cam tasarımı, numara, kalınlık, kaplama ve renk farkını müşteriye tek ekranda gösterin; gözlüğü 3 boyutlu olarak yüzde inceletin.',
+      kart: 'Tasarım, kalınlık, kaplama ve renk farkını müşteriye tek ekranda gösterin; gözlüğü 3 boyutlu olarak yüzde inceletin.',
       cta: ['Farkı mağazamızda görün', 'Ekrandaki karşılaştırmalar fikir verir. Gerçek cam örneklerini mağazamızda elinize alıp deneyebilirsiniz.']
     }
   };
@@ -126,7 +126,7 @@
     var h = '<header class="sa-ust buyuk" style="background-image:linear-gradient(90deg,rgba(2,18,44,.96) 0%,rgba(2,18,44,.84) 45%,rgba(2,18,44,.3) 100%),url(' + gorsel('magaza-cephe.webp') + ')">' +
       '<div class="sa-ust-ic"><img class="sa-logo" alt="Seçkin Optik" width="171" height="28" src="' + logo('seckin-optik-logo-beyaz.svg') + '"/>' +
       '<p class="sa-etiket">Seçkin Optik · Çanakkale</p><h1>Optik Araçlar</h1>' +
-      '<p class="sa-ozet">Gözlük camınızı daha iyi tanımanız için hazırladığımız ücretsiz araçlar. Üyelik gerekmez; telefonda, tablette ve bilgisayarda çalışır.</p>' +
+      '<p class="sa-ozet">Mağazamızda ölçüm alırken ve cam seçeneklerini anlatırken ekibimizin kullandığı araçlar. Tablette tam ekran sunum için hazırlandı.</p>' +
       '<p class="sa-btnler"><a class="sa-btn beyaz" href="' + SAYFA.studyo + '?app=1">Cam Gösterim Stüdyosu\'nu tam ekran aç</a></p></div></header>' +
       '<div class="sa-kartlar">';
     var foto = { olcer: 'magaza-ic-1.webp', simulator: 'magaza-ic-2.webp', studyo: 'magaza-ic-3.webp' };
