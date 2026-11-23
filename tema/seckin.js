@@ -4,7 +4,7 @@
 /* ---------- AYARLAR (buradan düzenleyin) ---------- */
 var AYAR = {
   satisAktif: false, /* PayTR hazır olunca true yapın */
-  whatsapp: "905054596402",
+  whatsapp: "905418672454",
   telefon: "+902862176636",
   sayfaBasi: 12,
   sozlesme: "/p/mesafeli-satis-sozlesmesi.html",
