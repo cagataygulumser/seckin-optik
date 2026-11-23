@@ -56,9 +56,9 @@
     SIRA.forEach(function (k) { h += '<a href="' + SAYFA[k] + '"' + (k === kimlik ? ' class="on" aria-current="page"' : '') + '>' + esc(ARAC[k].kisa) + '</a>'; });
     return h + '<a href="' + SAYFA.merkez + '">Tüm araçlar</a></nav></header>';
   }
-  function alt(kimlik) {
+  function alt(kimlik, foto) {
     var c = ARAC[kimlik].cta;
-    return '<aside class="sa-alt"><img alt="Seçkin Optik mağazası, Demircioğlu Caddesi, Çanakkale" loading="lazy" width="1600" height="882" src="' + gorsel('magaza-vitrin.webp') + '"/>' +
+    return '<aside class="sa-alt"><img alt="Seçkin Optik mağazası, Demircioğlu Caddesi, Çanakkale" loading="lazy" width="1400" height="868" src="' + gorsel(foto || 'magaza-vitrin.webp') + '"/>' +
       '<div><p class="sa-etiket">Seçkin Optik · Çanakkale</p><h2>' + esc(c[0]) + '</h2><p>' + esc(c[1]) + '</p>' +
       '<p class="sa-adres">Demircioğlu Caddesi No: 37/A, Merkez / Çanakkale · <a href="tel:+902862176636">0286 217 66 36</a></p>' +
       '<p class="sa-btnler"><a class="sa-btn" href="' + YOL + '" target="_blank" rel="noopener">Yol tarifi al</a>' +
@@ -108,13 +108,13 @@
       '<p class="sa-etiket">Seçkin Optik · Çanakkale</p><h1>Optik Araçlar</h1>' +
       '<p class="sa-ozet">Gözlük camınızı daha iyi tanımanız için hazırladığımız ücretsiz araçlar. Üyelik gerekmez; telefonda, tablette ve bilgisayarda çalışır.</p></div></header>' +
       '<div class="sa-kartlar">';
-    var foto = { olcer: 'magaza-ic-1.webp', simulator: 'magaza-ic-2.webp', studyo: 'magaza-vitrin.webp' };
+    var foto = { olcer: 'magaza-ic-1.webp', simulator: 'magaza-ic-2.webp', studyo: 'magaza-ic-3.webp' };
     SIRA.forEach(function (k, i) {
       h += '<a class="sa-kart" href="' + SAYFA[k] + '"><span class="sa-kart-g" style="background-image:url(' + gorsel(foto[k]) + ')"></span>' +
         '<span class="sa-kart-ic"><span class="sa-no">0' + (i + 1) + '</span><b>' + esc(ARAC[k].ad) + '</b><span>' + esc(ARAC[k].kart) + '</span><em>Aracı aç</em></span></a>';
     });
     h += '</div><p class="sa-not">Araçlardaki sonuçlar bilgilendirme amaçlıdır; göz muayenesinin ve optisyen ölçümünün yerini tutmaz.</p>';
-    el.innerHTML = h + alt('studyo').replace(esc(ARAC.studyo.cta[0]), 'Mağazamıza bekleriz').replace(esc(ARAC.studyo.cta[1]), 'Ölçünüzü almak, cam seçeneklerini göstermek ve gözlüğünüzün ayarını yapmak için Çanakkale mağazamızdayız.').replace('Cam Gösterim Stüdyosu sayfanızdan', 'Optik Araçlar sayfanızdan');
+    el.innerHTML = h + alt('studyo', 'magaza-ic-2.webp').replace(esc(ARAC.studyo.cta[0]), 'Mağazamıza bekleriz').replace(esc(ARAC.studyo.cta[1]), 'Ölçünüzü almak, cam seçeneklerini göstermek ve gözlüğünüzün ayarını yapmak için Çanakkale mağazamızdayız.').replace('Cam Gösterim Stüdyosu sayfanızdan', 'Optik Araçlar sayfanızdan');
   }
 
   function kur() {
