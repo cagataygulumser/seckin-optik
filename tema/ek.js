@@ -313,6 +313,7 @@
         setTimeout(function () { if (!bitti) { if (video.videoWidth > 0) son(); else rej(new Error("Kamera görüntüsü alınamadı. \"Fotoğraf yükle\" ile deneyebilirsiniz.")); } }, 12000);
       });
     }).then(function () {
+      if (DN.mod !== "video") { if (DN.akis) { DN.akis.getTracks().forEach(function (t) { t.stop(); }); DN.akis = null; } throw new Error("iptal"); }
       tuval.width = video.videoWidth; tuval.height = video.videoHeight; denemeDurum("Yüzünüzü kameraya çevirin");
       var fw = Math.min(640, video.videoWidth), fh = Math.round(video.videoHeight * fw / video.videoWidth);
       var kare = document.createElement("canvas"); kare.width = fw; kare.height = fh; var kc = kare.getContext("2d", { willReadFrequently: true });
